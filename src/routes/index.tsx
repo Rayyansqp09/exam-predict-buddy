@@ -87,9 +87,9 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-gradient-primary shadow-glow hover:opacity-95">
-              <a href={RAZORPAY_LINK} target="_blank" rel="noopener noreferrer">
+              <Link to="/select">
                 Buy Now <ArrowRight className="ml-1 h-4 w-4" />
-              </a>
+              </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <a href="#how">See How It Works</a>
