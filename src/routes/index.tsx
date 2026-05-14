@@ -293,9 +293,9 @@ function Pricing() {
               ))}
             </ul>
             <Button asChild size="lg" className="mt-7 w-full bg-gradient-primary shadow-soft">
-              <a href={RAZORPAY_LINK} target="_blank" rel="noopener noreferrer">
+              <Link to="/select">
                 <Wallet className="mr-2 h-4 w-4" /> Buy Now
-              </a>
+              </Link>
             </Button>
             <a href={SAMPLE_PDF_LINK} className="mt-3 block text-center text-xs text-muted-foreground hover:text-foreground">
               Download a sample preview →
