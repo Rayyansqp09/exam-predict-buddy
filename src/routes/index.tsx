@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { FloatingCTA } from "@/components/site/FloatingCTA";
-import { RAZORPAY_LINK, SAMPLE_PDF_LINK } from "@/lib/config";
+import { SAMPLE_PDF_LINK } from "@/lib/config";
 import heroImg from "@/assets/hero-student.jpg";
 
 export const Route = createFileRoute("/")({
@@ -87,9 +87,9 @@ function Hero() {
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
             <Button asChild size="lg" className="bg-gradient-primary shadow-glow hover:opacity-95">
-              <a href={RAZORPAY_LINK} target="_blank" rel="noopener noreferrer">
+              <Link to="/select">
                 Buy Now <ArrowRight className="ml-1 h-4 w-4" />
-              </a>
+              </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
               <a href="#how">See How It Works</a>
@@ -293,9 +293,9 @@ function Pricing() {
               ))}
             </ul>
             <Button asChild size="lg" className="mt-7 w-full bg-gradient-primary shadow-soft">
-              <a href={RAZORPAY_LINK} target="_blank" rel="noopener noreferrer">
+              <Link to="/select">
                 <Wallet className="mr-2 h-4 w-4" /> Buy Now
-              </a>
+              </Link>
             </Button>
             <a href={SAMPLE_PDF_LINK} className="mt-3 block text-center text-xs text-muted-foreground hover:text-foreground">
               Download a sample preview →
@@ -395,7 +395,7 @@ function FAQ() {
         <h3 className="font-display text-2xl font-bold">Ready to prepare smarter?</h3>
         <p className="mt-2 text-sm text-muted-foreground">Get your model paper instantly after secure payment.</p>
         <Button asChild size="lg" className="mt-6 bg-gradient-primary shadow-glow">
-          <a href={RAZORPAY_LINK} target="_blank" rel="noopener noreferrer">Buy Now <ArrowRight className="ml-1 h-4 w-4" /></a>
+          <Link to="/select">Buy Now <ArrowRight className="ml-1 h-4 w-4" /></Link>
         </Button>
         <div className="mt-4 text-xs text-muted-foreground">
           Read our <Link to="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>.

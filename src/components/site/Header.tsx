@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { GraduationCap, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { RAZORPAY_LINK } from "@/lib/config";
 
 const navLinks = [
   { label: "Features", href: "/#features" },
@@ -34,7 +33,7 @@ export function Header() {
         </nav>
         <div className="hidden md:block">
           <Button asChild size="sm" className="bg-gradient-primary shadow-soft hover:opacity-95">
-            <a href={RAZORPAY_LINK} target="_blank" rel="noopener noreferrer">Buy Now</a>
+            <Link to="/select">Buy Now</Link>
           </Button>
         </div>
         <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
@@ -50,7 +49,7 @@ export function Header() {
               </a>
             ))}
             <Button asChild className="mt-2 w-full bg-gradient-primary">
-              <a href={RAZORPAY_LINK} target="_blank" rel="noopener noreferrer">Buy Now</a>
+              <Link to="/select" onClick={() => setOpen(false)}>Buy Now</Link>
             </Button>
           </div>
         </div>
