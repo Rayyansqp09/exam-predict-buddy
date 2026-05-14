@@ -8,7 +8,7 @@ import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { FloatingCTA } from "@/components/site/FloatingCTA";
-import { RAZORPAY_LINK, SAMPLE_PDF_LINK } from "@/lib/config";
+import { SAMPLE_PDF_LINK } from "@/lib/config";
 import heroImg from "@/assets/hero-student.jpg";
 
 export const Route = createFileRoute("/")({
