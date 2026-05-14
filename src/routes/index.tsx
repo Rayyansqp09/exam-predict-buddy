@@ -395,7 +395,7 @@ function FAQ() {
         <h3 className="font-display text-2xl font-bold">Ready to prepare smarter?</h3>
         <p className="mt-2 text-sm text-muted-foreground">Get your model paper instantly after secure payment.</p>
         <Button asChild size="lg" className="mt-6 bg-gradient-primary shadow-glow">
-          <a href={RAZORPAY_LINK} target="_blank" rel="noopener noreferrer">Buy Now <ArrowRight className="ml-1 h-4 w-4" /></a>
+          <Link to="/select">Buy Now <ArrowRight className="ml-1 h-4 w-4" /></Link>
         </Button>
         <div className="mt-4 text-xs text-muted-foreground">
           Read our <Link to="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>.
