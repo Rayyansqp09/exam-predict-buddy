@@ -33,7 +33,7 @@ export function Header() {
         </nav>
         <div className="hidden md:block">
           <Button asChild size="sm" className="bg-gradient-primary shadow-soft hover:opacity-95">
-            <a href={RAZORPAY_LINK} target="_blank" rel="noopener noreferrer">Buy Now</a>
+            <Link to="/select">Buy Now</Link>
           </Button>
         </div>
         <button className="md:hidden" onClick={() => setOpen(!open)} aria-label="Menu">
