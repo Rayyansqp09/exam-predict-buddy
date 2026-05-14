@@ -2,7 +2,6 @@ import { Link } from "@tanstack/react-router";
 import { GraduationCap, Menu, X } from "lucide-react";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
-import { RAZORPAY_LINK } from "@/lib/config";
 
 const navLinks = [
   { label: "Features", href: "/#features" },
