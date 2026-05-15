@@ -6,9 +6,9 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — FAIUGP Model Question Papers" },
-      { name: "description", content: "How FAIUGP Model Question Papers handles your information and payments." },
-      { property: "og:title", content: "Privacy Policy — FAIUGP Model Question Papers" },
+      { title: "Privacy Policy — FYUGP Model Question Papers" },
+      { name: "description", content: "How FYUGP Model Question Papers handles your information and payments." },
+      { property: "og:title", content: "Privacy Policy — FYUGP Model Question Papers" },
       { property: "og:description", content: "Transparent privacy practices for our predicted model paper service." },
     ],
   }),
@@ -37,7 +37,7 @@ function PrivacyPage() {
         </div>
         <h1 className="mt-3 font-display text-4xl font-bold">Privacy Policy</h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          FAIUGP Model Question Papers — last updated {new Date().toLocaleDateString()}
+          FYUGP Model Question Papers — last updated {new Date().toLocaleDateString()}
         </p>
 
         <Section title="Information we collect">
@@ -70,8 +70,8 @@ function PrivacyPage() {
 
         <Section title="Contact">
           For privacy-related queries, reach us at{" "}
-          <a href="mailto:support@faiugp-papers.example" className="text-primary hover:underline">
-            support@faiugp-papers.example
+          <a href="mailto:support@FYUGP-papers.example" className="text-primary hover:underline">
+            support@FYUGP-papers.example
           </a>.
         </Section>
 

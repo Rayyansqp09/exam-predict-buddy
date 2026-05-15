@@ -11,7 +11,7 @@ export function Footer() {
               <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-primary text-primary-foreground">
                 <GraduationCap className="h-5 w-5" />
               </span>
-              <span className="font-display text-base font-bold">FAIUGP Model Papers</span>
+              <span className="font-display text-base font-bold">FYUGP Model Papers</span>
             </div>
             <p className="mt-3 max-w-sm text-sm text-muted-foreground">
               Syllabus-aligned predicted model question papers crafted to help Calicut University students prepare smarter.
@@ -28,8 +28,8 @@ export function Footer() {
           </div>
           <div>
             <h4 className="text-sm font-semibold">Contact</h4>
-            <a href="mailto:support@faiugp-papers.example" className="mt-3 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-              <Mail className="h-4 w-4" /> support@faiugp-papers.example
+            <a href="mailto:support@FYUGP-papers.example" className="mt-3 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+              <Mail className="h-4 w-4" /> support@FYUGP-papers.example
             </a>
             <p className="mt-4 text-xs text-muted-foreground">
               Disclaimer: Predictions are based on syllabus and trend analysis. We do not guarantee exact exam questions.
@@ -37,7 +37,7 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground md:flex-row">
-          <p>© {new Date().getFullYear()} FAIUGP Model Question Papers. All rights reserved.</p>
+          <p>© {new Date().getFullYear()} FYUGP Model Question Papers. All rights reserved.</p>
           <p>Trusted by students preparing for Calicut University semester exams.</p>
         </div>
       </div>

@@ -42,7 +42,7 @@ export const Route = createFileRoute("/api/subjects")({
 
           const { data, error } = await supabaseAdmin
             .from("subjects")
-            .select("subject_id,name,description,price,pdf_url")
+            .select("subject_id,name,description,price,discount_price,pdf_url")
             .eq("course", course)
             .eq("semester", semester)
             .order("name", { ascending: true });
@@ -60,6 +60,7 @@ export const Route = createFileRoute("/api/subjects")({
               name: row.name,
               description: row.description,
               price: row.price,
+              discountPrice: row.discount_price,
               pdfUrl: row.pdf_url,
             })) ?? [];
 

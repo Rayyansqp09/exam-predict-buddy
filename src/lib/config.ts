@@ -2,7 +2,7 @@
 export const SAMPLE_PDF_LINK = "#";
 
 // Supported courses and semesters
-export const COURSES = ["FAIUGP", "B.Com", "BBA", "BSc", "BA", "BCA"] as const;
+export const COURSES = ["FYUGP", "B.Com", "BBA", "BSc", "BA", "BCA"] as const;
 export type Course = (typeof COURSES)[number];
 
 export const SEMESTERS = [1, 2, 3, 4, 5, 6] as const;
@@ -11,12 +11,12 @@ export type Semester = (typeof SEMESTERS)[number];
 // Map of "Course|Semester" -> Razorpay hosted payment link.
 // TODO: Replace each placeholder with the real Razorpay link for that paper.
 export const RAZORPAY_LINKS: Record<string, string> = {
-  "FAIUGP|1": "https://rzp.io/l/faiugp-sem1",
-  "FAIUGP|2": "https://rzp.io/l/faiugp-sem2",
-  "FAIUGP|3": "https://rzp.io/l/faiugp-sem3",
-  "FAIUGP|4": "https://rzp.io/l/faiugp-sem4",
-  "FAIUGP|5": "https://rzp.io/l/faiugp-sem5",
-  "FAIUGP|6": "https://rzp.io/l/faiugp-sem6",
+  "FYUGP|1": "https://rzp.io/l/FYUGP-sem1",
+  "FYUGP|2": "https://rzp.io/l/FYUGP-sem2",
+  "FYUGP|3": "https://rzp.io/l/FYUGP-sem3",
+  "FYUGP|4": "https://rzp.io/l/FYUGP-sem4",
+  "FYUGP|5": "https://rzp.io/l/FYUGP-sem5",
+  "FYUGP|6": "https://rzp.io/l/FYUGP-sem6",
 
   "B.Com|1": "https://rzp.io/l/bcom-sem1",
   "B.Com|2": "https://rzp.io/l/bcom-sem2",

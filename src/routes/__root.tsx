@@ -74,7 +74,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       { name: "viewport", content: "width=device-width, initial-scale=1" },
       { title: "FYUGP Model Question Papers" },
       { name: "description", content: "Predicted model question papers for Calicut University FYUGP and degree semester exams." },
-      { name: "author", content: "FAIUGP Model Question Papers" },
+      { name: "author", content: "FYUGP Model Question Papers" },
       { property: "og:title", content: "FYUGP Model Question Papers" },
       { property: "og:description", content: "Predicted model question papers for Calicut University FYUGP and degree semester exams." },
       { property: "og:type", content: "website" },

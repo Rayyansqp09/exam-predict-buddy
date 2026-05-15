@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/lib/supabase.server";
+import { isAdminRequest } from "@/lib/admin-auth.server";
 
 export const Route = createFileRoute("/api/admin/upload-subject")({
     server: {
@@ -14,7 +15,15 @@ export const Route = createFileRoute("/api/admin/upload-subject")({
                     const name = String(formData.get("name") ?? "").trim();
                     const description = String(formData.get("description") ?? "").trim();
                     const priceRaw = String(formData.get("price") ?? "").trim();
+                    const discountPriceRaw = String(formData.get("discountPrice") ?? "").trim();
                     const pdf = formData.get("pdf");
+
+                    if (!isAdminRequest(request)) {
+                        return Response.json(
+                            { success: false, message: "Unauthorized" },
+                            { status: 401 },
+                        );
+                    }
 
                     if (!course) {
                         return Response.json({ success: false, message: "Course is required" }, { status: 400 });
@@ -60,6 +69,24 @@ export const Route = createFileRoute("/api/admin/upload-subject")({
                     if (!Number.isFinite(price) || price <= 0) {
                         return Response.json(
                             { success: false, message: "Price must be a valid number" },
+                            { status: 400 },
+                        );
+                    }
+
+                    const discountPrice =
+                        discountPriceRaw === ""
+                            ? null
+                            : Number(discountPriceRaw);
+
+                    if (
+                        discountPrice !== null &&
+                        (!Number.isFinite(discountPrice) || discountPrice < 0)
+                    ) {
+                        return Response.json(
+                            {
+                                success: false,
+                                message: "Discount price must be valid",
+                            },
                             { status: 400 },
                         );
                     }
@@ -111,6 +138,7 @@ export const Route = createFileRoute("/api/admin/upload-subject")({
                             name,
                             description,
                             price,
+                            discount_price: discountPrice,
                             pdf_url: pdfUrl,
                             storage_path: filePath,
                         },

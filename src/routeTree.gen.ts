@@ -19,6 +19,13 @@ import { Route as ApiVerifyPaymentRouteImport } from './routes/api/verify-paymen
 import { Route as ApiSubjectsRouteImport } from './routes/api/subjects'
 import { Route as ApiCreateOrderRouteImport } from './routes/api/create-order'
 import { Route as ApiAdminUploadSubjectRouteImport } from './routes/api/admin/upload-subject'
+import { Route as ApiAdminUpdateSubjectRouteImport } from './routes/api/admin/update-subject'
+import { Route as ApiAdminSubjectsRouteImport } from './routes/api/admin/subjects'
+import { Route as ApiAdminMeRouteImport } from './routes/api/admin/me'
+import { Route as ApiAdminLogoutRouteImport } from './routes/api/admin/logout'
+import { Route as ApiAdminLoginRouteImport } from './routes/api/admin/login'
+import { Route as ApiAdminDeleteSubjectRouteImport } from './routes/api/admin/delete-subject'
+import { Route as ApiAdminBulkPriceUpdateRouteImport } from './routes/api/admin/bulk-price-update'
 
 const ViewRoute = ViewRouteImport.update({
   id: '/view',
@@ -70,6 +77,41 @@ const ApiAdminUploadSubjectRoute = ApiAdminUploadSubjectRouteImport.update({
   path: '/api/admin/upload-subject',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminUpdateSubjectRoute = ApiAdminUpdateSubjectRouteImport.update({
+  id: '/api/admin/update-subject',
+  path: '/api/admin/update-subject',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminSubjectsRoute = ApiAdminSubjectsRouteImport.update({
+  id: '/api/admin/subjects',
+  path: '/api/admin/subjects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminMeRoute = ApiAdminMeRouteImport.update({
+  id: '/api/admin/me',
+  path: '/api/admin/me',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminLogoutRoute = ApiAdminLogoutRouteImport.update({
+  id: '/api/admin/logout',
+  path: '/api/admin/logout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminLoginRoute = ApiAdminLoginRouteImport.update({
+  id: '/api/admin/login',
+  path: '/api/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminDeleteSubjectRoute = ApiAdminDeleteSubjectRouteImport.update({
+  id: '/api/admin/delete-subject',
+  path: '/api/admin/delete-subject',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminBulkPriceUpdateRoute = ApiAdminBulkPriceUpdateRouteImport.update({
+  id: '/api/admin/bulk-price-update',
+  path: '/api/admin/bulk-price-update',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
@@ -81,6 +123,13 @@ export interface FileRoutesByFullPath {
   '/api/create-order': typeof ApiCreateOrderRoute
   '/api/subjects': typeof ApiSubjectsRoute
   '/api/verify-payment': typeof ApiVerifyPaymentRoute
+  '/api/admin/bulk-price-update': typeof ApiAdminBulkPriceUpdateRoute
+  '/api/admin/delete-subject': typeof ApiAdminDeleteSubjectRoute
+  '/api/admin/login': typeof ApiAdminLoginRoute
+  '/api/admin/logout': typeof ApiAdminLogoutRoute
+  '/api/admin/me': typeof ApiAdminMeRoute
+  '/api/admin/subjects': typeof ApiAdminSubjectsRoute
+  '/api/admin/update-subject': typeof ApiAdminUpdateSubjectRoute
   '/api/admin/upload-subject': typeof ApiAdminUploadSubjectRoute
 }
 export interface FileRoutesByTo {
@@ -93,6 +142,13 @@ export interface FileRoutesByTo {
   '/api/create-order': typeof ApiCreateOrderRoute
   '/api/subjects': typeof ApiSubjectsRoute
   '/api/verify-payment': typeof ApiVerifyPaymentRoute
+  '/api/admin/bulk-price-update': typeof ApiAdminBulkPriceUpdateRoute
+  '/api/admin/delete-subject': typeof ApiAdminDeleteSubjectRoute
+  '/api/admin/login': typeof ApiAdminLoginRoute
+  '/api/admin/logout': typeof ApiAdminLogoutRoute
+  '/api/admin/me': typeof ApiAdminMeRoute
+  '/api/admin/subjects': typeof ApiAdminSubjectsRoute
+  '/api/admin/update-subject': typeof ApiAdminUpdateSubjectRoute
   '/api/admin/upload-subject': typeof ApiAdminUploadSubjectRoute
 }
 export interface FileRoutesById {
@@ -106,6 +162,13 @@ export interface FileRoutesById {
   '/api/create-order': typeof ApiCreateOrderRoute
   '/api/subjects': typeof ApiSubjectsRoute
   '/api/verify-payment': typeof ApiVerifyPaymentRoute
+  '/api/admin/bulk-price-update': typeof ApiAdminBulkPriceUpdateRoute
+  '/api/admin/delete-subject': typeof ApiAdminDeleteSubjectRoute
+  '/api/admin/login': typeof ApiAdminLoginRoute
+  '/api/admin/logout': typeof ApiAdminLogoutRoute
+  '/api/admin/me': typeof ApiAdminMeRoute
+  '/api/admin/subjects': typeof ApiAdminSubjectsRoute
+  '/api/admin/update-subject': typeof ApiAdminUpdateSubjectRoute
   '/api/admin/upload-subject': typeof ApiAdminUploadSubjectRoute
 }
 export interface FileRouteTypes {
@@ -120,6 +183,13 @@ export interface FileRouteTypes {
     | '/api/create-order'
     | '/api/subjects'
     | '/api/verify-payment'
+    | '/api/admin/bulk-price-update'
+    | '/api/admin/delete-subject'
+    | '/api/admin/login'
+    | '/api/admin/logout'
+    | '/api/admin/me'
+    | '/api/admin/subjects'
+    | '/api/admin/update-subject'
     | '/api/admin/upload-subject'
   fileRoutesByTo: FileRoutesByTo
   to:
@@ -132,6 +202,13 @@ export interface FileRouteTypes {
     | '/api/create-order'
     | '/api/subjects'
     | '/api/verify-payment'
+    | '/api/admin/bulk-price-update'
+    | '/api/admin/delete-subject'
+    | '/api/admin/login'
+    | '/api/admin/logout'
+    | '/api/admin/me'
+    | '/api/admin/subjects'
+    | '/api/admin/update-subject'
     | '/api/admin/upload-subject'
   id:
     | '__root__'
@@ -144,6 +221,13 @@ export interface FileRouteTypes {
     | '/api/create-order'
     | '/api/subjects'
     | '/api/verify-payment'
+    | '/api/admin/bulk-price-update'
+    | '/api/admin/delete-subject'
+    | '/api/admin/login'
+    | '/api/admin/logout'
+    | '/api/admin/me'
+    | '/api/admin/subjects'
+    | '/api/admin/update-subject'
     | '/api/admin/upload-subject'
   fileRoutesById: FileRoutesById
 }
@@ -157,6 +241,13 @@ export interface RootRouteChildren {
   ApiCreateOrderRoute: typeof ApiCreateOrderRoute
   ApiSubjectsRoute: typeof ApiSubjectsRoute
   ApiVerifyPaymentRoute: typeof ApiVerifyPaymentRoute
+  ApiAdminBulkPriceUpdateRoute: typeof ApiAdminBulkPriceUpdateRoute
+  ApiAdminDeleteSubjectRoute: typeof ApiAdminDeleteSubjectRoute
+  ApiAdminLoginRoute: typeof ApiAdminLoginRoute
+  ApiAdminLogoutRoute: typeof ApiAdminLogoutRoute
+  ApiAdminMeRoute: typeof ApiAdminMeRoute
+  ApiAdminSubjectsRoute: typeof ApiAdminSubjectsRoute
+  ApiAdminUpdateSubjectRoute: typeof ApiAdminUpdateSubjectRoute
   ApiAdminUploadSubjectRoute: typeof ApiAdminUploadSubjectRoute
 }
 
@@ -232,6 +323,55 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminUploadSubjectRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/update-subject': {
+      id: '/api/admin/update-subject'
+      path: '/api/admin/update-subject'
+      fullPath: '/api/admin/update-subject'
+      preLoaderRoute: typeof ApiAdminUpdateSubjectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/subjects': {
+      id: '/api/admin/subjects'
+      path: '/api/admin/subjects'
+      fullPath: '/api/admin/subjects'
+      preLoaderRoute: typeof ApiAdminSubjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/me': {
+      id: '/api/admin/me'
+      path: '/api/admin/me'
+      fullPath: '/api/admin/me'
+      preLoaderRoute: typeof ApiAdminMeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/logout': {
+      id: '/api/admin/logout'
+      path: '/api/admin/logout'
+      fullPath: '/api/admin/logout'
+      preLoaderRoute: typeof ApiAdminLogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/login': {
+      id: '/api/admin/login'
+      path: '/api/admin/login'
+      fullPath: '/api/admin/login'
+      preLoaderRoute: typeof ApiAdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/delete-subject': {
+      id: '/api/admin/delete-subject'
+      path: '/api/admin/delete-subject'
+      fullPath: '/api/admin/delete-subject'
+      preLoaderRoute: typeof ApiAdminDeleteSubjectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/bulk-price-update': {
+      id: '/api/admin/bulk-price-update'
+      path: '/api/admin/bulk-price-update'
+      fullPath: '/api/admin/bulk-price-update'
+      preLoaderRoute: typeof ApiAdminBulkPriceUpdateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
@@ -245,6 +385,13 @@ const rootRouteChildren: RootRouteChildren = {
   ApiCreateOrderRoute: ApiCreateOrderRoute,
   ApiSubjectsRoute: ApiSubjectsRoute,
   ApiVerifyPaymentRoute: ApiVerifyPaymentRoute,
+  ApiAdminBulkPriceUpdateRoute: ApiAdminBulkPriceUpdateRoute,
+  ApiAdminDeleteSubjectRoute: ApiAdminDeleteSubjectRoute,
+  ApiAdminLoginRoute: ApiAdminLoginRoute,
+  ApiAdminLogoutRoute: ApiAdminLogoutRoute,
+  ApiAdminMeRoute: ApiAdminMeRoute,
+  ApiAdminSubjectsRoute: ApiAdminSubjectsRoute,
+  ApiAdminUpdateSubjectRoute: ApiAdminUpdateSubjectRoute,
   ApiAdminUploadSubjectRoute: ApiAdminUploadSubjectRoute,
 }
 export const routeTree = rootRouteImport

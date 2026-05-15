@@ -21,7 +21,7 @@ export function Header() {
             <GraduationCap className="h-5 w-5" />
           </span>
           <span className="font-display text-base font-bold tracking-tight">
-            FAIUGP <span className="text-muted-foreground font-medium">Papers</span>
+            FYUGP <span className="text-muted-foreground font-medium">Model Papers</span>
           </span>
         </Link>
         <nav className="hidden items-center gap-7 md:flex">

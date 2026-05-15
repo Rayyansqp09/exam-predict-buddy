@@ -16,7 +16,7 @@ import {
 export const Route = createFileRoute("/select")({
   head: () => ({
     meta: [
-      { title: "Select Course & Semester — FAIUGP Model Question Papers" },
+      { title: "Select Course & Semester — FYUGP Model Question Papers" },
       {
         name: "description",
         content:
@@ -136,7 +136,7 @@ function SelectPage() {
                   {semester ? `Semester ${semester}` : "Select semester"}
                 </p>
                 <p className="mt-1 text-sm text-muted-foreground">
-                  ₹49 · Instant PDF after Razorpay checkout
+                  ₹29 · Instant PDF after Razorpay checkout
                 </p>
               </div>
 

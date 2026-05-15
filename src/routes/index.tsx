@@ -14,9 +14,9 @@ import heroImg from "@/assets/hero-student.jpg";
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "FAIUGP Model Question Papers — Calicut University Predicted Papers" },
-      { name: "description", content: "Syllabus-based predicted model question papers for Calicut University FAIUGP, B.Com, BBA, BSc, BA, BCA semester exams. Smart, affordable, exam-focused." },
-      { property: "og:title", content: "FAIUGP Model Question Papers" },
+      { title: "FYUGP Model Question Papers — Calicut University Predicted Papers" },
+      { name: "description", content: "Syllabus-based predicted model question papers for Calicut University FYUGP, B.Com, BBA, BSc, BA, BCA semester exams. Smart, affordable, exam-focused." },
+      { property: "og:title", content: "FYUGP Model Question Papers" },
       { property: "og:description", content: "Predicted model question papers built on syllabus analysis and exam trends." },
     ],
   }),
@@ -28,22 +28,22 @@ const features = [
   { icon: LineChart, title: "Topic Weightage Analysis", text: "We weigh chapters by frequency, marks distribution, and recurring patterns." },
   { icon: FileText, title: "Previous Year Patterns", text: "Five years of past papers analysed to surface high-probability questions." },
   { icon: Target, title: "Internal Exam Relevance", text: "Topics aligned with internal assessment trends and university expectations." },
-  { icon: GraduationCap, title: "Course-Specific Papers", text: "Tailored sets for FAIUGP, B.Com, BBA, BSc, BA, BCA and more." },
+  { icon: GraduationCap, title: "Course-Specific Papers", text: "Tailored sets for B.Com, BBA, BSc, BA, BCA and more." },
   { icon: Download, title: "Instant PDF Access", text: "Download a clean, printable PDF immediately after secure payment." },
 ];
 
-const courses = ["FAIUGP", "B.Com", "BBA", "BSc", "BA", "BCA", "More coming soon"];
+const courses = ["B.Com", "BBA", "BSc", "BA", "BCA", "More coming soon"];
 
 const testimonials = [
   { name: "Aysha R.", course: "B.Com 4th Sem", text: "Helped me focus on the important topics in the last week. Saved hours of guesswork." },
   { name: "Rahul M.", course: "BCA 2nd Sem", text: "Good for exam preparation. The pattern analysis felt accurate to what we got." },
-  { name: "Fathima K.", course: "FAIUGP", text: "Affordable and useful. The PDF was clean and easy to revise from." },
+  { name: "Fathima K.", course: "FYUGP", text: "Affordable and useful. The PDF was clean and easy to revise from." },
 ];
 
 const faqs = [
   { q: "Is this a guaranteed question paper?", a: "No. These are predicted model papers built on syllabus mapping, weightage and previous year trends. They are a study aid, not a guarantee of exact exam questions." },
   { q: "Is this based on the official syllabus?", a: "Yes. Every paper is structured against the official Calicut University syllabus for the chosen course and semester." },
-  { q: "Which courses are supported?", a: "FAIUGP, B.Com, BBA, BSc, BA and BCA. More degree programs are being added regularly." },
+  { q: "Which courses are supported?", a: "B.Com, BBA, BSc, BA and BCA. More degree programs are being added regularly." },
   { q: "How do I receive the file after payment?", a: "After completing payment on the Razorpay page, you will get instant access to download the PDF." },
 ];
 
@@ -73,16 +73,16 @@ function Hero() {
     <section className="relative overflow-hidden bg-gradient-hero">
       <div className="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-primary-glow/15 blur-3xl" />
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-20 md:grid-cols-2 md:items-center md:px-6 md:py-28">
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-15 md:grid-cols-2 md:items-center md:px-6 md:py-28">
         <div>
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-background/70 px-3 py-1 text-xs font-medium text-primary shadow-sm backdrop-blur">
             <Sparkles className="h-3.5 w-3.5" /> Calicut University · Semester Exams
           </span>
           <h1 className="mt-5 font-display text-4xl font-bold leading-tight text-foreground md:text-6xl">
-            Predicted Model Papers, <span className="text-gradient">built on syllabus</span> &amp; trends.
+            Predicted Model Papers, <span className="text-gradient">built on syllabus</span> &amp; pyq trends.
           </h1>
           <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
-            Smart, focused model question papers for FAIUGP and supported degree courses.
+            Smart, focused model question papers for FYUGP courses.
             Spend less time guessing — and more time studying what matters.
           </p>
           <div className="mt-8 flex flex-wrap gap-3">
@@ -130,9 +130,9 @@ function Overview() {
           <h2 className="font-display text-3xl font-bold md:text-4xl">What is a model question paper?</h2>
           <p className="mt-4 text-muted-foreground">
             Our model papers are carefully predicted question sets crafted for Calicut University
-            degree semester exams. Each paper combines syllabus mapping, topic weightage,
-            previous year question patterns and current academic trends — giving you a focused,
-            exam-ready study guide.
+            fyugp semester exams. They are built using official syllabus analysis, PYQs, topic weightage,
+            repeated question trends, internal exam patterns, and subject relevance — giving students a smarter
+            and more focused way to prepare for exams.
           </p>
           <ul className="mt-6 space-y-3 text-sm">
             {[
@@ -150,15 +150,42 @@ function Overview() {
         </div>
         <div className="grid grid-cols-2 gap-4">
           {[
-            { icon: Brain, label: "Smart Analysis" },
-            { icon: BookOpen, label: "Syllabus First" },
-            { icon: LineChart, label: "Trend Mapped" },
-            { icon: Target, label: "Exam Focused" },
-          ].map(({ icon: Icon, label }) => (
-            <div key={label} className="rounded-2xl border border-border bg-card p-6 shadow-soft">
+            {
+              icon: Brain,
+              label: "Smart Analysis",
+              description:
+                "Our prediction engine studies syllabus patterns, PYQs, internal exams, and topic relevance to generate smarter model papers.",
+            },
+            {
+              icon: BookOpen,
+              label: "Syllabus First",
+              description:
+                "Generated directly from the official syllabus structure to avoid wasting time on low-priority topics.",
+            },
+            {
+              icon: LineChart,
+              label: "Trend Mapped",
+              description:
+                "Identifies repeated question patterns, important units, and high-frequency concepts from previous exams.",
+            },
+            {
+              icon: Target,
+              label: "Exam Focused",
+              description:
+                "Optimized for scoring by analyzing marks distribution, topic weightage, and practical exam relevance.",
+            },
+          ].map(({ icon: Icon, label, description }) => (
+            <div
+              key={label}
+              className="rounded-2xl border border-border bg-card p-6 shadow-soft"
+            >
               <Icon className="h-6 w-6 text-primary" />
+
               <p className="mt-4 font-semibold">{label}</p>
-              <p className="mt-1 text-sm text-muted-foreground">Carefully engineered for results that matter.</p>
+
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
+                {description}
+              </p>
             </div>
           ))}
         </div>
@@ -192,8 +219,8 @@ function Features() {
 }
 
 function AccuracyStat() {
-  const pct = 40;
-  const r = 70;
+  const pct = 36; // Placeholder percentage based on our internal analysis of syllabus coverage and question trends. We can update this with a more data-driven estimate in the future.
+  const r = 70; // Radius for the circular progress indicator
   const c = 2 * Math.PI * r;
   const offset = c - (pct / 100) * c;
   return (
@@ -249,7 +276,7 @@ function Courses() {
     <section id="courses" className="mx-auto max-w-7xl px-4 py-20 md:px-6">
       <div className="mx-auto max-w-2xl text-center">
         <h2 className="font-display text-3xl font-bold md:text-4xl">Supported courses</h2>
-        <p className="mt-3 text-muted-foreground">Calicut University degree programs we currently cover.</p>
+        <p className="mt-3 text-muted-foreground">Calicut University FYUGP programs we currently cover.</p>
       </div>
       <div className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
         {courses.map((c) => (
@@ -276,11 +303,11 @@ function Pricing() {
         <div className="mx-auto mt-12 max-w-lg overflow-hidden rounded-3xl border border-primary/20 bg-card shadow-glow">
           <div className="bg-gradient-primary px-8 py-6 text-primary-foreground">
             <p className="text-sm uppercase tracking-widest opacity-90">Model Question Paper</p>
-            <p className="mt-1 font-display text-2xl font-bold">FAIUGP &amp; Degree Courses</p>
+            <p className="mt-1 font-display text-2xl font-bold">FYUGP Courses</p>
           </div>
           <div className="px-8 py-8">
             <div className="flex items-baseline gap-2">
-              <span className="font-display text-5xl font-bold">₹49</span>
+              <span className="font-display text-5xl font-bold">₹29</span>
               <span className="text-sm text-muted-foreground">/ paper</span>
             </div>
             <p className="mt-2 text-sm text-muted-foreground">Course &amp; semester specific. Instant PDF download.</p>
@@ -338,9 +365,10 @@ function Testimonials() {
       <div className="mx-auto max-w-7xl px-4 md:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <h2 className="font-display text-3xl font-bold md:text-4xl">Trusted by students</h2>
-          <p className="mt-3 text-muted-foreground">Real feedback from learners using our model papers.</p>
+          {/* <p className="mt-3 text-muted-foreground">Real feedback from learners using our model papers.</p> */}
         </div>
-        <div className="mt-12 grid gap-6 md:grid-cols-3">
+
+        {/* <div className="mt-12 grid gap-6 md:grid-cols-3">
           {testimonials.map((t) => (
             <div key={t.name} className="rounded-2xl border border-border bg-card p-6 shadow-soft">
               <div className="flex gap-1 text-primary">
@@ -355,10 +383,11 @@ function Testimonials() {
               </div>
             </div>
           ))}
-        </div>
+        </div> */}
+
         <div className="mt-10 text-center">
           <Button variant="outline" asChild>
-            <a href="mailto:support@faiugp-papers.example">Send us your feedback</a>
+            <a href="mailto:support@FYUGP-papers.example">Send us your feedback</a>
           </Button>
         </div>
       </div>

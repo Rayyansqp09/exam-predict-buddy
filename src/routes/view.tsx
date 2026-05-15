@@ -1,7 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { getPurchaseGroup } from "@/lib/purchase-data";
 
 export const Route = createFileRoute("/view")({
     validateSearch: (search: Record<string, unknown>) => {

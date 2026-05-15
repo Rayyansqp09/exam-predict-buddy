@@ -1,6 +1,14 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { ArrowRight, ShoppingCart, ShieldCheck } from "lucide-react";
+import { useEffect, useMemo, useState } from "react";
+import {
+    AlertCircle,
+    ArrowLeft,
+    ArrowRight,
+    BadgePercent,
+    BookOpen,
+    ShieldCheck,
+    ShoppingCart,
+} from "lucide-react";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Button } from "@/components/ui/button";
@@ -12,6 +20,7 @@ type Subject = {
     name: string;
     description: string;
     price: number;
+    discountPrice: number | null;
     pdfUrl: string;
 };
 
@@ -97,18 +106,51 @@ function PurchasePage() {
         };
     }, [course, semesterNumber]);
 
-    if (!course || !semester || Number.isNaN(semesterNumber) || semesterNumber <= 0) {
+    const isValidSelection = Boolean(course && semester && !Number.isNaN(semesterNumber) && semesterNumber > 0);
+
+    const money = useMemo(
+        () =>
+            new Intl.NumberFormat("en-IN", {
+                style: "currency",
+                currency: "INR",
+                maximumFractionDigits: 0,
+            }),
+        [],
+    );
+
+    const formatPrice = (value: number) => money.format(value).replace("₹", "₹");
+
+    if (!isValidSelection) {
         return (
             <div className="min-h-screen bg-background">
                 <Header />
-                <main className="mx-auto max-w-4xl px-4 py-10">
-                    <h1 className="text-3xl font-bold">Invalid selection</h1>
-                    <p className="mt-2 text-muted-foreground">
-                        Course or semester is missing. Go back and choose again.
-                    </p>
-                    <Button asChild className="mt-4">
-                        <Link to="/select">Go back to selection</Link>
-                    </Button>
+                <main className="mx-auto flex min-h-[calc(100vh-8rem)] max-w-5xl items-center px-4 py-12 md:px-6">
+                    <div className="mx-auto w-full max-w-xl text-center">
+                        <Badge className="mb-4">Subject-wise checkout</Badge>
+                        <h1 className="font-display text-3xl font-bold md:text-5xl">
+                            Select a valid course and semester
+                        </h1>
+                        <p className="mt-3 text-muted-foreground">
+                            Your purchase page needs both values before it can load the subject list.
+                        </p>
+
+                        <Card className="mx-auto mt-8 max-w-md shadow-card">
+                            <CardHeader className="pb-3">
+                                <CardTitle>Invalid selection</CardTitle>
+                                <CardDescription>
+                                    Course or semester is missing. Go back and choose again.
+                                </CardDescription>
+                            </CardHeader>
+                            <CardContent>
+                                <Button asChild className="w-full bg-gradient-primary shadow-soft">
+                                    <Link to="/select">
+                                        <ArrowLeft className="h-4 w-4" />
+                                        Go back to selection
+                                    </Link>
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    </div>
                 </main>
                 <Footer />
             </div>
@@ -118,6 +160,7 @@ function PurchasePage() {
     const handleBuy = async (subject: Subject) => {
         try {
             const subjectId = subject.id;
+            const salePrice = subject.discountPrice ?? subject.price;
 
             const response = await fetch("/api/create-order", {
                 method: "POST",
@@ -125,7 +168,7 @@ function PurchasePage() {
                     "Content-Type": "application/json",
                 },
                 body: JSON.stringify({
-                    amount: subject.price,
+                    amount: salePrice,
                     currency: "INR",
                     course,
                     semester: semesterNumber,
@@ -158,7 +201,7 @@ function PurchasePage() {
                 key,
                 amount: data.amount,
                 currency: data.currency,
-                name: "FAIUGP Model Papers",
+                name: "FYUGP Model Papers",
                 description: subject.name,
                 order_id: data.orderId,
                 handler: async function (response: any) {
@@ -184,9 +227,7 @@ function PurchasePage() {
                     setRedirectLabel(`${course} Semester ${semesterNumber} · ${subject.name}`);
                     setRedirecting(true);
 
-                    // small delay so the user actually sees the loader
                     await new Promise((resolve) => setTimeout(resolve, 1200));
-
                     window.location.href = subject.pdfUrl;
                 },
                 prefill: {
@@ -207,94 +248,159 @@ function PurchasePage() {
         }
     };
 
+    const heading = `${course} · Semester ${semesterNumber}`;
+
     return (
         <div className="min-h-screen bg-background">
             <Header />
 
-            <main className="mx-auto max-w-6xl px-4 py-10 md:px-6 md:py-16">
-                <div className="mb-8 text-center">
-                    <Badge className="mb-4">Subject-wise checkout</Badge>
-                    <h1 className="font-display text-3xl font-bold md:text-5xl">
-                        {course} Semester {semester}
+            <main className="mx-auto max-w-6xl px-4 py-12 md:px-6 md:py-20">
+                <Link
+                    to="/select"
+                    className="inline-flex items-center gap-1 text-sm text-muted-foreground transition-colors hover:text-foreground"
+                >
+                    <ArrowLeft className="h-4 w-4" />
+                    Change course or semester
+                </Link>
+
+                <div className="mt-6 text-center">
+                    <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-background/70 px-3 py-1 text-xs font-medium text-primary shadow-sm">
+                        Step 2 of 2 · Pick your subjects
+                    </span>
+
+                    <h1 className="mt-4 font-display text-3xl font-bold md:text-5xl">
+                        <span className="text-gradient">{course}</span> · Semester {semesterNumber}
                     </h1>
+
                     <p className="mx-auto mt-3 max-w-2xl text-muted-foreground">
-                        Buy one subject at a time. Each paper is priced separately.
+                        Subject-wise predicted model question papers. Buy only what you need. Unlocked instantly after payment.
                     </p>
                 </div>
 
-                {loadingSubjects ? (
-                    <Card className="mx-auto max-w-2xl shadow-card">
-                        <CardHeader>
-                            <CardTitle>Loading subjects...</CardTitle>
-                            <CardDescription>Please wait while we load your papers.</CardDescription>
-                        </CardHeader>
-                    </Card>
-                ) : loadError ? (
-                    <Card className="mx-auto max-w-2xl shadow-card">
-                        <CardHeader>
-                            <CardTitle>Failed to load subjects</CardTitle>
-                            <CardDescription>{loadError}</CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <Button asChild>
-                                <Link to="/select">Go back to selection</Link>
-                            </Button>
-                        </CardContent>
-                    </Card>
-                ) : subjects.length === 0 ? (
-                    <Card className="mx-auto max-w-2xl shadow-card">
-                        <CardHeader>
-                            <CardTitle>No subjects found</CardTitle>
-                            <CardDescription>
-                                No subject list exists for this course and semester.
-                            </CardDescription>
-                        </CardHeader>
-                        <CardContent>
-                            <Button asChild>
-                                <Link to="/select">Go back to selection</Link>
-                            </Button>
-                        </CardContent>
-                    </Card>
-                ) : (
-                    <div className="grid gap-5 md:grid-cols-2 xl:grid-cols-3">
-                        {subjects.map((subject) => (
-                            <Card key={subject.id} className="shadow-card">
-                                <CardHeader>
-                                    <div className="flex items-start justify-between gap-3">
-                                        <div>
-                                            <CardTitle className="text-xl">{subject.name}</CardTitle>
-                                            <CardDescription className="mt-2">{subject.description}</CardDescription>
-                                        </div>
-                                        <Badge variant="secondary">₹{subject.price}</Badge>
+                <div className="mt-10">
+                    {loadingSubjects ? (
+                        <Card className="mx-auto max-w-2xl shadow-card">
+                            <CardHeader>
+                                <CardTitle>Loading subjects...</CardTitle>
+                                <CardDescription>
+                                    Please wait while we load the papers for {heading}.
+                                </CardDescription>
+                            </CardHeader>
+                        </Card>
+                    ) : loadError ? (
+                        <Card className="mx-auto max-w-2xl shadow-card">
+                            <CardHeader>
+                                <div className="flex items-start gap-3">
+                                    <div className="rounded-full bg-destructive/10 p-2 text-destructive">
+                                        <AlertCircle className="h-5 w-5" />
                                     </div>
-                                </CardHeader>
-
-                                <CardContent className="space-y-4">
-                                    <div className="rounded-xl border bg-secondary/30 p-4 text-sm text-muted-foreground">
-                                        <div className="mb-2 flex items-center gap-2 font-medium text-foreground">
-                                            <ShieldCheck className="h-4 w-4" />
-                                            Single-subject purchase
-                                        </div>
-                                        Buy this paper only. After payment, you will open the PDF directly.
+                                    <div>
+                                        <CardTitle>Failed to load subjects</CardTitle>
+                                        <CardDescription className="mt-1">{loadError}</CardDescription>
                                     </div>
+                                </div>
+                            </CardHeader>
+                            <CardContent>
+                                <Button asChild variant="outline" className="w-full">
+                                    <Link to="/select">Go back to selection</Link>
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    ) : subjects.length === 0 ? (
+                        <Card className="mx-auto max-w-2xl shadow-card">
+                            <CardHeader>
+                                <div className="flex items-start gap-3">
+                                    <div className="rounded-full bg-muted p-2">
+                                        <BookOpen className="h-5 w-5 text-muted-foreground" />
+                                    </div>
+                                    <div>
+                                        <CardTitle>No subjects found</CardTitle>
+                                        <CardDescription className="mt-1">
+                                            No subject list exists for {course} Semester {semesterNumber}.
+                                        </CardDescription>
+                                    </div>
+                                </div>
+                            </CardHeader>
+                            <CardContent>
+                                <Button asChild className="w-full bg-gradient-primary shadow-soft">
+                                    <Link to="/select">Go back to selection</Link>
+                                </Button>
+                            </CardContent>
+                        </Card>
+                    ) : (
+                        <div className="mt-10 grid gap-4 sm:grid-cols-2">
+                            {subjects.map((s) => {
+                                const hasDiscount =
+                                    typeof s.discountPrice === "number" && s.discountPrice < s.price;
 
-                                    <Button
-                                        className="w-full bg-gradient-primary shadow-soft"
-                                        onClick={() => handleBuy(subject)}
+                                const salePrice = hasDiscount ? s.discountPrice! : s.price;
+                                const off = hasDiscount
+                                    ? Math.round(((s.price - s.discountPrice!) / s.price) * 100)
+                                    : 0;
+
+                                return (
+                                    <div
+                                        key={s.id}
+                                        className="group flex flex-col rounded-2xl border border-border bg-card p-5 shadow-soft transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card"
                                     >
-                                        <ShoppingCart className="h-4 w-4" />
-                                        Buy Now
-                                        <ArrowRight className="h-4 w-4" />
-                                    </Button>
-                                </CardContent>
-                            </Card>
-                        ))}
-                    </div>
-                )}
+                                        <div className="flex items-start gap-3">
+                                            <div className="grid h-10 w-10 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+                                                <BookOpen className="h-5 w-5" />
+                                            </div>
+
+                                            <div className="flex-1">
+                                                <h3 className="font-semibold leading-snug">{s.name}</h3>
+                                                <p className="mt-0.5 text-xs text-muted-foreground">
+                                                    {course} · Semester {semester}
+                                                </p>
+                                            </div>
+
+                                            {hasDiscount && (
+                                                <span className="inline-flex items-center gap-1 rounded-full bg-success/10 px-2 py-0.5 text-[11px] font-semibold text-success">
+                                                    <BadgePercent className="h-3 w-3" /> {off}% OFF
+                                                </span>
+                                            )}
+                                        </div>
+
+                                        <div className="mt-5 flex items-end justify-between">
+                                            <div>
+                                                <div className="flex items-baseline gap-2">
+                                                    <span className="font-display text-2xl font-bold">₹{salePrice}</span>
+                                                    {hasDiscount && (
+                                                        <span className="text-sm text-muted-foreground line-through">
+                                                            ₹{s.price}
+                                                        </span>
+                                                    )}
+                                                </div>
+                                                <p className="mt-0.5 text-xs text-muted-foreground">
+                                                    Instant PDF after payment
+                                                </p>
+                                            </div>
+
+                                            <Button
+                                                size="sm"
+                                                className="bg-gradient-primary shadow-glow hover:opacity-95"
+                                                onClick={() => handleBuy(s)}
+                                            >
+                                                Buy
+                                                <ArrowRight className="ml-1 h-4 w-4" />
+                                            </Button>
+                                        </div>
+                                    </div>
+                                );
+                            })}
+                        </div>
+                    )}
+                </div>
+                
+                <p className="mt-12 text-center text-xs text-muted-foreground">
+                    Secure payments via Razorpay. Predictions are estimates based on syllabus &amp; past
+                    patterns — not guaranteed.
+                </p>
+
             </main>
 
             <Footer />
-
 
             {redirecting ? (
                 <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
@@ -303,16 +409,11 @@ function PurchasePage() {
                         <h2 className="font-display text-2xl font-bold">
                             Loading your model question paper
                         </h2>
-                        <p className="mt-2 text-sm text-muted-foreground">
-                            {redirectLabel}
-                        </p>
-                        <p className="mt-3 text-sm text-muted-foreground">
-                            Preparing the PDF now...
-                        </p>
+                        <p className="mt-2 text-sm text-muted-foreground">{redirectLabel}</p>
+                        <p className="mt-3 text-sm text-muted-foreground">Preparing the PDF now...</p>
                     </div>
                 </div>
             ) : null}
-
         </div>
     );
 }
