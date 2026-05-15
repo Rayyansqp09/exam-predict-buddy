@@ -9,13 +9,30 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
+import { Route as ViewRouteImport } from './routes/view'
 import { Route as SelectRouteImport } from './routes/select'
+import { Route as PurchaseRouteImport } from './routes/purchase'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as ApiVerifyPaymentRouteImport } from './routes/api/verify-payment'
+import { Route as ApiSubjectsRouteImport } from './routes/api/subjects'
+import { Route as ApiCreateOrderRouteImport } from './routes/api/create-order'
+import { Route as ApiAdminUploadSubjectRouteImport } from './routes/api/admin/upload-subject'
 
+const ViewRoute = ViewRouteImport.update({
+  id: '/view',
+  path: '/view',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const SelectRoute = SelectRouteImport.update({
   id: '/select',
   path: '/select',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PurchaseRoute = PurchaseRouteImport.update({
+  id: '/purchase',
+  path: '/purchase',
   getParentRoute: () => rootRouteImport,
 } as any)
 const PrivacyRoute = PrivacyRouteImport.update({
@@ -23,49 +40,147 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const AdminRoute = AdminRouteImport.update({
+  id: '/admin',
+  path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiVerifyPaymentRoute = ApiVerifyPaymentRouteImport.update({
+  id: '/api/verify-payment',
+  path: '/api/verify-payment',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiSubjectsRoute = ApiSubjectsRouteImport.update({
+  id: '/api/subjects',
+  path: '/api/subjects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiCreateOrderRoute = ApiCreateOrderRouteImport.update({
+  id: '/api/create-order',
+  path: '/api/create-order',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminUploadSubjectRoute = ApiAdminUploadSubjectRouteImport.update({
+  id: '/api/admin/upload-subject',
+  path: '/api/admin/upload-subject',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/privacy': typeof PrivacyRoute
+  '/purchase': typeof PurchaseRoute
   '/select': typeof SelectRoute
+  '/view': typeof ViewRoute
+  '/api/create-order': typeof ApiCreateOrderRoute
+  '/api/subjects': typeof ApiSubjectsRoute
+  '/api/verify-payment': typeof ApiVerifyPaymentRoute
+  '/api/admin/upload-subject': typeof ApiAdminUploadSubjectRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/privacy': typeof PrivacyRoute
+  '/purchase': typeof PurchaseRoute
   '/select': typeof SelectRoute
+  '/view': typeof ViewRoute
+  '/api/create-order': typeof ApiCreateOrderRoute
+  '/api/subjects': typeof ApiSubjectsRoute
+  '/api/verify-payment': typeof ApiVerifyPaymentRoute
+  '/api/admin/upload-subject': typeof ApiAdminUploadSubjectRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/admin': typeof AdminRoute
   '/privacy': typeof PrivacyRoute
+  '/purchase': typeof PurchaseRoute
   '/select': typeof SelectRoute
+  '/view': typeof ViewRoute
+  '/api/create-order': typeof ApiCreateOrderRoute
+  '/api/subjects': typeof ApiSubjectsRoute
+  '/api/verify-payment': typeof ApiVerifyPaymentRoute
+  '/api/admin/upload-subject': typeof ApiAdminUploadSubjectRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/privacy' | '/select'
+  fullPaths:
+    | '/'
+    | '/admin'
+    | '/privacy'
+    | '/purchase'
+    | '/select'
+    | '/view'
+    | '/api/create-order'
+    | '/api/subjects'
+    | '/api/verify-payment'
+    | '/api/admin/upload-subject'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/privacy' | '/select'
-  id: '__root__' | '/' | '/privacy' | '/select'
+  to:
+    | '/'
+    | '/admin'
+    | '/privacy'
+    | '/purchase'
+    | '/select'
+    | '/view'
+    | '/api/create-order'
+    | '/api/subjects'
+    | '/api/verify-payment'
+    | '/api/admin/upload-subject'
+  id:
+    | '__root__'
+    | '/'
+    | '/admin'
+    | '/privacy'
+    | '/purchase'
+    | '/select'
+    | '/view'
+    | '/api/create-order'
+    | '/api/subjects'
+    | '/api/verify-payment'
+    | '/api/admin/upload-subject'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AdminRoute: typeof AdminRoute
   PrivacyRoute: typeof PrivacyRoute
+  PurchaseRoute: typeof PurchaseRoute
   SelectRoute: typeof SelectRoute
+  ViewRoute: typeof ViewRoute
+  ApiCreateOrderRoute: typeof ApiCreateOrderRoute
+  ApiSubjectsRoute: typeof ApiSubjectsRoute
+  ApiVerifyPaymentRoute: typeof ApiVerifyPaymentRoute
+  ApiAdminUploadSubjectRoute: typeof ApiAdminUploadSubjectRoute
 }
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
+    '/view': {
+      id: '/view'
+      path: '/view'
+      fullPath: '/view'
+      preLoaderRoute: typeof ViewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/select': {
       id: '/select'
       path: '/select'
       fullPath: '/select'
       preLoaderRoute: typeof SelectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/purchase': {
+      id: '/purchase'
+      path: '/purchase'
+      fullPath: '/purchase'
+      preLoaderRoute: typeof PurchaseRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/privacy': {
@@ -75,6 +190,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/admin': {
+      id: '/admin'
+      path: '/admin'
+      fullPath: '/admin'
+      preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/': {
       id: '/'
       path: '/'
@@ -82,13 +204,48 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/verify-payment': {
+      id: '/api/verify-payment'
+      path: '/api/verify-payment'
+      fullPath: '/api/verify-payment'
+      preLoaderRoute: typeof ApiVerifyPaymentRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/subjects': {
+      id: '/api/subjects'
+      path: '/api/subjects'
+      fullPath: '/api/subjects'
+      preLoaderRoute: typeof ApiSubjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/create-order': {
+      id: '/api/create-order'
+      path: '/api/create-order'
+      fullPath: '/api/create-order'
+      preLoaderRoute: typeof ApiCreateOrderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/upload-subject': {
+      id: '/api/admin/upload-subject'
+      path: '/api/admin/upload-subject'
+      fullPath: '/api/admin/upload-subject'
+      preLoaderRoute: typeof ApiAdminUploadSubjectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AdminRoute: AdminRoute,
   PrivacyRoute: PrivacyRoute,
+  PurchaseRoute: PurchaseRoute,
   SelectRoute: SelectRoute,
+  ViewRoute: ViewRoute,
+  ApiCreateOrderRoute: ApiCreateOrderRoute,
+  ApiSubjectsRoute: ApiSubjectsRoute,
+  ApiVerifyPaymentRoute: ApiVerifyPaymentRoute,
+  ApiAdminUploadSubjectRoute: ApiAdminUploadSubjectRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

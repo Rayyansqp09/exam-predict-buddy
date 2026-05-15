@@ -1,10 +1,17 @@
-import { createFileRoute, Link } from "@tanstack/react-router";
+import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
-import { ArrowRight, GraduationCap, CheckCircle2, AlertCircle } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { COURSES, SEMESTERS, getRazorpayLink } from "@/lib/config";
+import { ArrowRight, GraduationCap, CheckCircle2 } from "lucide-react";
+import { COURSES, SEMESTERS } from "@/lib/config";
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from "@/components/ui/select";
 
 export const Route = createFileRoute("/select")({
   head: () => ({
@@ -21,11 +28,24 @@ export const Route = createFileRoute("/select")({
 });
 
 function SelectPage() {
+  const navigate = useNavigate();
+
   const [course, setCourse] = useState<string | null>(null);
   const [semester, setSemester] = useState<number | null>(null);
 
-  const link = course && semester ? getRazorpayLink(course, semester) : undefined;
   const ready = Boolean(course && semester);
+
+  const handleProceed = () => {
+    if (!course || !semester) return;
+
+    navigate({
+      to: "/purchase",
+      search: {
+        course,
+        semester: String(semester),
+      },
+    });
+  };
 
   return (
     <div className="min-h-screen bg-background">
@@ -46,8 +66,8 @@ function SelectPage() {
 
         <div className="mt-12 space-y-10">
           {/* Course */}
-          <section>
-            <div className="mb-4 flex items-center justify-between">
+          <section className="space-y-4">
+            <div className="flex items-center justify-between">
               <h2 className="font-display text-lg font-semibold">1. Choose your course</h2>
               {course && (
                 <span className="inline-flex items-center gap-1 text-xs text-success">
@@ -55,34 +75,25 @@ function SelectPage() {
                 </span>
               )}
             </div>
-            <div className="grid grid-cols-2 gap-3 sm:grid-cols-3">
-              {COURSES.map((c) => {
-                const active = course === c;
-                return (
-                  <button
-                    key={c}
-                    onClick={() => setCourse(c)}
-                    className={`group rounded-2xl border p-5 text-left shadow-soft transition ${
-                      active
-                        ? "border-primary bg-primary/5 shadow-glow"
-                        : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40"
-                    }`}
-                  >
-                    <div
-                      className={`grid h-10 w-10 place-items-center rounded-xl ${
-                        active
-                          ? "bg-gradient-primary text-primary-foreground"
-                          : "bg-primary/10 text-primary"
-                      }`}
-                    >
-                      <GraduationCap className="h-5 w-5" />
-                    </div>
-                    <p className="mt-3 font-semibold">{c}</p>
-                    <p className="text-xs text-muted-foreground">Calicut University</p>
-                  </button>
-                );
-              })}
-            </div>
+
+            <Select
+              value={course ?? ""}
+              onValueChange={(value) => {
+                setCourse(value);
+                setSemester(null);
+              }}
+            >
+              <SelectTrigger className="h-12 rounded-2xl">
+                <SelectValue placeholder="Select your course" />
+              </SelectTrigger>
+              <SelectContent>
+                {COURSES.map((c) => (
+                  <SelectItem key={c} value={c}>
+                    {c}
+                  </SelectItem>
+                ))}
+              </SelectContent>
+            </Select>
           </section>
 
           {/* Semester */}
@@ -102,11 +113,10 @@ function SelectPage() {
                   <button
                     key={s}
                     onClick={() => setSemester(s)}
-                    className={`rounded-2xl border px-3 py-5 text-center font-semibold shadow-soft transition ${
-                      active
-                        ? "border-primary bg-gradient-primary text-primary-foreground shadow-glow"
-                        : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40"
-                    }`}
+                    className={`rounded-2xl border px-3 py-5 text-center font-semibold shadow-soft transition ${active
+                      ? "border-primary bg-gradient-primary text-primary-foreground shadow-glow"
+                      : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40"
+                      }`}
                   >
                     <div className="text-xs uppercase tracking-wider opacity-70">Sem</div>
                     <div className="font-display text-2xl">{s}</div>
@@ -129,31 +139,28 @@ function SelectPage() {
                   ₹49 · Instant PDF after Razorpay checkout
                 </p>
               </div>
+
               <div className="flex flex-col items-stretch gap-2 md:items-end">
-                {ready && !link ? (
-                  <div className="inline-flex items-center gap-2 rounded-xl border border-border bg-background/70 px-4 py-2 text-xs text-muted-foreground">
-                    <AlertCircle className="h-4 w-4" /> Coming soon for this combination
-                  </div>
-                ) : null}
                 <Button
-                  asChild={ready && !!link}
-                  disabled={!ready || !link}
+                  onClick={handleProceed}
+                  disabled={!ready}
                   size="lg"
                   className="bg-gradient-primary shadow-glow hover:opacity-95"
                 >
-                  {ready && link ? (
-                    <a href={link} target="_blank" rel="noopener noreferrer">
+                  {ready ? (
+                    <>
                       Buy {course} Sem {semester} Paper
                       <ArrowRight className="ml-1 h-4 w-4" />
-                    </a>
+                    </>
                   ) : (
-                    <span>
+                    <>
                       Select course &amp; semester
                       <ArrowRight className="ml-1 h-4 w-4" />
-                    </span>
+                    </>
                   )}
                 </Button>
               </div>
+
             </div>
           </section>
 
