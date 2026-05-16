@@ -219,7 +219,7 @@ function Features() {
 }
 
 function AccuracyStat() {
-  const pct = 36; // Placeholder percentage based on our internal analysis of syllabus coverage and question trends. We can update this with a more data-driven estimate in the future.
+  const pct = 46; // Placeholder percentage based on our internal analysis of syllabus coverage and question trends. We can update this with a more data-driven estimate in the future.
   const r = 70; // Radius for the circular progress indicator
   const c = 2 * Math.PI * r;
   const offset = c - (pct / 100) * c;
@@ -387,7 +387,7 @@ function Testimonials() {
 
         <div className="mt-10 text-center">
           <Button variant="outline" asChild>
-            <a href="mailto:support@FYUGP-papers.example">Send us your feedback</a>
+            <a href="mailto:support@FYUGPhub.example">Send us your feedback</a>
           </Button>
         </div>
       </div>
