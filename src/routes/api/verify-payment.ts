@@ -1,5 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import crypto from "node:crypto";
+import { supabaseAdmin } from "@/lib/supabase.server";
 
 export const Route = createFileRoute("/api/verify-payment")({
   server: {
@@ -48,6 +49,40 @@ export const Route = createFileRoute("/api/verify-payment")({
             return Response.json(
               { success: false, message: "Invalid signature" },
               { status: 401 },
+            );
+          }
+
+          const { data: purchase, error: fetchError } = await supabaseAdmin
+            .from("purchases")
+            .select("id, payment_status")
+            .eq("razorpay_order_id", razorpay_order_id)
+            .single();
+
+          if (fetchError || !purchase) {
+            return Response.json(
+              { success: false, message: "Purchase record not found" },
+              { status: 404 },
+            );
+          }
+
+          if (purchase.payment_status === "paid") {
+            return Response.json({ success: true, message: "Already verified" });
+          }
+
+          const { error: updateError } = await supabaseAdmin
+            .from("purchases")
+            .update({
+              payment_status: "paid",
+              razorpay_payment_id,
+              razorpay_signature,
+              paid_at: new Date().toISOString(),
+            })
+            .eq("razorpay_order_id", razorpay_order_id);
+
+          if (updateError) {
+            return Response.json(
+              { success: false, message: updateError.message },
+              { status: 500 },
             );
           }
 

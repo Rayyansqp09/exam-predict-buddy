@@ -13,6 +13,7 @@ import { Route as ViewRouteImport } from './routes/view'
 import { Route as SelectRouteImport } from './routes/select'
 import { Route as PurchaseRouteImport } from './routes/purchase'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as AdminDashboardRouteImport } from './routes/admin-dashboard'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as ApiVerifyPaymentRouteImport } from './routes/api/verify-payment'
@@ -25,6 +26,7 @@ import { Route as ApiAdminMeRouteImport } from './routes/api/admin/me'
 import { Route as ApiAdminLogoutRouteImport } from './routes/api/admin/logout'
 import { Route as ApiAdminLoginRouteImport } from './routes/api/admin/login'
 import { Route as ApiAdminDeleteSubjectRouteImport } from './routes/api/admin/delete-subject'
+import { Route as ApiAdminDashboardRouteImport } from './routes/api/admin/dashboard'
 import { Route as ApiAdminBulkPriceUpdateRouteImport } from './routes/api/admin/bulk-price-update'
 
 const ViewRoute = ViewRouteImport.update({
@@ -45,6 +47,11 @@ const PurchaseRoute = PurchaseRouteImport.update({
 const PrivacyRoute = PrivacyRouteImport.update({
   id: '/privacy',
   path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/admin-dashboard',
+  path: '/admin-dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminRoute = AdminRouteImport.update({
@@ -107,6 +114,11 @@ const ApiAdminDeleteSubjectRoute = ApiAdminDeleteSubjectRouteImport.update({
   path: '/api/admin/delete-subject',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiAdminDashboardRoute = ApiAdminDashboardRouteImport.update({
+  id: '/api/admin/dashboard',
+  path: '/api/admin/dashboard',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiAdminBulkPriceUpdateRoute = ApiAdminBulkPriceUpdateRouteImport.update({
   id: '/api/admin/bulk-price-update',
   path: '/api/admin/bulk-price-update',
@@ -116,6 +128,7 @@ const ApiAdminBulkPriceUpdateRoute = ApiAdminBulkPriceUpdateRouteImport.update({
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/admin-dashboard': typeof AdminDashboardRoute
   '/privacy': typeof PrivacyRoute
   '/purchase': typeof PurchaseRoute
   '/select': typeof SelectRoute
@@ -124,6 +137,7 @@ export interface FileRoutesByFullPath {
   '/api/subjects': typeof ApiSubjectsRoute
   '/api/verify-payment': typeof ApiVerifyPaymentRoute
   '/api/admin/bulk-price-update': typeof ApiAdminBulkPriceUpdateRoute
+  '/api/admin/dashboard': typeof ApiAdminDashboardRoute
   '/api/admin/delete-subject': typeof ApiAdminDeleteSubjectRoute
   '/api/admin/login': typeof ApiAdminLoginRoute
   '/api/admin/logout': typeof ApiAdminLogoutRoute
@@ -135,6 +149,7 @@ export interface FileRoutesByFullPath {
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/admin-dashboard': typeof AdminDashboardRoute
   '/privacy': typeof PrivacyRoute
   '/purchase': typeof PurchaseRoute
   '/select': typeof SelectRoute
@@ -143,6 +158,7 @@ export interface FileRoutesByTo {
   '/api/subjects': typeof ApiSubjectsRoute
   '/api/verify-payment': typeof ApiVerifyPaymentRoute
   '/api/admin/bulk-price-update': typeof ApiAdminBulkPriceUpdateRoute
+  '/api/admin/dashboard': typeof ApiAdminDashboardRoute
   '/api/admin/delete-subject': typeof ApiAdminDeleteSubjectRoute
   '/api/admin/login': typeof ApiAdminLoginRoute
   '/api/admin/logout': typeof ApiAdminLogoutRoute
@@ -155,6 +171,7 @@ export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
   '/admin': typeof AdminRoute
+  '/admin-dashboard': typeof AdminDashboardRoute
   '/privacy': typeof PrivacyRoute
   '/purchase': typeof PurchaseRoute
   '/select': typeof SelectRoute
@@ -163,6 +180,7 @@ export interface FileRoutesById {
   '/api/subjects': typeof ApiSubjectsRoute
   '/api/verify-payment': typeof ApiVerifyPaymentRoute
   '/api/admin/bulk-price-update': typeof ApiAdminBulkPriceUpdateRoute
+  '/api/admin/dashboard': typeof ApiAdminDashboardRoute
   '/api/admin/delete-subject': typeof ApiAdminDeleteSubjectRoute
   '/api/admin/login': typeof ApiAdminLoginRoute
   '/api/admin/logout': typeof ApiAdminLogoutRoute
@@ -176,6 +194,7 @@ export interface FileRouteTypes {
   fullPaths:
     | '/'
     | '/admin'
+    | '/admin-dashboard'
     | '/privacy'
     | '/purchase'
     | '/select'
@@ -184,6 +203,7 @@ export interface FileRouteTypes {
     | '/api/subjects'
     | '/api/verify-payment'
     | '/api/admin/bulk-price-update'
+    | '/api/admin/dashboard'
     | '/api/admin/delete-subject'
     | '/api/admin/login'
     | '/api/admin/logout'
@@ -195,6 +215,7 @@ export interface FileRouteTypes {
   to:
     | '/'
     | '/admin'
+    | '/admin-dashboard'
     | '/privacy'
     | '/purchase'
     | '/select'
@@ -203,6 +224,7 @@ export interface FileRouteTypes {
     | '/api/subjects'
     | '/api/verify-payment'
     | '/api/admin/bulk-price-update'
+    | '/api/admin/dashboard'
     | '/api/admin/delete-subject'
     | '/api/admin/login'
     | '/api/admin/logout'
@@ -214,6 +236,7 @@ export interface FileRouteTypes {
     | '__root__'
     | '/'
     | '/admin'
+    | '/admin-dashboard'
     | '/privacy'
     | '/purchase'
     | '/select'
@@ -222,6 +245,7 @@ export interface FileRouteTypes {
     | '/api/subjects'
     | '/api/verify-payment'
     | '/api/admin/bulk-price-update'
+    | '/api/admin/dashboard'
     | '/api/admin/delete-subject'
     | '/api/admin/login'
     | '/api/admin/logout'
@@ -234,6 +258,7 @@ export interface FileRouteTypes {
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   AdminRoute: typeof AdminRoute
+  AdminDashboardRoute: typeof AdminDashboardRoute
   PrivacyRoute: typeof PrivacyRoute
   PurchaseRoute: typeof PurchaseRoute
   SelectRoute: typeof SelectRoute
@@ -242,6 +267,7 @@ export interface RootRouteChildren {
   ApiSubjectsRoute: typeof ApiSubjectsRoute
   ApiVerifyPaymentRoute: typeof ApiVerifyPaymentRoute
   ApiAdminBulkPriceUpdateRoute: typeof ApiAdminBulkPriceUpdateRoute
+  ApiAdminDashboardRoute: typeof ApiAdminDashboardRoute
   ApiAdminDeleteSubjectRoute: typeof ApiAdminDeleteSubjectRoute
   ApiAdminLoginRoute: typeof ApiAdminLoginRoute
   ApiAdminLogoutRoute: typeof ApiAdminLogoutRoute
@@ -279,6 +305,13 @@ declare module '@tanstack/react-router' {
       path: '/privacy'
       fullPath: '/privacy'
       preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/admin-dashboard': {
+      id: '/admin-dashboard'
+      path: '/admin-dashboard'
+      fullPath: '/admin-dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin': {
@@ -365,6 +398,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminDeleteSubjectRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/admin/dashboard': {
+      id: '/api/admin/dashboard'
+      path: '/api/admin/dashboard'
+      fullPath: '/api/admin/dashboard'
+      preLoaderRoute: typeof ApiAdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/admin/bulk-price-update': {
       id: '/api/admin/bulk-price-update'
       path: '/api/admin/bulk-price-update'
@@ -378,6 +418,7 @@ declare module '@tanstack/react-router' {
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   AdminRoute: AdminRoute,
+  AdminDashboardRoute: AdminDashboardRoute,
   PrivacyRoute: PrivacyRoute,
   PurchaseRoute: PurchaseRoute,
   SelectRoute: SelectRoute,
@@ -386,6 +427,7 @@ const rootRouteChildren: RootRouteChildren = {
   ApiSubjectsRoute: ApiSubjectsRoute,
   ApiVerifyPaymentRoute: ApiVerifyPaymentRoute,
   ApiAdminBulkPriceUpdateRoute: ApiAdminBulkPriceUpdateRoute,
+  ApiAdminDashboardRoute: ApiAdminDashboardRoute,
   ApiAdminDeleteSubjectRoute: ApiAdminDeleteSubjectRoute,
   ApiAdminLoginRoute: ApiAdminLoginRoute,
   ApiAdminLogoutRoute: ApiAdminLogoutRoute,

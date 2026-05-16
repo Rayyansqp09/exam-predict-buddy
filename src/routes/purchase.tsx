@@ -173,6 +173,9 @@ function PurchasePage() {
                     course,
                     semester: semesterNumber,
                     subjectId,
+                    subjectName: subject.name,
+                    originalPrice: subject.price,
+                    discountPrice: subject.discountPrice,
                     receipt: `${course}-${semesterNumber}-${subjectId}-${Date.now()}`,
                 }),
             });
@@ -392,7 +395,7 @@ function PurchasePage() {
                         </div>
                     )}
                 </div>
-                
+
                 <p className="mt-12 text-center text-xs text-muted-foreground">
                     Secure payments via Razorpay. Predictions are estimates based on syllabus &amp; past
                     patterns — not guaranteed.
