@@ -2,7 +2,7 @@
 export const SAMPLE_PDF_LINK = "#";
 
 // Supported courses and semesters
-export const COURSES = ["B.Com", "BBA", "BSc", "BA", "BCA"] as const;
+export const COURSES = ["B.Com", "BBA", "BA English Language and Literature", "BCA","BA Economics","BSc Botany","BSc Mathematics","BSc Computer Science","BSc Microbiology"] as const;
 export type Course = (typeof COURSES)[number];
 
 export const SEMESTERS = [1, 2, 3, 4, 5, 6] as const;

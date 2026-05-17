@@ -28,8 +28,8 @@ export function Footer() {
           </div>
           <div>
             <h4 className="text-sm font-semibold">Contact</h4>
-            <a href="mailto:support@FYUGPhub.example" className="mt-3 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
-              <Mail className="h-4 w-4" /> support@FYUGPhub.example
+            <a href="mailto:support.fyugphub@gmail.com" className="mt-3 inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
+              <Mail className="h-4 w-4" /> support.fyugphub@gmail.com
             </a>
             <p className="mt-4 text-xs text-muted-foreground">
               Disclaimer: Predictions are based on syllabus and trend analysis. We do not guarantee exact exam questions.

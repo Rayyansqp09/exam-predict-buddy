@@ -32,7 +32,7 @@ const features = [
   { icon: Download, title: "Instant PDF Access", text: "Download a clean, printable PDF immediately after secure payment." },
 ];
 
-const courses = ["B.Com", "BBA", "BSc", "BA", "BCA", "More coming soon"];
+const courses = ["B.Com", "BBA", "BSc", "BA English", "BCA", "More coming soon"];
 
 const testimonials = [
   { name: "Aysha R.", course: "B.Com 4th Sem", text: "Helped me focus on the important topics in the last week. Saved hours of guesswork." },
@@ -387,7 +387,7 @@ function Testimonials() {
 
         <div className="mt-10 text-center">
           <Button variant="outline" asChild>
-            <a href="mailto:support@FYUGPhub.example">Send us your feedback</a>
+            <a href="mailto:support.fyugphub@gmail.com">Send us your feedback</a>
           </Button>
         </div>
       </div>

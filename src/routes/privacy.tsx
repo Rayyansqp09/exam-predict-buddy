@@ -70,8 +70,8 @@ function PrivacyPage() {
 
         <Section title="Contact">
           For privacy-related queries, reach us at{" "}
-          <a href="mailto:support@FYUGPhub.example" className="text-primary hover:underline">
-            support@FYUGPhub.example
+          <a href="mailto:support.fyugphub@gmail.com" className="text-primary hover:underline">
+            support.fyugphub@gmail.com
           </a>.
         </Section>
 
