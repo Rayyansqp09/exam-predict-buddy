@@ -8,11 +8,16 @@ export const Route = createFileRoute("/api/create-order")({
       POST: async ({ request }) => {
         try {
           const body = await request.json();
-
+          // console.log("CREATE ORDER BODY:", body);
           const {
             amount,
             currency = "INR",
             receipt,
+
+            resourceSlug,
+            resourceTitle,
+            resourceType,
+
             subjectId,
             subjectName,
             course,
@@ -23,11 +28,16 @@ export const Route = createFileRoute("/api/create-order")({
             amount: number;
             currency?: string;
             receipt?: string;
-            subjectId?: string;
-            subjectName?: string;
+
+            resourceSlug?: string;
+            resourceTitle?: string;
+            resourceType?: string;
+
+            subjectId?: string | null;
+            subjectName?: string | null;
             course?: string;
             semester?: number;
-            originalPrice?: number;
+            originalPrice?: number | null;
             discountPrice?: number | null;
           };
 
@@ -35,13 +45,7 @@ export const Route = createFileRoute("/api/create-order")({
             return Response.json({ error: "Invalid amount" }, { status: 400 });
           }
 
-          if (
-            !subjectId ||
-            !subjectName ||
-            !course ||
-            !semester ||
-            !originalPrice
-          ) {
+          if (!resourceSlug || !resourceTitle || !resourceType || !course || !semester) {
             return Response.json(
               { error: "Missing purchase details" },
               { status: 400 },
@@ -53,13 +57,20 @@ export const Route = createFileRoute("/api/create-order")({
             key_secret: process.env.RAZORPAY_KEY_SECRET!,
           });
 
+          const safeReceipt = `r_${Date.now().toString(36)}_${Math.random()
+            .toString(36)
+            .slice(2, 8)}`;
+
           const order = await razorpay.orders.create({
             amount: Math.round(amount * 100),
             currency,
-            receipt: receipt ?? `rcpt_${Date.now()}`,
+            receipt: safeReceipt,
             notes: {
-              subjectId,
-              subjectName,
+              resourceSlug,
+              resourceTitle,
+              resourceType,
+              subjectId: subjectId ?? "",
+              subjectName: subjectName ?? "",
               course,
               semester: String(semester),
             },
@@ -67,13 +78,19 @@ export const Route = createFileRoute("/api/create-order")({
 
           const { error: insertError } = await supabaseAdmin
             .from("purchases")
+            
             .insert({
-              subject_id: subjectId,
-              subject_name: subjectName,
+              resource_slug: resourceSlug,
+              resource_title: resourceTitle,
+              resource_type: resourceType,
+
+              subject_id: subjectId ?? null,
+              subject_name: subjectName ?? null,
+
               course,
               semester,
-              original_price: originalPrice,
-              discount_price: discountPrice,
+              original_price: originalPrice ?? null,
+              discount_price: discountPrice ?? null,
               paid_amount: amount,
               razorpay_order_id: order.id,
               payment_status: "pending",

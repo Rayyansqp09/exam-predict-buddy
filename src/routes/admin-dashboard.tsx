@@ -3,8 +3,10 @@ import { useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
   BarChart3,
+  BookOpen,
   Clock3,
   CreditCard,
+  FileText,
   Package2,
   TrendingUp,
   Users,
@@ -25,51 +27,62 @@ import {
 
 type DashboardResponse =
   | {
-      success: true;
-      summary: {
-        totalPurchases: number;
-        paidCount: number;
-        pendingCount: number;
-        totalRevenue: number;
-        averageOrderValue: number;
-      };
-      byCourse: Array<{
-        course: string;
-        count: number;
-        revenue: number;
-      }>;
-      bySemester: Array<{
-        semester: number;
-        count: number;
-        revenue: number;
-      }>;
-      topSubjects: Array<{
-        subjectId: string;
-        subjectName: string;
-        course: string;
-        semester: number;
-        count: number;
-        revenue: number;
-      }>;
-      recentPurchases: Array<{
-        id: number;
-        subjectId: string;
-        subjectName: string;
-        course: string;
-        semester: number;
-        originalPrice: number;
-        discountPrice: number | null;
-        paidAmount: number;
-        paymentStatus: string;
-        createdAt: string;
-        paidAt: string | null;
-        razorpayPaymentId: string | null;
-      }>;
-    }
-  | {
-      success: false;
-      message: string;
+    success: true;
+    summary: {
+      totalPurchases: number;
+      paidCount: number;
+      pendingCount: number;
+      totalRevenue: number;
+      averageOrderValue: number;
     };
+    byCourse: Array<{
+      course: string;
+      count: number;
+      revenue: number;
+    }>;
+    bySemester: Array<{
+      semester: number;
+      count: number;
+      revenue: number;
+    }>;
+    byResourceType: Array<{
+      resourceType: string;
+      count: number;
+      revenue: number;
+    }>;
+    topResources: Array<{
+      resourceSlug: string;
+      resourceTitle: string;
+      resourceType: string;
+      course: string;
+      semester: number;
+      count: number;
+      revenue: number;
+    }>;
+    recentPurchases: Array<{
+      id: number;
+      resourceSlug: string | null;
+      resourceTitle: string;
+      resourceType: string;
+
+      subjectId: string | null;
+      subjectName: string | null;
+
+      course: string;
+      semester: number;
+      originalPrice: number | null;
+      discountPrice: number | null;
+      paidAmount: number;
+      paymentStatus: string;
+      createdAt: string;
+      paidAt: string | null;
+      razorpayPaymentId: string | null;
+    }>;
+  }
+  | {
+    success: false;
+    message: string;
+  };
 
 export const Route = createFileRoute("/admin-dashboard")({
   component: AdminDashboardPage,
@@ -78,7 +91,8 @@ export const Route = createFileRoute("/admin-dashboard")({
 function AdminDashboardPage() {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [data, setData] = useState<Extract<DashboardResponse, { success: true }> | null>(null);
+  const [data, setData] =
+    useState<Extract<DashboardResponse, { success: true }> | null>(null);
 
   useEffect(() => {
     const load = async () => {
@@ -125,6 +139,21 @@ function AdminDashboardPage() {
 
   const fmt = (value: number) => money.format(value);
 
+  const formatResourceType = (type: string) => {
+    const map: Record<string, string> = {
+      MODEL_PAPER: "Model Paper",
+      PYQ: "PYQ",
+      QUESTION_BANK: "Question Bank",
+      STUDY_MATERIAL: "Study Material",
+      TEXTBOOK_PDF: "Textbook PDF",
+      HANDWRITTEN_NOTE: "Handwritten Notes",
+      MICRO_NOTE: "Micro Notes",
+      IMPORTANT_QUESTION: "Important Questions",
+      UNKNOWN: "Unknown",
+    };
+    return map[type] ?? type;
+  };
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -143,7 +172,7 @@ function AdminDashboardPage() {
               Admin Dashboard
             </h1>
             <p className="mt-2 text-muted-foreground">
-              Sales overview, course trends, and recent purchase history.
+              Sales overview, resource trends, and recent purchase history.
             </p>
           </div>
 
@@ -168,56 +197,82 @@ function AdminDashboardPage() {
               </Button>
             </CardContent>
           </Card>
+
         ) : data ? (
-          <div className="space-y-8">
-            <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-4">
+          <div className="space-y-4">
+            
+            <div className="grid grid-cols-2 gap-2 md:gap-4 xl:grid-cols-4">
               <Card className="shadow-card">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Total Purchases</CardTitle>
-                  <ShoppingIcon />
+                <CardHeader className="flex flex-row items-center justify-between space-y-1 px-4 py-5 md:px-4 md:py-4 pb-1 md:pb-2">
+                  <CardTitle className="flex items-center justify-between text-xs md:text-sm font-medium w-full">
+                    <span>Total Purchases</span>
+                    <Users className="h-4 w-4 text-muted-foreground" />
+                  </CardTitle>
                 </CardHeader>
+
                 <CardContent>
-                  <div className="text-3xl font-bold">{data.summary.totalPurchases}</div>
-                  <p className="text-xs text-muted-foreground">
+                  <div className="text-3xl md:text-3xl font-bold mt-2 mb-2 md:mt-0 md:mb-0">
+                    {data.summary.totalPurchases}
+                  </div>
+
+                  <p className="text-[10px] md:text-xs text-muted-foreground">
                     Paid + pending orders
                   </p>
                 </CardContent>
               </Card>
 
               <Card className="shadow-card">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Paid Orders</CardTitle>
-                  <CreditCard className="h-4 w-4 text-muted-foreground" />
+                <CardHeader className="flex flex-row items-center justify-between space-y-1 px-4 py-5 md:px-4 md:py-4 pb-1 md:pb-2">
+                  <CardTitle className="flex items-center justify-between text-xs md:text-sm font-medium w-full">
+                    <span>Paid Orders</span>
+                    <CreditCard className="h-4 w-4 text-muted-foreground" />
+                  </CardTitle>
                 </CardHeader>
+
                 <CardContent>
-                  <div className="text-3xl font-bold">{data.summary.paidCount}</div>
-                  <p className="text-xs text-muted-foreground">
+                  <div className="text-3xl md:text-3xl font-bold mt-2 mb-2 md:mt-0 md:mb-0">
+                    {data.summary.paidCount}
+                  </div>
+
+                  <p className="text-[10px] md:text-xs text-muted-foreground">
                     Successfully verified payments
                   </p>
                 </CardContent>
               </Card>
 
               <Card className="shadow-card">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Pending Orders</CardTitle>
-                  <Clock3 className="h-4 w-4 text-muted-foreground" />
+                <CardHeader className="flex flex-row items-center justify-between space-y-1 px-4 py-5 md:px-4 md:py-4 pb-1 md:pb-2">
+                  <CardTitle className="flex items-center justify-between text-xs md:text-sm font-medium w-full">
+                    <span>Pending Orders</span>
+                    <Clock3 className="h-4 w-4 text-muted-foreground" />
+                  </CardTitle>
                 </CardHeader>
+
                 <CardContent>
-                  <div className="text-3xl font-bold">{data.summary.pendingCount}</div>
-                  <p className="text-xs text-muted-foreground">
+                  <div className="text-3xl md:text-3xl font-bold mt-2 mb-2 md:mt-0 md:mb-0">
+                    {data.summary.pendingCount}
+                  </div>
+
+                  <p className="text-[10px] md:text-xs text-muted-foreground">
                     Orders waiting for payment
                   </p>
                 </CardContent>
               </Card>
 
               <Card className="shadow-card">
-                <CardHeader className="flex flex-row items-center justify-between space-y-0 pb-2">
-                  <CardTitle className="text-sm font-medium">Revenue</CardTitle>
-                  <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                <CardHeader className="flex flex-row items-center justify-between space-y-1 px-4 py-5 md:px-4 md:py-4 pb-1 md:pb-2">
+                  <CardTitle className="flex items-center justify-between text-xs md:text-sm font-medium w-full">
+                    <span>Revenue</span>
+                    <TrendingUp className="h-4 w-4 text-muted-foreground" />
+                  </CardTitle>
                 </CardHeader>
+
                 <CardContent>
-                  <div className="text-3xl font-bold">{revenueLabel}</div>
-                  <p className="text-xs text-muted-foreground">
+                  <div className="text-3xl md:text-3xl font-bold mt-2 mb-2 md:mt-0 md:mb-0">
+                    {revenueLabel}
+                  </div>
+
+                  <p className="text-[10px] md:text-xs text-muted-foreground">
                     Avg order value: {fmt(data.summary.averageOrderValue)}
                   </p>
                 </CardContent>
@@ -251,9 +306,13 @@ function AdminDashboardPage() {
                       ) : (
                         data.byCourse.map((row) => (
                           <TableRow key={row.course}>
-                            <TableCell className="font-medium">{row.course}</TableCell>
+                            <TableCell className="font-medium">
+                              {row.course}
+                            </TableCell>
                             <TableCell>{row.count}</TableCell>
-                            <TableCell className="text-right">{fmt(row.revenue)}</TableCell>
+                            <TableCell className="text-right">
+                              {fmt(row.revenue)}
+                            </TableCell>
                           </TableRow>
                         ))
                       )}
@@ -288,9 +347,13 @@ function AdminDashboardPage() {
                       ) : (
                         data.bySemester.map((row) => (
                           <TableRow key={row.semester}>
-                            <TableCell className="font-medium">Semester {row.semester}</TableCell>
+                            <TableCell className="font-medium">
+                              Semester {row.semester}
+                            </TableCell>
                             <TableCell>{row.count}</TableCell>
-                            <TableCell className="text-right">{fmt(row.revenue)}</TableCell>
+                            <TableCell className="text-right">
+                              {fmt(row.revenue)}
+                            </TableCell>
                           </TableRow>
                         ))
                       )}
@@ -302,13 +365,55 @@ function AdminDashboardPage() {
 
             <Card className="shadow-card">
               <CardHeader>
-                <CardTitle>Top Selling Subjects</CardTitle>
+                <CardTitle className="flex items-center gap-2">
+                  <FileText className="h-5 w-5" />
+                  Sales by Resource Type
+                </CardTitle>
               </CardHeader>
               <CardContent>
                 <Table>
                   <TableHeader>
                     <TableRow>
-                      <TableHead>Subject</TableHead>
+                      <TableHead>Resource Type</TableHead>
+                      <TableHead>Orders</TableHead>
+                      <TableHead className="text-right">Revenue</TableHead>
+                    </TableRow>
+                  </TableHeader>
+                  <TableBody>
+                    {data.byResourceType.length === 0 ? (
+                      <TableRow>
+                        <TableCell colSpan={3} className="text-muted-foreground">
+                          No paid orders yet.
+                        </TableCell>
+                      </TableRow>
+                    ) : (
+                      data.byResourceType.map((row) => (
+                        <TableRow key={row.resourceType}>
+                          <TableCell className="font-medium">
+                            {formatResourceType(row.resourceType)}
+                          </TableCell>
+                          <TableCell>{row.count}</TableCell>
+                          <TableCell className="text-right">
+                            {fmt(row.revenue)}
+                          </TableCell>
+                        </TableRow>
+                      ))
+                    )}
+                  </TableBody>
+                </Table>
+              </CardContent>
+            </Card>
+
+            <Card className="shadow-card">
+              <CardHeader>
+                <CardTitle>Top Selling Resources</CardTitle>
+              </CardHeader>
+              <CardContent>
+                <Table>
+                  <TableHeader>
+                    <TableRow>
+                      <TableHead>Resource</TableHead>
+                      <TableHead>Type</TableHead>
                       <TableHead>Course</TableHead>
                       <TableHead>Semester</TableHead>
                       <TableHead>Orders</TableHead>
@@ -316,20 +421,25 @@ function AdminDashboardPage() {
                     </TableRow>
                   </TableHeader>
                   <TableBody>
-                    {data.topSubjects.length === 0 ? (
+                    {data.topResources.length === 0 ? (
                       <TableRow>
-                        <TableCell colSpan={5} className="text-muted-foreground">
+                        <TableCell colSpan={6} className="text-muted-foreground">
                           No paid orders yet.
                         </TableCell>
                       </TableRow>
                     ) : (
-                      data.topSubjects.map((row) => (
-                        <TableRow key={row.subjectId}>
-                          <TableCell className="font-medium">{row.subjectName}</TableCell>
+                      data.topResources.map((row) => (
+                        <TableRow key={row.resourceSlug || row.resourceTitle}>
+                          <TableCell className="font-medium">
+                            {row.resourceTitle}
+                          </TableCell>
+                          <TableCell>{formatResourceType(row.resourceType)}</TableCell>
                           <TableCell>{row.course}</TableCell>
                           <TableCell>{row.semester}</TableCell>
                           <TableCell>{row.count}</TableCell>
-                          <TableCell className="text-right">{fmt(row.revenue)}</TableCell>
+                          <TableCell className="text-right">
+                            {fmt(row.revenue)}
+                          </TableCell>
                         </TableRow>
                       ))
                     )}
@@ -347,7 +457,8 @@ function AdminDashboardPage() {
                   <TableHeader>
                     <TableRow>
                       <TableHead>Time</TableHead>
-                      <TableHead>Subject</TableHead>
+                      <TableHead>Resource</TableHead>
+                      <TableHead>Type</TableHead>
                       <TableHead>Course</TableHead>
                       <TableHead>Semester</TableHead>
                       <TableHead>Status</TableHead>
@@ -357,7 +468,7 @@ function AdminDashboardPage() {
                   <TableBody>
                     {data.recentPurchases.length === 0 ? (
                       <TableRow>
-                        <TableCell colSpan={6} className="text-muted-foreground">
+                        <TableCell colSpan={7} className="text-muted-foreground">
                           No purchase history yet.
                         </TableCell>
                       </TableRow>
@@ -367,7 +478,10 @@ function AdminDashboardPage() {
                           <TableCell className="text-sm text-muted-foreground">
                             {new Date(row.createdAt).toLocaleString()}
                           </TableCell>
-                          <TableCell className="font-medium">{row.subjectName}</TableCell>
+                          <TableCell className="font-medium">
+                            {row.resourceTitle}
+                          </TableCell>
+                          <TableCell>{formatResourceType(row.resourceType)}</TableCell>
                           <TableCell>{row.course}</TableCell>
                           <TableCell>{row.semester}</TableCell>
                           <TableCell>
@@ -377,7 +491,9 @@ function AdminDashboardPage() {
                               {row.paymentStatus}
                             </Badge>
                           </TableCell>
-                          <TableCell className="text-right">{fmt(row.paidAmount)}</TableCell>
+                          <TableCell className="text-right">
+                            {fmt(row.paidAmount)}
+                          </TableCell>
                         </TableRow>
                       ))
                     )}
@@ -392,8 +508,4 @@ function AdminDashboardPage() {
       <Footer />
     </div>
   );
-}
-
-function ShoppingIcon() {
-  return <Users className="h-4 w-4 text-muted-foreground" />;
 }

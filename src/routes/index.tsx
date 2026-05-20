@@ -92,7 +92,7 @@ function Hero() {
               </Link>
             </Button>
             <Button asChild size="lg" variant="outline">
-              <a href="#how">See How It Works</a>
+              <Link to="/resources">  See How It Works </Link>
             </Button>
           </div>
           <div className="mt-8 flex flex-wrap items-center gap-5 text-sm text-muted-foreground">
