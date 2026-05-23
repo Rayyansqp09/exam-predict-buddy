@@ -93,6 +93,12 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
     ],
     scripts: [
+      // Google AdSense
+      {
+        src: "https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-4230217863557428",
+        async: true,
+        crossOrigin: "anonymous",
+      },
       {
         src: "https://www.googletagmanager.com/gtag/js?id=G-GJX6762VVV",
         async: true,
