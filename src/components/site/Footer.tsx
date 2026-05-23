@@ -11,17 +11,17 @@ export function Footer() {
               <span className="grid h-9 w-9 place-items-center rounded-xl bg-gradient-primary text-primary-foreground">
                 <GraduationCap className="h-5 w-5" />
               </span>
-              <span className="font-display text-base font-bold">FYUGP Model Papers</span>
+              <span className="font-display text-base font-bold">FYUGP HUB</span>
             </div>
             <p className="mt-3 max-w-sm text-sm text-muted-foreground">
-              Syllabus-aligned predicted model question papers crafted to help Calicut University students prepare smarter.
+              High-quality study resources designed to help students prepare smarter, revise faster, and stay updated with their academics.
             </p>
           </div>
           <div>
             <h4 className="text-sm font-semibold">Quick Links</h4>
             <ul className="mt-3 space-y-2 text-sm text-muted-foreground">
               <li><a href="/#features" className="hover:text-foreground">Features</a></li>
-              <li><a href="/#pricing" className="hover:text-foreground">Pricing</a></li>
+              <li><a href="/#Channels" className="hover:text-foreground">Join Us</a></li>
               <li><a href="/#faq" className="hover:text-foreground">FAQ</a></li>
               <li><Link to="/privacy" className="hover:text-foreground">Privacy Policy</Link></li>
             </ul>
@@ -37,8 +37,10 @@ export function Footer() {
           </div>
         </div>
         <div className="mt-10 flex flex-col items-center justify-between gap-3 border-t border-border pt-6 text-xs text-muted-foreground md:flex-row">
-          <p>© {new Date().getFullYear()} FYUGP Hub Model Question Papers. All rights reserved.</p>
-          <p>Trusted by students preparing for Calicut University semester exams.</p>
+          <p>© {new Date().getFullYear()} FYUGP HUB. All rights reserved.</p>
+          <p className="text-center md:text-left">
+            Trusted by students preparing for Calicut University semester exams.
+          </p>
         </div>
       </div>
     </footer>

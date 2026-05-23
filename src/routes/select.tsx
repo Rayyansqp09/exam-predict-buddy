@@ -50,27 +50,30 @@ function SelectPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="mx-auto max-w-4xl px-4 py-16 md:px-6 md:py-24">
+      <main className="mx-auto max-w-4xl px-4 py-10 md:px-6 md:py-24">
         <div className="text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-background/70 px-3 py-1 text-xs font-medium text-primary shadow-sm">
             Step 1 of 1 · Choose your paper
           </span>
-          <h1 className="mt-5 font-display text-3xl font-bold md:text-5xl">
+          <h1 className="mt-5 font-display text-2xl font-bold md:text-5xl">
             Select your <span className="text-gradient">Course &amp; Semester</span>
           </h1>
-          <p className="mt-3 text-muted-foreground">
-            Pick the right Calicut University paper. You'll be redirected to a secure Razorpay
-            page to complete your purchase.
+          <p className="mt-3 text-sm md:text-base text-muted-foreground">
+            Pick the right resource for your course and semester. You’ll be redirected
+            to a secure checkout page to complete your purchase.
           </p>
         </div>
 
-        <div className="mt-12 space-y-10">
+        <div className="mt-12 md:mt-12 space-y-7 md:space-y-10">
           {/* Course */}
-          <section className="space-y-4">
-            <div className="flex items-center justify-between">
-              <h2 className="font-display text-lg font-semibold">1. Choose your course</h2>
+          <section className="space-y-2 md:space-y-4">
+            <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="font-display text-base font-semibold sm:text-lg">
+                1. Choose your course
+              </h2>
+
               {course && (
-                <span className="inline-flex items-center gap-1 text-xs text-success">
+                <span className="inline-flex items-center gap-1 self-start text-xs text-success sm:self-auto">
                   <CheckCircle2 className="h-4 w-4" /> {course} selected
                 </span>
               )}
@@ -83,7 +86,7 @@ function SelectPage() {
                 setSemester(null);
               }}
             >
-              <SelectTrigger className="h-12 rounded-2xl">
+              <SelectTrigger className="h-11 rounded-2xl sm:h-12">
                 <SelectValue placeholder="Select your course" />
               </SelectTrigger>
               <SelectContent>
@@ -94,32 +97,48 @@ function SelectPage() {
                 ))}
               </SelectContent>
             </Select>
+
+            <div className="mt-0 md:mt-3 text-center">
+              <a
+                href="#find"
+                className="text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground"
+              >
+                Can't find your course?
+              </a>
+            </div>
+
           </section>
 
           {/* Semester */}
           <section>
-            <div className="mb-4 flex items-center justify-between">
-              <h2 className="font-display text-lg font-semibold">2. Choose your semester</h2>
+            <div className="mb-3 flex flex-col gap-2 sm:mb-4 sm:flex-row sm:items-center sm:justify-between">
+              <h2 className="font-display text-base font-semibold sm:text-lg">
+                2. Choose your semester
+              </h2>
+
               {semester && (
-                <span className="inline-flex items-center gap-1 text-xs text-success">
+                <span className="inline-flex items-center gap-1 self-start text-xs text-success sm:self-auto">
                   <CheckCircle2 className="h-4 w-4" /> Semester {semester} selected
                 </span>
               )}
             </div>
-            <div className="grid grid-cols-3 gap-3 sm:grid-cols-6">
+
+            <div className="grid grid-cols-3 gap-2 sm:grid-cols-6 sm:gap-3">
               {SEMESTERS.map((s) => {
                 const active = semester === s;
                 return (
                   <button
                     key={s}
                     onClick={() => setSemester(s)}
-                    className={`rounded-2xl border px-3 py-5 text-center font-semibold shadow-soft transition ${active
+                    className={`rounded-2xl border px-2 py-4 text-center font-semibold shadow-soft transition sm:px-3 sm:py-5 ${active
                       ? "border-primary bg-gradient-primary text-primary-foreground shadow-glow"
                       : "border-border bg-card hover:-translate-y-0.5 hover:border-primary/40"
                       }`}
                   >
-                    <div className="text-xs uppercase tracking-wider opacity-70">Sem</div>
-                    <div className="font-display text-2xl">{s}</div>
+                    <div className="text-[10px] uppercase tracking-wider opacity-70 sm:text-xs">
+                      Sem
+                    </div>
+                    <div className="font-display text-xl sm:text-2xl">{s}</div>
                   </button>
                 );
               })}
@@ -127,16 +146,20 @@ function SelectPage() {
           </section>
 
           {/* CTA */}
-          <section className="rounded-3xl border border-primary/20 bg-gradient-hero p-6 shadow-card md:p-10">
-            <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
-              <div>
-                <p className="text-sm text-muted-foreground">Your selection</p>
-                <p className="mt-1 font-display text-xl font-bold">
+          <section className="rounded-3xl border border-primary/20 bg-gradient-hero p-5 shadow-card md:p-10">
+            <div className="flex flex-col gap-4 md:gap-5 md:flex-row md:items-center md:justify-between">
+              <div className="space-y-1">
+                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground md:text-sm md:normal-case md:tracking-normal">
+                  Your selection
+                </p>
+
+                <p className="font-display text-[1.1rem] font-bold leading-tight md:mt-1 md:text-xl">
                   {course ?? "Select course"} ·{" "}
                   {semester ? `Semester ${semester}` : "Select semester"}
                 </p>
-                <p className="mt-1 text-sm text-muted-foreground">
-                  ₹29 · Instant PDF after Razorpay checkout
+
+                <p className="text-[0.8rem] leading-6 text-muted-foreground">
+                  ₹30 · Instant PDF after Razorpay checkout
                 </p>
               </div>
 
@@ -145,24 +168,50 @@ function SelectPage() {
                   onClick={handleProceed}
                   disabled={!ready}
                   size="lg"
-                  className="bg-gradient-primary shadow-glow hover:opacity-95"
+                  className="w-full bg-gradient-primary shadow-glow hover:opacity-95 md:w-auto"
                 >
                   {ready ? (
                     <>
-                      Buy {course} Sem {semester} Paper
+                      <span className="sm:hidden">
+                        {course} Sem {semester}
+                      </span>
+
+                      <span className="hidden sm:inline">
+                        Buy {course} Sem {semester} Resource
+                      </span>
+
                       <ArrowRight className="ml-1 h-4 w-4" />
                     </>
                   ) : (
                     <>
                       Select course &amp; semester
-                      <ArrowRight className="ml-1 h-4 w-4" />
+                      <ArrowRight id="find" className="ml-1 h-4 w-4" />
                     </>
                   )}
                 </Button>
               </div>
-
             </div>
           </section>
+
+          <div className="rounded-2xl border border-border bg-card p-5 text-center shadow-soft">
+            <h3 className="text-lg font-semibold">
+              Can’t find your course or semester?
+            </h3>
+
+            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+              Tell us your course and semester, and we’ll try to add the required
+              resources as soon as possible and notify you once available.
+              <br />
+              Reach us at{" "}
+              <a
+                href="mailto:support.fyugphub@gmail.com"
+                className="font-medium underline underline-offset-4"
+              >
+                support.fyugphub@gmail.com
+              </a>{" "}
+              or through our WhatsApp and Telegram channels.
+            </p>
+          </div>
 
           <p className="text-center text-xs text-muted-foreground">
             Need help?{" "}
@@ -171,6 +220,7 @@ function SelectPage() {
             </Link>
           </p>
         </div>
+
       </main>
       <Footer />
     </div>

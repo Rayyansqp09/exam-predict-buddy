@@ -73,8 +73,7 @@ export const Route = createFileRoute("/resources")({
   head: () => ({
     meta: [
       {
-        title:
-          "Resource Hub — FYUGP Notes, PYQs, Predicted Papers & Study Materials",
+        title: "Resource Hub — FYUGP Notes, PYQs, Predicted Papers & Study Materials",
       },
       {
         name: "description",
@@ -258,11 +257,7 @@ function ResourcesPage() {
 
   const semesterOptions = useMemo(() => {
     return Array.from(
-      new Set(
-        resources
-          .filter((r) => !course || r.course === course)
-          .map((r) => r.semester),
-      ),
+      new Set(resources.filter((r) => !course || r.course === course).map((r) => r.semester)),
     ).sort((a, b) => a - b);
   }, [resources, course]);
 
@@ -270,7 +265,10 @@ function ResourcesPage() {
     return Array.from(
       new Set(
         resources
-          .filter((r) => (!course || r.course === course) && (!semester || String(r.semester) === semester))
+          .filter(
+            (r) =>
+              (!course || r.course === course) && (!semester || String(r.semester) === semester),
+          )
           .map((r) => r.subject),
       ),
     ).sort();
@@ -298,10 +296,7 @@ function ResourcesPage() {
   const latestSpotlight = useMemo(
     () =>
       [...resources]
-        .sort(
-          (a, b) =>
-            new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
-        )
+        .sort((a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime())
         .slice(0, 4),
     [resources],
   );
@@ -309,11 +304,7 @@ function ResourcesPage() {
   const popularSpotlight = useMemo(
     () =>
       [...resources]
-        .sort(
-          (a, b) =>
-            (b.downloadCount + b.purchaseCount) -
-            (a.downloadCount + a.purchaseCount),
-        )
+        .sort((a, b) => b.downloadCount + b.purchaseCount - (a.downloadCount + a.purchaseCount))
         .slice(0, 4),
     [resources],
   );
@@ -356,16 +347,13 @@ function ResourcesPage() {
 
     if (sort === "latest") {
       return [...list].sort(
-        (a, b) =>
-          new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
+        (a, b) => new Date(b.createdAt).getTime() - new Date(a.createdAt).getTime(),
       );
     }
 
     if (sort === "popular") {
       return [...list].sort(
-        (a, b) =>
-          (b.downloadCount + b.purchaseCount) -
-          (a.downloadCount + a.purchaseCount),
+        (a, b) => b.downloadCount + b.purchaseCount - (a.downloadCount + a.purchaseCount),
       );
     }
 
@@ -398,13 +386,13 @@ function ResourcesPage() {
             </span>
 
             <h1 className="mt-5 max-w-3xl text-3xl font-bold leading-tight md:text-5xl">
-              Every <span className="text-gradient">note, PYQ &amp; predicted paper</span> in one place.
+              Every <span className="text-gradient">note, PYQ &amp; predicted paper</span> in one
+              place.
             </h1>
 
             <p className="mt-4 max-w-2xl text-sm text-muted-foreground md:text-lg">
-              Handwritten notes, PYQs, predicted model papers, micro notes,
-              module-wise notes, question banks and important questions —
-              organized by course, semester and subject.
+              Handwritten notes, PYQs, predicted model papers, micro notes, module-wise notes,
+              question banks and important questions — organized by course, semester and subject.
             </p>
 
             <div className="mt-8 flex items-center gap-3 rounded-2xl border bg-card p-3 shadow-soft md:max-w-2xl">
@@ -432,18 +420,14 @@ function ResourcesPage() {
 
                 <span className="md:hidden">Trending :</span>
 
-                <span className="hidden md:inline">
-                  Trending subjects:
-                </span>
+                <span className="hidden md:inline">Trending subjects:</span>
               </span>
 
               {trendingSubjects.map((s, index) => (
                 <button
                   key={s}
                   type="button"
-                  onClick={() =>
-                    setTrendingSubject((prev) => (prev === s ? "" : s))
-                  }
+                  onClick={() => setTrendingSubject((prev) => (prev === s ? "" : s))}
                   className={`rounded-full border px-2.5 py-1 text-[10px] md:px-3 md:py-1 md:text-xs transition duration-200 ${index >= 3 ? "hidden md:inline-flex" : ""
                     } ${trendingSubject === s
                       ? "border-primary bg-primary text-primary-foreground shadow-md md:scale-105"
@@ -454,18 +438,12 @@ function ResourcesPage() {
                 </button>
               ))}
             </div>
-
-
           </div>
-
         </section>
 
         <section className="mx-auto max-w-7xl px-4 pb-12 pt-2 md:px-6">
-
           <div className="mt-6 rounded-2xl border bg-card p-4 shadow-soft">
-
-            <div className="grid grid-cols-2 gap-4 md:flex md:flex-wrap md:items-end md:gap-3">
-
+            <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:items-end md:gap-3">
               <FilterSelect
                 label="Access"
                 value={access}
@@ -481,7 +459,10 @@ function ResourcesPage() {
                 label="Course"
                 value={course}
                 onChange={setCourse}
-                options={[{ value: "", label: "All courses" }, ...courseOptions.map((c) => ({ value: c, label: c }))]}
+                options={[
+                  { value: "", label: "All courses" },
+                  ...courseOptions.map((c) => ({ value: c, label: c })),
+                ]}
               />
 
               <FilterSelect
@@ -531,16 +512,19 @@ function ResourcesPage() {
                 ]}
               />
 
-              <div className="ml-auto">
-                <Button variant="outline" onClick={clearFilters}>
+              <div className="col-span-2 flex justify-center md:ml-auto md:block">
+                <Button
+                  variant="outline"
+                  onClick={clearFilters}
+                  className="h-8 px-3 text-xs md:h-10 md:px-4 md:text-sm"
+                >
                   Reset
                 </Button>
               </div>
             </div>
-
           </div>
 
-          <div className="mb-5 flex items-end justify-between mt-9">
+          <div className="mb-5 flex items-end justify-between mt-6 md:mt-9">
             <div>
               <h2 className="text-2xl font-bold">
                 {filteredResources.length}{" "}
@@ -574,9 +558,7 @@ function ResourcesPage() {
           ) : filteredResources.length === 0 ? (
             <div className="rounded-2xl border bg-card p-10 text-center shadow-soft">
               <FileText className="mx-auto h-8 w-8 text-muted-foreground" />
-              <p className="mt-3 font-semibold">
-                No resources match your filters
-              </p>
+              <p className="mt-3 font-semibold">No resources match your filters</p>
               <p className="mt-1 text-sm text-muted-foreground">
                 Try clearing filters or selecting a different course or semester.
               </p>
@@ -585,17 +567,21 @@ function ResourcesPage() {
               </Button>
             </div>
           ) : (
-            <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            <div className="grid grid-cols-2 gap-3 md:grid-cols-3">
               {filteredResources.map((r) => (
-                <ResourceCard
-                  key={r.id}
-                  r={r}
-                  onBuy={handleBuy}
-                  buyingSlug={buyingSlug}
-                />
+                <ResourceCard key={r.id} r={r} onBuy={handleBuy} buyingSlug={buyingSlug} />
               ))}
             </div>
           )}
+
+          <div className="mt-4 md:mt-5 text-center">
+            <a
+              href="#find"
+              className="text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground"
+            >
+              Can't find desired resource?
+            </a>
+          </div>
 
           <div className="mt-14 grid gap-8 lg:grid-cols-2">
             <Spotlight
@@ -614,6 +600,51 @@ function ResourcesPage() {
               buyingSlug={buyingSlug}
             />
           </div>
+
+          <section
+            id="find"
+            className="mt-10 rounded-3xl border border-border bg-card p-5 text-center shadow-soft md:mt-14 md:p-8"
+          >
+            <h2 className="font-display text-xl font-bold md:text-2xl">
+              Can’t find your resource?
+            </h2>
+
+            <p className="mx-auto mt-3 max-w-2xl text-sm leading-5 text-muted-foreground">
+              If your course, semester, subject, or preferred resource type is not
+              available yet, let us know. Tell us your course, subject, semester,
+              and the exact resource you need, and we’ll try to add it as soon as
+              possible and notify you once available.
+            </p>
+
+            <p className="mt-3 text-sm text-muted-foreground">
+              Reach us at{" "}
+              <a
+                href="mailto:support.fyugphub@gmail.com"
+                className="font-medium underline underline-offset-4 hover:text-foreground"
+              >
+                support.fyugphub@gmail.com
+              </a>{" "}
+              or through our{" "}
+              <a
+                href="YOUR_WHATSAPP_CHANNEL_LINK"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
+              >
+                WhatsApp channel
+              </a>{" "}
+              and{" "}
+              <a
+                href="YOUR_TELEGRAM_CHANNEL_LINK"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
+              >
+                Telegram channel
+              </a>.
+            </p>
+          </section>
+
         </section>
       </main>
 
@@ -621,13 +652,9 @@ function ResourcesPage() {
         <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/60 px-4">
           <div className="w-full max-w-md rounded-2xl border bg-background p-6 text-center shadow-card">
             <div className="mx-auto mb-4 h-12 w-12 animate-spin rounded-full border-4 border-primary/20 border-t-primary" />
-            <h2 className="font-display text-2xl font-bold">
-              Loading your resource
-            </h2>
+            <h2 className="font-display text-2xl font-bold">Loading your resource</h2>
             <p className="mt-2 text-sm text-muted-foreground">{redirectLabel}</p>
-            <p className="mt-3 text-sm text-muted-foreground">
-              Preparing the PDF now...
-            </p>
+            <p className="mt-3 text-sm text-muted-foreground">Preparing the PDF now...</p>
           </div>
         </div>
       ) : null}
@@ -650,14 +677,14 @@ function FilterSelect({
   options: { value: string; label: string }[];
 }) {
   return (
-    <div className="min-w-[150px] flex-1">
-      <p className="mb-2 text-xs font-medium uppercase tracking-wider text-muted-foreground">
+    <div className="min-w-[110px] flex-1 md:min-w-[150px]">
+      <p className="mb-1 text-[10px] font-medium uppercase tracking-wider text-muted-foreground md:mb-2 md:text-xs">
         {label}
       </p>
       <select
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        className="h-10 w-full rounded-lg border border-border bg-background px-3 text-sm outline-none focus:border-primary"
+        className="h-8 w-full rounded-lg border border-border bg-background px-2 text-xs outline-none focus:border-primary md:h-10 md:px-3 md:text-sm"
       >
         {options.map((o) => (
           <option key={o.value || "_all"} value={o.value}>
@@ -691,128 +718,240 @@ function ResourceCard({
     : 0;
 
   return (
-    <div className="group flex flex-col rounded-2xl border border-border bg-card p-3 shadow-soft transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card">
-      <div className="flex items-start gap-3">
+    <>
+      {/* mobile version */}
+      <div className="group flex flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-soft md:hidden">
         <div
-          className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${isPremium ? "bg-primary/10 text-primary" : "bg-success/10 text-success"
+          className={`relative flex flex-col gap-2 px-3 pt-3 pb-4 ${isPremium
+            ? "bg-gradient-to-br from-primary/10 to-primary/20"
+            : "bg-gradient-to-br from-success/10 to-success/20"
             }`}
         >
-          {isPremium ? <Lock className="h-5 w-5" /> : <Unlock className="h-5 w-5" />}
-        </div>
-
-        <div className="min-w-0 flex-1">
-          <div className="flex flex-wrap items-center gap-1.5">
-
-            <span
-              className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${isPremium
-                ? "bg-primary/10 text-primary"
-                : "bg-success/10 text-success"
+          <div className="flex items-center justify-between">
+            <div
+              className={`grid h-7 w-7 place-items-center rounded-lg ${isPremium ? "bg-primary/15 text-primary" : "bg-success/15 text-success"
                 }`}
             >
-              {isPremium ? "Premium" : "Free"}
-            </span>
+              {isPremium ? <Lock className="h-3.5 w-3.5" /> : <Unlock className="h-3.5 w-3.5" />}
+            </div>
 
-            <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium text-secondary-foreground">
+            <span
+              className={`rounded-full px-2 py-0.5 text-[8px] font-extrabold uppercase tracking-wider ${isPremium
+                ? hasDiscount
+                  ? "bg-destructive/10 text-destructive"
+                  : "bg-primary/15 text-primary"
+                : "bg-success/15 text-success"
+                }`}
+            >
+              {isPremium ? (hasDiscount ? `${off}% OFF` : "Premium") : "Free"}
+            </span>
+          </div>
+
+          <div className="flex flex-col gap-1">
+            <span className="-ml-1.5 w-fit rounded-full bg-secondary px-2 py-0.5 text-[9px] font-medium text-secondary-foreground">
               {formatResourceType(r.resourceType)}
             </span>
 
-            {hasDiscount ? (
-              <span className="rounded-full bg-destructive/10 px-2 py-0.5 text-[10px] font-semibold text-destructive">
-                {off}% OFF
-              </span>
-            ) : null}
-
+            <h3 className="text-[13px] font-extrabold leading-tight text-foreground">
+              {r.title}
+            </h3>
           </div>
 
-          <h3 className="mt-2 font-semibold leading-snug">
-            {r.title}
-          </h3>
-
-          <p className="mt-1 text-xs text-muted-foreground">
+          <p className="text-[10px] font-medium text-muted-foreground">
             {r.course} · Semester {r.semester}
             {r.subjectId ? ` · ${r.subjectId}` : ""}
           </p>
 
+          <div className="absolute -bottom-3 right-3 rounded-xl bg-background px-2.5 py-1 shadow-md">
+            <div className="flex items-baseline gap-1.5">
+              <span
+                className={`text-[15px] font-black leading-none ${isPremium ? "text-primary" : "text-success"
+                  }`}
+              >
+                ₹{isPremium ? (salePrice ?? 0) : 0}
+              </span>
+
+              <span className="text-[9px] font-semibold text-muted-foreground line-through">
+                ₹{isPremium ? r.originalPrice : 30}
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-2 px-3 pb-1 pt-5">
+          <div className="flex items-center justify-between text-[10px] font-semibold text-muted-foreground">
+            <span className="inline-flex items-center gap-1">
+              <Download className="h-3 w-3" />
+              {r.downloadCount.toLocaleString()} dl
+            </span>
+
+            <span className="inline-flex items-center gap-1">
+              <Clock className="h-3 w-3" />
+              {daysAgo(r.createdAt) === 0 ? "Today" : `${daysAgo(r.createdAt)}d ago`}
+            </span>
+          </div>
+
+          {r.description ? (
+            <p className="line-clamp-2 text-[11px] leading-4 text-muted-foreground">
+              {r.description}
+            </p>
+          ) : null}
+
+          <div className="flex items-center gap-2 mb-0">
+            {!isPremium && r.pdfUrl ? (
+              <Button asChild size="sm" variant="outline" className="h-8 flex-1 text-xs">
+                <a href={`/api/resource/download/${r.slug}`} target="_blank" rel="noreferrer">
+                  Download
+                </a>
+              </Button>
+            ) : null}
+
+            {isPremium ? (
+              <div className="flex w-full items-center gap-2">
+
+                <Button
+                  asChild
+                  size="sm"
+                  variant="outline"
+                  className="h-8 w-8 shrink-0 p-0"
+                >
+                  <a
+                    href={`/api/resource/download/${r.slug}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    aria-label="Preview"
+                  >
+                    <Eye className="h-3.5 w-3.5" />
+                  </a>
+                </Button>
+
+                <Button
+                  size="sm"
+                  className="h-8 flex-1 bg-gradient-primary text-xs shadow-glow hover:opacity-95"
+                  onClick={() => onBuy(r)}
+                  disabled={buyingSlug === r.slug}
+                >
+                  <ShoppingCart className="h-3 w-3 md:h-3.5 md:w-3.5" />
+
+                  {buyingSlug === r.slug ? "Loading..." : "Buy Now"}
+                </Button>
+
+              </div>
+            ) : null}
+          </div>
+        </div>
+
+        <div className="mt-3 flex flex-wrap gap-2">
+          {r.isFeatured ? <Badge>Featured</Badge> : null}
+          {r.isTrending ? <Badge variant="secondary">Trending</Badge> : null}
         </div>
       </div>
 
-      {r.description ? (
-        <p className="mt-4 line-clamp-3 text-sm text-muted-foreground">
-          {r.description}
-        </p>
-      ) : null}
+      {/* your existing desktop card exactly here */}
+      <div className="hidden md:flex group flex-col rounded-2xl border border-border bg-card p-4 shadow-soft transition hover:-translate-y-0.5 hover:border-primary/40 hover:shadow-card">
+        <div className="flex items-start gap-3">
+          <div
+            className={`grid h-10 w-10 shrink-0 place-items-center rounded-xl ${isPremium ? "bg-primary/10 text-primary" : "bg-success/10 text-success"
+              }`}
+          >
+            {isPremium ? <Lock className="h-5 w-5" /> : <Unlock className="h-5 w-5" />}
+          </div>
 
-      <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
-        <span className="inline-flex items-center gap-1">
-          <Download className="h-3.5 w-3.5" />
-          {r.downloadCount.toLocaleString()} downloads
-        </span>
-
-        <span className="inline-flex items-center gap-1">
-          <Clock className="h-3.5 w-3.5" />
-          {daysAgo(r.createdAt) === 0 ? "Today" : `${daysAgo(r.createdAt)}d ago`}
-        </span>
-      </div>
-
-      <div className="mt-4 flex items-end justify-between gap-3">
-        <div>
-          {isPremium ? (
-            <div className="flex items-baseline gap-2">
-              <span className="font-display text-2xl font-bold">
-                ₹{salePrice ?? 0}
+          <div className="min-w-0 flex-1">
+            <div className="flex flex-wrap items-center gap-1.5">
+              <span
+                className={`rounded-full px-2 py-0.5 text-[10px] font-semibold uppercase tracking-wider ${isPremium ? "bg-primary/10 text-primary" : "bg-success/10 text-success"
+                  }`}
+              >
+                {isPremium ? "Premium" : "Free"}
               </span>
+
+              <span className="rounded-full bg-secondary px-2 py-0.5 text-[10px] font-medium text-secondary-foreground">
+                {formatResourceType(r.resourceType)}
+              </span>
+
               {hasDiscount ? (
-                <span className="text-sm text-muted-foreground line-through">
-                  ₹{r.originalPrice}
+                <span className="rounded-full bg-destructive/10 px-2 py-0.5 text-[10px] font-semibold text-destructive">
+                  {off}% OFF
                 </span>
               ) : null}
             </div>
-          ) : (
-            <span className="font-display text-2xl font-bold text-success">
-              Free
-            </span>
-          )}
+
+            <h3 className="mt-2 font-semibold leading-snug">{r.title}</h3>
+
+            <p className="mt-1 text-xs text-muted-foreground">
+              {r.course} · Semester {r.semester}
+              {r.subjectId ? ` · ${r.subjectId}` : ""}
+            </p>
+          </div>
         </div>
 
-        <div className="flex items-center gap-2">
-          {!isPremium && r.pdfUrl ? (
-            <Button asChild size="sm" variant="outline">
-              <a
-                href={`/api/resource/download/${r.slug}`}
-                target="_blank"
-                rel="noreferrer"
+        {r.description ? (
+          <p className="mt-4 line-clamp-3 text-sm text-muted-foreground">{r.description}</p>
+        ) : null}
+
+        <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
+          <span className="inline-flex items-center gap-1">
+            <Download className="h-3.5 w-3.5" />
+            {r.downloadCount.toLocaleString()} downloads
+          </span>
+
+          <span className="inline-flex items-center gap-1">
+            <Clock className="h-3.5 w-3.5" />
+            {daysAgo(r.createdAt) === 0 ? "Today" : `${daysAgo(r.createdAt)}d ago`}
+          </span>
+        </div>
+
+        <div className="mt-4 flex items-end justify-between gap-3">
+          <div>
+            {isPremium ? (
+              <div className="flex items-baseline gap-2">
+                <span className="font-display text-2xl font-bold">₹{salePrice ?? 0}</span>
+                {hasDiscount ? (
+                  <span className="text-sm text-muted-foreground line-through">
+                    ₹{r.originalPrice}
+                  </span>
+                ) : null}
+              </div>
+            ) : (
+              <span className="font-display text-2xl font-bold text-success">Free</span>
+            )}
+          </div>
+
+          <div className="flex items-center gap-2">
+            {!isPremium && r.pdfUrl ? (
+              <Button asChild size="sm" variant="outline">
+                <a href={`/api/resource/download/${r.slug}`} target="_blank" rel="noreferrer">
+                  Download
+                  <ArrowRight className="ml-1 h-4 w-4" />
+                </a>
+              </Button>
+            ) : null}
+
+            {isPremium ? (
+              <Button
+                size="sm"
+                className="bg-gradient-primary shadow-glow hover:opacity-95"
+                onClick={() => onBuy(r)}
+                disabled={buyingSlug === r.slug}
               >
-                Download
-                <ArrowRight className="ml-1 h-4 w-4" />
-              </a>
-            </Button>
-          ) : null}
+                <ShoppingCart className="h-4 w-4" />
+                {buyingSlug === r.slug ? "Loading..." : "Buy"}
+                <ArrowRight className="h-4 w-4" />
+              </Button>
+            ) : null}
+          </div>
+        </div>
 
-          {isPremium ? (
-            <Button
-              size="sm"
-              className="bg-gradient-primary shadow-glow hover:opacity-95"
-              onClick={() => onBuy(r)}
-              disabled={buyingSlug === r.slug}
-            >
-              <ShoppingCart className="h-4 w-4" />
-              {buyingSlug === r.slug ? "Loading..." : "Buy"}
-              <ArrowRight className="h-4 w-4" />
-            </Button>
-          ) : null}
-
+        <div className="mt-0 flex flex-wrap gap-2">
+          {r.isFeatured ? <Badge>Featured</Badge> : null}
+          {r.isTrending ? <Badge variant="secondary">Trending</Badge> : null}
         </div>
       </div>
+    </>
 
-      <div className="mt-4 flex flex-wrap gap-2">
-        {r.isFeatured ? <Badge>Featured</Badge> : null}
-        {r.isTrending ? <Badge variant="secondary">Trending</Badge> : null}
-      </div>
-    </div>
   );
 }
-
-
 
 function Spotlight({
   title,
@@ -828,46 +967,45 @@ function Spotlight({
   buyingSlug: string | null;
 }) {
   return (
-    <div className="rounded-2xl border border-border bg-card p-5 shadow-soft">
+    <div className="rounded-2xl mt-0 border border-border bg-card p-3 md:p-5 shadow-soft">
       <h3 className="inline-flex items-center gap-2 text-lg font-bold">
         <Icon className="h-5 w-5 text-primary" />
         {title}
       </h3>
 
-      <ul className="mt-4 divide-y divide-border">
+      <ul className="mt-3 md:mt-4 divide-y divide-border">
         {items.map((r) => {
           const isPremium = r.accessType === "premium";
 
           return (
-            <li key={r.id} className="flex items-center gap-3 py-3">
+            <li
+              key={r.id}
+              className="flex flex-wrap items-center gap-2 py-2 md:flex-nowrap md:gap-3 md:py-3"
+            >
               <div
-                className={`grid h-9 w-9 shrink-0 place-items-center rounded-lg ${isPremium ? "bg-primary/10 text-primary" : "bg-success/10 text-success"
+                className={`grid h-8 w-8 md:h-9 md:w-9 shrink-0 place-items-center rounded-lg ${isPremium ? "bg-primary/10 text-primary" : "bg-success/10 text-success"
                   }`}
               >
                 <BookOpen className="h-4 w-4" />
               </div>
 
               <div className="min-w-0 flex-1">
-                <p className="truncate text-sm font-semibold">{r.title}</p>
-                <p className="truncate text-xs text-muted-foreground">
+                <p className="truncate text-[13px] md:text-sm font-semibold">{r.title}</p>
+                <p className="truncate text-[10px] md:text-xs text-muted-foreground">
                   {r.course} · Sem {r.semester} · {formatResourceType(r.resourceType)}
                 </p>
               </div>
 
-              <span
-                className="inline-flex items-center gap-1 rounded-md  px-2.5 py-1 text-xs font-medium hover:border-primary/40 hover:text-primary"
-              >
-                <span
-                  className="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium hover:border-primary/40 hover:text-primary"
-                >
+              <span className="inline-flex items-center gap-1 rounded-md  px-2.5 py-1 text-xs font-medium hover:border-primary/40 hover:text-primary">
+                <span className="inline-flex items-center gap-1 rounded-md px-2.5 py-1 text-xs font-medium hover:border-primary/40 hover:text-primary">
                   {isPremium ? (
                     <Button
                       size="sm"
-                      className="h-8 min-w-[90px] px-3 text-xs bg-gradient-primary shadow-glow hover:opacity-95"
+                      className="h-7 w-[72px] px-2 text-[11px] md:h-8 md:w-[90px] md:px-3 md:text-xs bg-gradient-primary shadow-glow hover:opacity-95"
                       onClick={() => onBuy(r)}
                       disabled={buyingSlug === r.slug}
                     >
-                      <ShoppingCart className="h-3.5 w-3.5" />
+                      {/* <ShoppingCart className="h-2.5 w-2.5 md:h-3.5 md:w-3.5" /> */}
 
                       {buyingSlug === r.slug
                         ? "Loading..."
@@ -880,13 +1018,9 @@ function Spotlight({
                       asChild
                       size="sm"
                       variant="outline"
-                      className="h-8 min-w-[90px] px-3 text-xs"
+                      className="h-7 min-w-[72px] px-2 text-[11px] md:h-8 md:min-w-[90px] md:px-3 md:text-xs"
                     >
-                      <a
-                        href={`/api/resource/download/${r.slug}`}
-                        target="_blank"
-                        rel="noreferrer"
-                      >
+                      <a href={`/api/resource/download/${r.slug}`} target="_blank" rel="noreferrer">
                         Free
                         <ArrowRight className="h-3 w-3" />
                       </a>
@@ -909,6 +1043,7 @@ function Spotlight({
         </Link> */}
       </div>
     </div>
+
   );
 }
 

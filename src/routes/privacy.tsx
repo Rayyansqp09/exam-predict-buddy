@@ -6,7 +6,7 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — FYUGP Model Question Papers" },
+      { title: "Privacy Policy — FYUGP HUB" },
       { name: "description", content: "How FYUGP Model Question Papers handles your information and payments." },
       { property: "og:title", content: "Privacy Policy — FYUGP Model Question Papers" },
       { property: "og:description", content: "Transparent privacy practices for our predicted model paper service." },
@@ -32,40 +32,137 @@ function PrivacyPage() {
         <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
           <ArrowLeft className="h-4 w-4" /> Back to home
         </Link>
-        <div className="mt-6 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
+        <div className="mt-6 ml-3 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
           <ShieldCheck className="h-3.5 w-3.5" /> Your privacy matters
         </div>
         <h1 className="mt-3 font-display text-4xl font-bold">Privacy Policy</h1>
         <p className="mt-3 text-sm text-muted-foreground">
-          FYUGP Model Question Papers — last updated {new Date().toLocaleDateString()}
+          FYUGP HUB — last updated {new Date().toLocaleDateString()}
+        </p>
+        <p className="mt-3 text-sm text-muted-foreground">
+          Welcome to FYUGP HUB. Your privacy is important to us. This Privacy Policy explains how we collect, use, and protect information when you use our website and services.
         </p>
 
-        <Section title="Information we collect">
-          We do not collect or store personal data on this website. The site is a static, frontend-only
-          marketing page. No accounts, no logins, and no databases.
+        <Section title="Information We Collect">
+          <div className="space-y-3 text-sm text-muted-foreground">
+            <p>
+              We may collect limited information required to provide and improve our services.
+              This can include basic contact details you voluntarily provide through forms,
+              support requests, or communication channels.
+            </p>
+
+            <p>
+              We may also receive limited payment confirmation information from our payment
+              partners in order to verify transactions and deliver purchased resources.
+            </p>
+
+            <p>
+              Basic technical data such as browser type, device information, and analytics
+              data may be collected for website performance, security, and user experience
+              improvements.
+            </p>
+
+            <p>
+              We do not collect or store sensitive payment information such as card numbers,
+              CVV details, UPI PINs, or banking passwords.
+            </p>
+          </div>
         </Section>
 
-        <Section title="How payments work">
-          All payments are processed securely by <strong>Razorpay</strong> through their hosted payment page.
-          When you click <em>Buy Now</em>, you are redirected to Razorpay's secure environment to complete
-          your payment. We do not see, handle or store your card or banking details.
+        <Section title="Payments & Transactions">
+          <div className="space-y-3 text-sm text-muted-foreground">
+            <p>
+              All payments on this platform are processed securely through trusted
+              third-party payment providers such as <strong>Razorpay</strong>.
+            </p>
+
+            <p>
+              When you proceed with a purchase, you may be redirected to a secure
+              payment environment to complete your transaction safely.
+            </p>
+
+            <p>
+              We do not collect, access, or store sensitive payment information such
+              as card numbers, CVV details, banking passwords, or UPI PINs.
+            </p>
+
+            <p>
+              We only receive limited transaction confirmation details required to
+              verify payments, provide purchased resources, and offer customer support
+              when necessary.
+            </p>
+          </div>
         </Section>
 
-        <Section title="How your data is used">
-          Any information you choose to share with Razorpay during checkout is governed by Razorpay's own
-          privacy policy. We only receive minimal payment confirmation information necessary to deliver
-          your purchased model question paper.
+        <Section title="How Your Data Is Used">
+          <div className="space-y-3 text-sm text-muted-foreground">
+            <p>
+              Any information shared during payment or communication is used only for
+              providing services, verifying transactions, delivering purchased resources,
+              improving user experience, and offering customer support.
+            </p>
+
+            <p>
+              Payment-related information processed through third-party providers such as
+              Razorpay is governed by their respective privacy policies. We only receive
+              limited transaction confirmation details necessary to complete and manage orders.
+            </p>
+
+            <p>
+              We do not sell, rent, or share personal information with third parties for
+              marketing purposes.
+            </p>
+          </div>
         </Section>
 
-        <Section title="Cookies & tracking">
-          This website does not use marketing cookies or third-party tracking. Basic browser storage may
-          be used only for essential UI behaviour.
+        <Section title="Cookies & Tracking">
+          This website may use cookies, local storage, and analytics tools to improve
+          functionality, understand user behaviour, enhance performance, and provide
+          a better user experience.
+
+          We may use third-party services such as Google Analytics and Microsoft Clarity
+          to collect anonymous usage and interaction data, including pages visited,
+          device information, browser type, session activity, and general website
+          performance metrics.
+
+          These tools do not provide us with sensitive personal information such as
+          passwords, payment details, or banking credentials.
         </Section>
 
         <Section title="Disclaimer">
-          Our model question papers are prediction-based study aids built on syllabus analysis, topic
-          weightage and previous year trends. We do not guarantee that the actual exam questions will
-          match our predictions.
+          <div className="space-y-3 text-sm text-muted-foreground">
+            <p>
+              All resources provided on this platform, including notes, handwritten
+              notes, PYQs, study materials, textbooks, important questions, and other
+              academic content, are recreated and organized according to the latest
+              available syllabus and exam structure for educational and preparation
+              purposes only.
+            </p>
+
+            <p>
+              Our predicted model question papers are specially prepared using syllabus
+              analysis, previous year question papers, topic weightage, mark
+              distribution, important concepts, exam trends, and other relevant
+              academic parameters to recreate the most probable exam-oriented model
+              paper for student preparation.
+            </p>
+
+            <p>
+              While we aim to provide highly relevant and accurate preparation
+              materials, we do not guarantee that the actual university examination
+              questions will exactly match our predicted model papers.
+            </p>
+
+            <p>
+              Micro notes and portable revision materials are designed only for quick
+              revision, last-minute preparation, and easier studying anywhere.
+            </p>
+
+            <p>
+              We do not encourage, support, or promote any form of malpractice,
+              cheating, or unfair academic activity.
+            </p>
+          </div>
         </Section>
 
         <Section title="Contact">
