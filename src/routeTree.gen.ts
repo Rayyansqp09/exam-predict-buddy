@@ -10,6 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ViewRouteImport } from './routes/view'
+import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
 import { Route as SelectRouteImport } from './routes/select'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as PurchaseRouteImport } from './routes/purchase'
@@ -40,6 +41,11 @@ import { Route as ApiResourceDownloadSlugRouteImport } from './routes/api/resour
 const ViewRoute = ViewRouteImport.update({
   id: '/view',
   path: '/view',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
+  id: '/sitemap.xml',
+  path: '/sitemap.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SelectRoute = SelectRouteImport.update({
@@ -182,6 +188,7 @@ export interface FileRoutesByFullPath {
   '/purchase': typeof PurchaseRoute
   '/resources': typeof ResourcesRoute
   '/select': typeof SelectRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/view': typeof ViewRoute
   '/api/create-order': typeof ApiCreateOrderRoute
   '/api/resources': typeof ApiResourcesRoute
@@ -211,6 +218,7 @@ export interface FileRoutesByTo {
   '/purchase': typeof PurchaseRoute
   '/resources': typeof ResourcesRoute
   '/select': typeof SelectRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/view': typeof ViewRoute
   '/api/create-order': typeof ApiCreateOrderRoute
   '/api/resources': typeof ApiResourcesRoute
@@ -241,6 +249,7 @@ export interface FileRoutesById {
   '/purchase': typeof PurchaseRoute
   '/resources': typeof ResourcesRoute
   '/select': typeof SelectRoute
+  '/sitemap.xml': typeof SitemapDotxmlRoute
   '/view': typeof ViewRoute
   '/api/create-order': typeof ApiCreateOrderRoute
   '/api/resources': typeof ApiResourcesRoute
@@ -272,6 +281,7 @@ export interface FileRouteTypes {
     | '/purchase'
     | '/resources'
     | '/select'
+    | '/sitemap.xml'
     | '/view'
     | '/api/create-order'
     | '/api/resources'
@@ -301,6 +311,7 @@ export interface FileRouteTypes {
     | '/purchase'
     | '/resources'
     | '/select'
+    | '/sitemap.xml'
     | '/view'
     | '/api/create-order'
     | '/api/resources'
@@ -330,6 +341,7 @@ export interface FileRouteTypes {
     | '/purchase'
     | '/resources'
     | '/select'
+    | '/sitemap.xml'
     | '/view'
     | '/api/create-order'
     | '/api/resources'
@@ -360,6 +372,7 @@ export interface RootRouteChildren {
   PurchaseRoute: typeof PurchaseRoute
   ResourcesRoute: typeof ResourcesRoute
   SelectRoute: typeof SelectRoute
+  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
   ViewRoute: typeof ViewRoute
   ApiCreateOrderRoute: typeof ApiCreateOrderRoute
   ApiResourcesRoute: typeof ApiResourcesRoute
@@ -389,6 +402,13 @@ declare module '@tanstack/react-router' {
       path: '/view'
       fullPath: '/view'
       preLoaderRoute: typeof ViewRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemap.xml': {
+      id: '/sitemap.xml'
+      path: '/sitemap.xml'
+      fullPath: '/sitemap.xml'
+      preLoaderRoute: typeof SitemapDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/select': {
@@ -584,6 +604,7 @@ const rootRouteChildren: RootRouteChildren = {
   PurchaseRoute: PurchaseRoute,
   ResourcesRoute: ResourcesRoute,
   SelectRoute: SelectRoute,
+  SitemapDotxmlRoute: SitemapDotxmlRoute,
   ViewRoute: ViewRoute,
   ApiCreateOrderRoute: ApiCreateOrderRoute,
   ApiResourcesRoute: ApiResourcesRoute,
