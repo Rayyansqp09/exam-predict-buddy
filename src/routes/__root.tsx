@@ -71,17 +71,66 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
   head: () => ({
     meta: [
       { charSet: "utf-8" },
-      { name: "viewport", content: "width=device-width, initial-scale=1" },
-      { title: "FYUGP Model Question Papers" },
-      { name: "description", content: "Predicted model question papers for Calicut University FYUGP and degree semester exams." },
-      { name: "author", content: "FYUGP Model Question Papers" },
-      { property: "og:title", content: "FYUGP Model Question Papers" },
-      { property: "og:description", content: "Predicted model question papers for Calicut University FYUGP and degree semester exams." },
-      { property: "og:type", content: "website" },
-      { name: "twitter:card", content: "summary" },
-      { name: "twitter:site", content: "@Lovable" },
-      { name: "twitter:title", content: "FYUGP Model Question Papers" },
-      { name: "twitter:description", content: "Predicted model question papers for Calicut University FYUGP and degree semester exams." },
+
+      {
+        name: "viewport",
+        content: "width=device-width, initial-scale=1",
+      },
+
+      {
+        title:
+          "FYUGP Hub — Notes, PYQs, Study Materials, Text Books & Many More Resources",
+      },
+
+      {
+        name: "description",
+        content:
+          "FYUGP study resources for Calicut University students including handwritten notes, PYQs, study materials, text books, micro notes, predicted question papers, question banks, important questions, and many more resources.",
+      },
+
+      {
+        name: "author",
+        content: "FYUGP Hub",
+      },
+
+      {
+        property: "og:title",
+        content:
+          "FYUGP Hub — Notes, PYQs, Study Materials, Text Books & Many More Resources",
+      },
+
+      {
+        property: "og:description",
+        content:
+          "Handwritten notes, PYQs, study materials, text books, micro notes, question banks, and many more resources for Calicut University students.",
+      },
+
+      {
+        property: "og:type",
+        content: "website",
+      },
+
+      {
+        property: "og:site_name",
+        content: "FYUGP Hub",
+      },
+
+      {
+        name: "twitter:card",
+        content: "summary_large_image",
+      },
+
+      {
+        name: "twitter:title",
+        content:
+          "FYUGP Hub — Notes, PYQs, Study Materials, Text Books & Many More Resources",
+      },
+
+      {
+        name: "twitter:description",
+        content:
+          "FYUGP notes, PYQs, study materials, text books, micro notes, question banks, and many more resources for Calicut University students.",
+      },
     ],
     links: [
       { rel: "stylesheet", href: appCss },

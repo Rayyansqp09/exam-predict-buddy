@@ -642,7 +642,17 @@ function ResourcesPage() {
                 className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
               >
                 Telegram channel
-              </a>.
+              </a> , or just message{" "}
+              <a
+                href="https://t.me/fyugp_hub"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
+              >
+                @fyugp_hub
+              </a>{" "}
+              on Telegram.
+
             </p>
           </section>
 

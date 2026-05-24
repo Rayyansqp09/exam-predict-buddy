@@ -16,7 +16,7 @@ import {
 export const Route = createFileRoute("/select")({
   head: () => ({
     meta: [
-      { title: "Select Course & Semester — FYUGP Model Question Papers" },
+      { title: "Select Course & Semester — FYUGP HUB" },
       {
         name: "description",
         content:
@@ -199,8 +199,8 @@ function SelectPage() {
             </h3>
 
             <p className="mt-2 text-sm leading-6 text-muted-foreground">
-              Tell us your course and semester, and we’ll try to add the required
-              resources as soon as possible and notify you once available.
+              Tell us your course, semester, subject, and the type of resource you need,
+              and we’ll try to add it as soon as possible and notify you once available.
               <br />
               Reach us at{" "}
               <a
@@ -209,7 +209,34 @@ function SelectPage() {
               >
                 support.fyugphub@gmail.com
               </a>{" "}
-              or through our WhatsApp and Telegram channels.
+              or through our{" "}
+              <a
+                href="https://whatsapp.com/channel/0029VbCxFM2KbYMWPvmVnu3b"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
+              >
+                WhatsApp
+              </a>{" "}
+              and{" "}
+              <a
+                href="https://t.me/FYUGPhub"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
+              >
+                Telegram
+              </a>{" "}
+              channels, or message{" "}
+              <a
+                href="https://t.me/fyugp_hub"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
+              >
+                @fyugp_hub
+              </a>{" "}
+              directly on Telegram.
             </p>
           </div>
 

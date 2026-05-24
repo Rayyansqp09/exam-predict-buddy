@@ -35,10 +35,28 @@ import { FREE_TYPES, MATCH_PROOFS, PREMIUM_TYPES, TELEGRAM_CHANNEL, WHATSAPP_CHA
 export const Route = createFileRoute("/")({
   head: () => ({
     meta: [
-      { title: "FYUGP Model Question Papers — Calicut University Predicted Papers" },
-      { name: "description", content: "Syllabus-based predicted model question papers for Calicut University FYUGP, B.Com, BBA, BSc, BA, BCA semester exams. Smart, affordable, exam-focused." },
-      { property: "og:title", content: "FYUGP Model Question Papers" },
-      { property: "og:description", content: "Predicted model question papers built on syllabus analysis and exam trends." },
+      {
+        title:
+          "FYUGP Hub — Notes, PYQs, Study materials , Text books, Model Papers & Many Study Resources",
+      },
+
+      {
+        name: "description",
+        content:
+          "Study resources for Calicut University FYUGP students including handwritten notes, PYQs, study materials, text books, predicted model papers, micro notes, question banks, important questions, and many more study resources.",
+      },
+
+      {
+        property: "og:title",
+        content:
+          "FYUGP Hub — Notes, PYQs, Study materials , Text books, Model Papers & Many Study Resources",
+      },
+
+      {
+        property: "og:description",
+        content:
+          "Handwritten notes, PYQs, study materials, text books, predicted model papers, micro notes, question banks, and many more study resources for FYUGP students.",
+      },
     ],
   }),
   component: HomePage,
@@ -78,33 +96,33 @@ function Hero() {
           <h1 className="mt-5 font-display text-4xl font-bold leading-tight text-foreground md:text-6xl">
             Everything you need for <span className="text-gradient">FYUGP exam preparation</span> in one place.
           </h1>
-         <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
-  Handwritten notes, PYQs, predicted model papers, micro pocket notes,
-  module-wise notes, question banks &amp; important questions — organized
-  by course, semester and subject. Prepare smarter, not harder.
+          <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
+            Handwritten notes, PYQs, predicted model papers, micro pocket notes,
+            module-wise notes, question banks &amp; important questions — organized
+            by course, semester and subject. Prepare smarter, not harder.
 
-  <span className="mt-3 block text-sm">
-    Join our{" "}
-    <a
-      href="https://whatsapp.com/channel/0029VbCxFM2KbYMWPvmVnu3b"
-      target="_blank"
-      rel="noreferrer"
-      className="font-medium text-green-600 underline underline-offset-4 hover:text-green-700"
-    >
-      WhatsApp channel
-    </a>{" "}
-    or{" "}
-    <a
-      href="https://t.me/FYUGPhub"
-      target="_blank"
-      rel="noreferrer"
-      className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
-    >
-      Telegram channel
-    </a>{" "}
-    for latest updates, free resources & exclusive offers.
-  </span>
-</p>
+            <span className="mt-3 block text-sm">
+              Join our{" "}
+              <a
+                href="https://whatsapp.com/channel/0029VbCxFM2KbYMWPvmVnu3b"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-green-600 underline underline-offset-4 hover:text-green-700"
+              >
+                WhatsApp channel
+              </a>{" "}
+              or{" "}
+              <a
+                href="https://t.me/FYUGPhub"
+                target="_blank"
+                rel="noreferrer"
+                className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
+              >
+                Telegram channel
+              </a>{" "}
+              for latest updates, free resources & exclusive offers.
+            </span>
+          </p>
 
           <div className="mt-8 flex flex-col gap-3 sm:flex-row sm:flex-wrap sm:items-center">
             <Button asChild size="lg" className="w-full bg-gradient-primary shadow-glow hover:opacity-95 sm:w-auto">

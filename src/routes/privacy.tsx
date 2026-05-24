@@ -6,10 +6,26 @@ import { Footer } from "@/components/site/Footer";
 export const Route = createFileRoute("/privacy")({
   head: () => ({
     meta: [
-      { title: "Privacy Policy — FYUGP HUB" },
-      { name: "description", content: "How FYUGP Model Question Papers handles your information and payments." },
-      { property: "og:title", content: "Privacy Policy — FYUGP Model Question Papers" },
-      { property: "og:description", content: "Transparent privacy practices for our predicted model paper service." },
+      {
+        title: "Privacy Policy — FYUGP Hub",
+      },
+
+      {
+        name: "description",
+        content:
+          "Learn how FYUGP Hub handles user information, payments, analytics, and academic resources including notes, PYQs, and predicted model papers.",
+      },
+
+      {
+        property: "og:title",
+        content: "Privacy Policy — FYUGP Hub",
+      },
+
+      {
+        property: "og:description",
+        content:
+          "Transparent privacy practices for FYUGP Hub users, including payment processing, analytics, and educational resource access.",
+      },
     ],
   }),
   component: PrivacyPage,
