@@ -1,4 +1,4 @@
-import { createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
 import {
   ArrowRight,
@@ -52,6 +52,7 @@ type Resource = {
   downloadCount: number;
   createdAt: string;
   updatedAt: string;
+  previewPageCount: number | null;
 };
 
 type ResourcesResponse =
@@ -747,12 +748,12 @@ function ResourceCard({
             </span>
           </div>
 
-          <div className="flex flex-col gap-1">
+          <div className="flex w-full min-w-0 flex-col gap-1">
             <span className="-ml-1.5 w-fit rounded-full bg-secondary px-2 py-0.5 text-[9px] font-medium text-secondary-foreground">
               {formatResourceType(r.resourceType)}
             </span>
 
-            <h3 className="text-[13px] font-extrabold leading-tight text-foreground">
+            <h3 className="w-full min-w-0 text-[13px] font-extrabold leading-tight text-foreground break-words">
               {r.title}
             </h3>
           </div>
@@ -809,21 +810,22 @@ function ResourceCard({
             {isPremium ? (
               <div className="flex w-full items-center gap-2">
 
-                <Button
-                  asChild
-                  size="sm"
-                  variant="outline"
-                  className="h-8 w-8 shrink-0 p-0"
-                >
-                  <a
-                    href={`/api/resource/download/${r.slug}`}
-                    target="_blank"
-                    rel="noreferrer"
-                    aria-label="Preview"
+                {(r.previewPageCount ?? 0) > 1 ? (
+                  <Button
+                    asChild
+                    size="sm"
+                    variant="outline"
+                    className="h-8 w-8 shrink-0 p-0"
                   >
-                    <Eye className="h-3.5 w-3.5" />
-                  </a>
-                </Button>
+                    <Link
+                      to="/preview/$slug"
+                      params={{ slug: r.slug }}
+                      aria-label="Preview"
+                    >
+                      <Eye className="h-3.5 w-3.5" />
+                    </Link>
+                  </Button>
+                ) : null}
 
                 <Button
                   size="sm"
@@ -929,17 +931,38 @@ function ResourceCard({
             ) : null}
 
             {isPremium ? (
-              <Button
-                size="sm"
-                className="bg-gradient-primary shadow-glow hover:opacity-95"
-                onClick={() => onBuy(r)}
-                disabled={buyingSlug === r.slug}
-              >
-                <ShoppingCart className="h-4 w-4" />
-                {buyingSlug === r.slug ? "Loading..." : "Buy"}
-                <ArrowRight className="h-4 w-4" />
-              </Button>
+              <div className="flex items-center gap-2">
+
+                {(r.previewPageCount ?? 0) > 1 ? (
+                  <Button
+                    asChild
+                    size="sm"
+                    variant="outline"
+                    className="h-8 w-8 shrink-0 p-0"
+                  >
+                    <Link
+                      to="/preview/$slug"
+                      params={{ slug: r.slug }}
+                      aria-label="Preview"
+                    >
+                      <Eye className="h-3.5 w-3.5" />
+                    </Link>
+                  </Button>
+                ) : null}
+
+                <Button
+                  size="sm"
+                  className="bg-gradient-primary shadow-glow hover:opacity-95"
+                  onClick={() => onBuy(r)}
+                  disabled={buyingSlug === r.slug}
+                >
+                  <ShoppingCart className="h-4 w-4" />
+                  {buyingSlug === r.slug ? "Loading..." : "Buy"}
+                  <ArrowRight className="h-4 w-4" />
+                </Button>
+              </div>
             ) : null}
+
           </div>
         </div>
 

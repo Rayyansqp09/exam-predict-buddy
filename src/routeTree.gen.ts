@@ -10,7 +10,7 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as ViewRouteImport } from './routes/view'
-import { Route as SitemapDotxmlRouteImport } from './routes/sitemap[.]xml'
+import { Route as SitemapfyugpDotxmlRouteImport } from './routes/sitemapfyugp[.]xml'
 import { Route as SelectRouteImport } from './routes/select'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as PurchaseRouteImport } from './routes/purchase'
@@ -18,10 +18,12 @@ import { Route as PrivacyRouteImport } from './routes/privacy'
 import { Route as AdminDashboardRouteImport } from './routes/admin-dashboard'
 import { Route as AdminRouteImport } from './routes/admin'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as PreviewSlugRouteImport } from './routes/preview/$slug'
 import { Route as ApiVerifyPaymentRouteImport } from './routes/api/verify-payment'
 import { Route as ApiSubjectsRouteImport } from './routes/api/subjects'
 import { Route as ApiResourcesRouteImport } from './routes/api/resources'
 import { Route as ApiCreateOrderRouteImport } from './routes/api/create-order'
+import { Route as ApiResourceSlugRouteImport } from './routes/api/resource/$slug'
 import { Route as ApiAdminUploadSubjectRouteImport } from './routes/api/admin/upload-subject'
 import { Route as ApiAdminUploadResourceRouteImport } from './routes/api/admin/upload-resource'
 import { Route as ApiAdminUpdateSubjectRouteImport } from './routes/api/admin/update-subject'
@@ -36,6 +38,7 @@ import { Route as ApiAdminDeleteResourceRouteImport } from './routes/api/admin/d
 import { Route as ApiAdminDashboardRouteImport } from './routes/api/admin/dashboard'
 import { Route as ApiAdminBulkResourceUpdateRouteImport } from './routes/api/admin/bulk-resource-update'
 import { Route as ApiAdminBulkPriceUpdateRouteImport } from './routes/api/admin/bulk-price-update'
+import { Route as ApiResourcePdfSlugRouteImport } from './routes/api/resource/pdf/$slug'
 import { Route as ApiResourceDownloadSlugRouteImport } from './routes/api/resource/download/$slug'
 
 const ViewRoute = ViewRouteImport.update({
@@ -43,9 +46,9 @@ const ViewRoute = ViewRouteImport.update({
   path: '/view',
   getParentRoute: () => rootRouteImport,
 } as any)
-const SitemapDotxmlRoute = SitemapDotxmlRouteImport.update({
-  id: '/sitemap.xml',
-  path: '/sitemap.xml',
+const SitemapfyugpDotxmlRoute = SitemapfyugpDotxmlRouteImport.update({
+  id: '/sitemapfyugp.xml',
+  path: '/sitemapfyugp.xml',
   getParentRoute: () => rootRouteImport,
 } as any)
 const SelectRoute = SelectRouteImport.update({
@@ -83,6 +86,11 @@ const IndexRoute = IndexRouteImport.update({
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const PreviewSlugRoute = PreviewSlugRouteImport.update({
+  id: '/preview/$slug',
+  path: '/preview/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiVerifyPaymentRoute = ApiVerifyPaymentRouteImport.update({
   id: '/api/verify-payment',
   path: '/api/verify-payment',
@@ -101,6 +109,11 @@ const ApiResourcesRoute = ApiResourcesRouteImport.update({
 const ApiCreateOrderRoute = ApiCreateOrderRouteImport.update({
   id: '/api/create-order',
   path: '/api/create-order',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiResourceSlugRoute = ApiResourceSlugRouteImport.update({
+  id: '/api/resource/$slug',
+  path: '/api/resource/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAdminUploadSubjectRoute = ApiAdminUploadSubjectRouteImport.update({
@@ -174,6 +187,11 @@ const ApiAdminBulkPriceUpdateRoute = ApiAdminBulkPriceUpdateRouteImport.update({
   path: '/api/admin/bulk-price-update',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ApiResourcePdfSlugRoute = ApiResourcePdfSlugRouteImport.update({
+  id: '/api/resource/pdf/$slug',
+  path: '/api/resource/pdf/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const ApiResourceDownloadSlugRoute = ApiResourceDownloadSlugRouteImport.update({
   id: '/api/resource/download/$slug',
   path: '/api/resource/download/$slug',
@@ -188,12 +206,13 @@ export interface FileRoutesByFullPath {
   '/purchase': typeof PurchaseRoute
   '/resources': typeof ResourcesRoute
   '/select': typeof SelectRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sitemapfyugp.xml': typeof SitemapfyugpDotxmlRoute
   '/view': typeof ViewRoute
   '/api/create-order': typeof ApiCreateOrderRoute
   '/api/resources': typeof ApiResourcesRoute
   '/api/subjects': typeof ApiSubjectsRoute
   '/api/verify-payment': typeof ApiVerifyPaymentRoute
+  '/preview/$slug': typeof PreviewSlugRoute
   '/api/admin/bulk-price-update': typeof ApiAdminBulkPriceUpdateRoute
   '/api/admin/bulk-resource-update': typeof ApiAdminBulkResourceUpdateRoute
   '/api/admin/dashboard': typeof ApiAdminDashboardRoute
@@ -208,7 +227,9 @@ export interface FileRoutesByFullPath {
   '/api/admin/update-subject': typeof ApiAdminUpdateSubjectRoute
   '/api/admin/upload-resource': typeof ApiAdminUploadResourceRoute
   '/api/admin/upload-subject': typeof ApiAdminUploadSubjectRoute
+  '/api/resource/$slug': typeof ApiResourceSlugRoute
   '/api/resource/download/$slug': typeof ApiResourceDownloadSlugRoute
+  '/api/resource/pdf/$slug': typeof ApiResourcePdfSlugRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -218,12 +239,13 @@ export interface FileRoutesByTo {
   '/purchase': typeof PurchaseRoute
   '/resources': typeof ResourcesRoute
   '/select': typeof SelectRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sitemapfyugp.xml': typeof SitemapfyugpDotxmlRoute
   '/view': typeof ViewRoute
   '/api/create-order': typeof ApiCreateOrderRoute
   '/api/resources': typeof ApiResourcesRoute
   '/api/subjects': typeof ApiSubjectsRoute
   '/api/verify-payment': typeof ApiVerifyPaymentRoute
+  '/preview/$slug': typeof PreviewSlugRoute
   '/api/admin/bulk-price-update': typeof ApiAdminBulkPriceUpdateRoute
   '/api/admin/bulk-resource-update': typeof ApiAdminBulkResourceUpdateRoute
   '/api/admin/dashboard': typeof ApiAdminDashboardRoute
@@ -238,7 +260,9 @@ export interface FileRoutesByTo {
   '/api/admin/update-subject': typeof ApiAdminUpdateSubjectRoute
   '/api/admin/upload-resource': typeof ApiAdminUploadResourceRoute
   '/api/admin/upload-subject': typeof ApiAdminUploadSubjectRoute
+  '/api/resource/$slug': typeof ApiResourceSlugRoute
   '/api/resource/download/$slug': typeof ApiResourceDownloadSlugRoute
+  '/api/resource/pdf/$slug': typeof ApiResourcePdfSlugRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
@@ -249,12 +273,13 @@ export interface FileRoutesById {
   '/purchase': typeof PurchaseRoute
   '/resources': typeof ResourcesRoute
   '/select': typeof SelectRoute
-  '/sitemap.xml': typeof SitemapDotxmlRoute
+  '/sitemapfyugp.xml': typeof SitemapfyugpDotxmlRoute
   '/view': typeof ViewRoute
   '/api/create-order': typeof ApiCreateOrderRoute
   '/api/resources': typeof ApiResourcesRoute
   '/api/subjects': typeof ApiSubjectsRoute
   '/api/verify-payment': typeof ApiVerifyPaymentRoute
+  '/preview/$slug': typeof PreviewSlugRoute
   '/api/admin/bulk-price-update': typeof ApiAdminBulkPriceUpdateRoute
   '/api/admin/bulk-resource-update': typeof ApiAdminBulkResourceUpdateRoute
   '/api/admin/dashboard': typeof ApiAdminDashboardRoute
@@ -269,7 +294,9 @@ export interface FileRoutesById {
   '/api/admin/update-subject': typeof ApiAdminUpdateSubjectRoute
   '/api/admin/upload-resource': typeof ApiAdminUploadResourceRoute
   '/api/admin/upload-subject': typeof ApiAdminUploadSubjectRoute
+  '/api/resource/$slug': typeof ApiResourceSlugRoute
   '/api/resource/download/$slug': typeof ApiResourceDownloadSlugRoute
+  '/api/resource/pdf/$slug': typeof ApiResourcePdfSlugRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
@@ -281,12 +308,13 @@ export interface FileRouteTypes {
     | '/purchase'
     | '/resources'
     | '/select'
-    | '/sitemap.xml'
+    | '/sitemapfyugp.xml'
     | '/view'
     | '/api/create-order'
     | '/api/resources'
     | '/api/subjects'
     | '/api/verify-payment'
+    | '/preview/$slug'
     | '/api/admin/bulk-price-update'
     | '/api/admin/bulk-resource-update'
     | '/api/admin/dashboard'
@@ -301,7 +329,9 @@ export interface FileRouteTypes {
     | '/api/admin/update-subject'
     | '/api/admin/upload-resource'
     | '/api/admin/upload-subject'
+    | '/api/resource/$slug'
     | '/api/resource/download/$slug'
+    | '/api/resource/pdf/$slug'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
@@ -311,12 +341,13 @@ export interface FileRouteTypes {
     | '/purchase'
     | '/resources'
     | '/select'
-    | '/sitemap.xml'
+    | '/sitemapfyugp.xml'
     | '/view'
     | '/api/create-order'
     | '/api/resources'
     | '/api/subjects'
     | '/api/verify-payment'
+    | '/preview/$slug'
     | '/api/admin/bulk-price-update'
     | '/api/admin/bulk-resource-update'
     | '/api/admin/dashboard'
@@ -331,7 +362,9 @@ export interface FileRouteTypes {
     | '/api/admin/update-subject'
     | '/api/admin/upload-resource'
     | '/api/admin/upload-subject'
+    | '/api/resource/$slug'
     | '/api/resource/download/$slug'
+    | '/api/resource/pdf/$slug'
   id:
     | '__root__'
     | '/'
@@ -341,12 +374,13 @@ export interface FileRouteTypes {
     | '/purchase'
     | '/resources'
     | '/select'
-    | '/sitemap.xml'
+    | '/sitemapfyugp.xml'
     | '/view'
     | '/api/create-order'
     | '/api/resources'
     | '/api/subjects'
     | '/api/verify-payment'
+    | '/preview/$slug'
     | '/api/admin/bulk-price-update'
     | '/api/admin/bulk-resource-update'
     | '/api/admin/dashboard'
@@ -361,7 +395,9 @@ export interface FileRouteTypes {
     | '/api/admin/update-subject'
     | '/api/admin/upload-resource'
     | '/api/admin/upload-subject'
+    | '/api/resource/$slug'
     | '/api/resource/download/$slug'
+    | '/api/resource/pdf/$slug'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
@@ -372,12 +408,13 @@ export interface RootRouteChildren {
   PurchaseRoute: typeof PurchaseRoute
   ResourcesRoute: typeof ResourcesRoute
   SelectRoute: typeof SelectRoute
-  SitemapDotxmlRoute: typeof SitemapDotxmlRoute
+  SitemapfyugpDotxmlRoute: typeof SitemapfyugpDotxmlRoute
   ViewRoute: typeof ViewRoute
   ApiCreateOrderRoute: typeof ApiCreateOrderRoute
   ApiResourcesRoute: typeof ApiResourcesRoute
   ApiSubjectsRoute: typeof ApiSubjectsRoute
   ApiVerifyPaymentRoute: typeof ApiVerifyPaymentRoute
+  PreviewSlugRoute: typeof PreviewSlugRoute
   ApiAdminBulkPriceUpdateRoute: typeof ApiAdminBulkPriceUpdateRoute
   ApiAdminBulkResourceUpdateRoute: typeof ApiAdminBulkResourceUpdateRoute
   ApiAdminDashboardRoute: typeof ApiAdminDashboardRoute
@@ -392,7 +429,9 @@ export interface RootRouteChildren {
   ApiAdminUpdateSubjectRoute: typeof ApiAdminUpdateSubjectRoute
   ApiAdminUploadResourceRoute: typeof ApiAdminUploadResourceRoute
   ApiAdminUploadSubjectRoute: typeof ApiAdminUploadSubjectRoute
+  ApiResourceSlugRoute: typeof ApiResourceSlugRoute
   ApiResourceDownloadSlugRoute: typeof ApiResourceDownloadSlugRoute
+  ApiResourcePdfSlugRoute: typeof ApiResourcePdfSlugRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -404,11 +443,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ViewRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/sitemap.xml': {
-      id: '/sitemap.xml'
-      path: '/sitemap.xml'
-      fullPath: '/sitemap.xml'
-      preLoaderRoute: typeof SitemapDotxmlRouteImport
+    '/sitemapfyugp.xml': {
+      id: '/sitemapfyugp.xml'
+      path: '/sitemapfyugp.xml'
+      fullPath: '/sitemapfyugp.xml'
+      preLoaderRoute: typeof SitemapfyugpDotxmlRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/select': {
@@ -460,6 +499,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/preview/$slug': {
+      id: '/preview/$slug'
+      path: '/preview/$slug'
+      fullPath: '/preview/$slug'
+      preLoaderRoute: typeof PreviewSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/verify-payment': {
       id: '/api/verify-payment'
       path: '/api/verify-payment'
@@ -486,6 +532,13 @@ declare module '@tanstack/react-router' {
       path: '/api/create-order'
       fullPath: '/api/create-order'
       preLoaderRoute: typeof ApiCreateOrderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/resource/$slug': {
+      id: '/api/resource/$slug'
+      path: '/api/resource/$slug'
+      fullPath: '/api/resource/$slug'
+      preLoaderRoute: typeof ApiResourceSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/admin/upload-subject': {
@@ -586,6 +639,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminBulkPriceUpdateRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/api/resource/pdf/$slug': {
+      id: '/api/resource/pdf/$slug'
+      path: '/api/resource/pdf/$slug'
+      fullPath: '/api/resource/pdf/$slug'
+      preLoaderRoute: typeof ApiResourcePdfSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/api/resource/download/$slug': {
       id: '/api/resource/download/$slug'
       path: '/api/resource/download/$slug'
@@ -604,12 +664,13 @@ const rootRouteChildren: RootRouteChildren = {
   PurchaseRoute: PurchaseRoute,
   ResourcesRoute: ResourcesRoute,
   SelectRoute: SelectRoute,
-  SitemapDotxmlRoute: SitemapDotxmlRoute,
+  SitemapfyugpDotxmlRoute: SitemapfyugpDotxmlRoute,
   ViewRoute: ViewRoute,
   ApiCreateOrderRoute: ApiCreateOrderRoute,
   ApiResourcesRoute: ApiResourcesRoute,
   ApiSubjectsRoute: ApiSubjectsRoute,
   ApiVerifyPaymentRoute: ApiVerifyPaymentRoute,
+  PreviewSlugRoute: PreviewSlugRoute,
   ApiAdminBulkPriceUpdateRoute: ApiAdminBulkPriceUpdateRoute,
   ApiAdminBulkResourceUpdateRoute: ApiAdminBulkResourceUpdateRoute,
   ApiAdminDashboardRoute: ApiAdminDashboardRoute,
@@ -624,7 +685,9 @@ const rootRouteChildren: RootRouteChildren = {
   ApiAdminUpdateSubjectRoute: ApiAdminUpdateSubjectRoute,
   ApiAdminUploadResourceRoute: ApiAdminUploadResourceRoute,
   ApiAdminUploadSubjectRoute: ApiAdminUploadSubjectRoute,
+  ApiResourceSlugRoute: ApiResourceSlugRoute,
   ApiResourceDownloadSlugRoute: ApiResourceDownloadSlugRoute,
+  ApiResourcePdfSlugRoute: ApiResourcePdfSlugRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

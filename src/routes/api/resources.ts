@@ -35,7 +35,7 @@ export const Route = createFileRoute("/api/resources")({
           const { data, error } = await supabaseAdmin
             .from("resources")
             .select(
-              "id,resource_slug,title,extra_info,description,resource_type,access_type,course,semester,subject_id,subject,original_price,discount_price,pdf_url,storage_path,is_featured,is_trending,is_published,view_count,purchase_count,download_count,created_at,updated_at",
+              "id,resource_slug,title,extra_info,description,resource_type,access_type,course,semester,subject_id,subject,original_price,discount_price,pdf_url,storage_path,is_featured,is_trending,is_published,view_count,purchase_count,download_count,preview_page_count,created_at,updated_at",
             )
             .eq("is_published", true)
             .order("created_at", { ascending: false });
@@ -72,6 +72,7 @@ export const Route = createFileRoute("/api/resources")({
               downloadCount: row.download_count,
               createdAt: row.created_at,
               updatedAt: row.updated_at,
+              previewPageCount: row.preview_page_count,
             })) ?? [];
 
           return Response.json({

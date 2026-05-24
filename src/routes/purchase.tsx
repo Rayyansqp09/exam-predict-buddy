@@ -9,6 +9,7 @@ import {
     ShieldCheck,
     ShoppingCart,
     Download,
+    Eye,
 } from "lucide-react";
 
 
@@ -42,6 +43,7 @@ type Resource = {
     pdfUrl: string | null;
     createdAt: string;
     downloadCount: number;
+    previewPageCount: number | null;
 };
 
 type ResourcesApiResponse =
@@ -552,16 +554,36 @@ function PurchasePage() {
                                             </div>
 
                                             {isPremium ? (
-                                                <Button
-                                                    size="sm"
-                                                    className="bg-gradient-primary shadow-glow hover:opacity-95"
-                                                    onClick={() => handleBuy(resource)}
-                                                    disabled={buyingSlug === resource.slug}
-                                                >
-                                                    <ShoppingCart className="h-4 w-4" />
-                                                    {buyingSlug === resource.slug ? "Loading..." : "Buy"}
-                                                    <ArrowRight className="h-4 w-4" />
-                                                </Button>
+                                                <div className="flex items-center gap-2">
+
+                                                    {(resource.previewPageCount ?? 0) > 1 ? (
+                                                        <Button
+                                                            asChild
+                                                            size="sm"
+                                                            variant="outline"
+                                                            className="h-9 w-9 shrink-0 p-0"
+                                                        >
+                                                            <Link
+                                                                to="/preview/$slug"
+                                                                params={{ slug: resource.slug }}
+                                                                aria-label="Preview"
+                                                            >
+                                                                <Eye className="h-4 w-4" />
+                                                            </Link>
+                                                        </Button>
+                                                    ) : null}
+
+                                                    <Button
+                                                        size="sm"
+                                                        className="bg-gradient-primary shadow-glow hover:opacity-95"
+                                                        onClick={() => handleBuy(resource)}
+                                                        disabled={buyingSlug === resource.slug}
+                                                    >
+                                                        <ShoppingCart className="h-4 w-4" />
+                                                        {buyingSlug === resource.slug ? "Loading..." : "Buy"}
+                                                        <ArrowRight className="h-4 w-4" />
+                                                    </Button>
+                                                </div>
                                             ) : (
                                                 <Button
                                                     asChild

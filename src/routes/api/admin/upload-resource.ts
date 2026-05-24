@@ -50,6 +50,13 @@ export const Route = createFileRoute("/api/admin/upload-resource")({
           const priceRaw = String(formData.get("price") ?? "").trim();
           const discountPriceRaw = String(formData.get("discountPrice") ?? "").trim();
           const pdf = formData.get("pdf");
+          const previewPageCountRaw = String(formData.get("previewPageCount") ?? "").trim();
+          const parsedPreviewCount = Number(previewPageCountRaw);
+
+          const previewPageCount =
+            Number.isFinite(parsedPreviewCount) && parsedPreviewCount >= 0
+              ? parsedPreviewCount
+              : 0;
 
           if (!resourceType) {
             return Response.json(
@@ -195,6 +202,7 @@ export const Route = createFileRoute("/api/admin/upload-resource")({
             pdf_url: pdfUrl,
             storage_path: storagePath,
             is_published: true,
+            preview_page_count: previewPageCount,
           });
 
           if (insertError) {

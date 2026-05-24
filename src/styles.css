@@ -99,3 +99,11 @@
     color: transparent;
   }
 }
+
+.react-pdf__Page {
+  margin: 0 !important;
+}
+
+.react-pdf__Page canvas {
+  display: block;
+}

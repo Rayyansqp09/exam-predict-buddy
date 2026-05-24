@@ -62,7 +62,7 @@ async function getDynamicEntries(origin: string): Promise<SitemapEntry[]> {
   }));
 }
 
-export const Route = createFileRoute("/sitemap.xml")({
+export const Route = createFileRoute("/sitemapfyugp.xml")({
   server: {
     handlers: {
       GET: async ({ request }) => {

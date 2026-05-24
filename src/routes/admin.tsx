@@ -88,6 +88,9 @@ function AdminPage() {
     const [bulkLoading, setBulkLoading] = useState(false);
     const [bulkMessage, setBulkMessage] = useState("");
 
+    const [previewPageCount, setPreviewPageCount] = useState("2");
+    const [editPreviewPageCount, setEditPreviewPageCount] = useState("2");
+
     type ResourceItem = {
         id: number;
         slug: string;
@@ -153,6 +156,7 @@ function AdminPage() {
         setEditPrice(resource.originalPrice != null ? String(resource.originalPrice) : "30");
         setEditDiscountPrice(resource.discountPrice != null ? String(resource.discountPrice) : "");
         setEditPdfFile(null);
+        setEditPreviewPageCount(String(resource.previewPageCount ?? 2));
     };
 
     const cancelResourceEdit = () => {
@@ -186,6 +190,7 @@ function AdminPage() {
             formData.append("subjectId", editSubjectId);
             formData.append("extraInfo", editExtraInfo);
             formData.append("description", editDescription);
+            formData.append("previewPageCount", editPreviewPageCount);
 
             if (editAccessType === "premium") {
                 formData.append("price", editPrice);
@@ -380,6 +385,7 @@ function AdminPage() {
             formData.append("description", description);
             formData.append("pdf", pdfFile);
             formData.append("subjectId", subjectId);
+            formData.append("previewPageCount", previewPageCount);
 
             if (accessType === "premium") {
                 formData.append("price", price);
@@ -409,6 +415,7 @@ function AdminPage() {
             setPrice("30");
             setDiscountPrice("");
             setPdfFile(null);
+            setPreviewPageCount("2");
         } catch (error) {
             setUploadMessage(error instanceof Error ? error.message : "Upload failed");
         } finally {
@@ -582,6 +589,17 @@ function AdminPage() {
                                         </div>
                                     </>
                                 ) : null}
+
+                                <div className="space-y-2">
+                                    <Label>Preview Page Count</Label>
+                                    <Input
+                                        type="number"
+                                        min={0}
+                                        value={previewPageCount}
+                                        onChange={(e) => setPreviewPageCount(e.target.value)}
+                                        placeholder="2"
+                                    />
+                                </div>
 
                                 <div className="space-y-2">
                                     <Label>PDF File</Label>
@@ -1090,6 +1108,16 @@ function AdminPage() {
                                     </div>
                                 </div>
                             ) : null}
+
+                            <div className="space-y-2">
+                                <Label>Preview Page Count</Label>
+                                <Input
+                                    type="number"
+                                    min={0}
+                                    value={editPreviewPageCount}
+                                    onChange={(e) => setEditPreviewPageCount(e.target.value)}
+                                />
+                            </div>
 
                             <div className="space-y-2">
                                 <Label>Replace PDF (optional)</Label>
