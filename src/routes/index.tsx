@@ -86,7 +86,7 @@ function Hero() {
   <span className="mt-3 block text-sm">
     Join our{" "}
     <a
-      href="YOUR_WHATSAPP_CHANNEL_LINK"
+      href="https://whatsapp.com/channel/0029VbCxFM2KbYMWPvmVnu3b"
       target="_blank"
       rel="noreferrer"
       className="font-medium text-green-600 underline underline-offset-4 hover:text-green-700"
@@ -95,7 +95,7 @@ function Hero() {
     </a>{" "}
     or{" "}
     <a
-      href="YOUR_TELEGRAM_CHANNEL_LINK"
+      href="https://t.me/FYUGPhub"
       target="_blank"
       rel="noreferrer"
       className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"

@@ -627,7 +627,7 @@ function ResourcesPage() {
               </a>{" "}
               or through our{" "}
               <a
-                href="YOUR_WHATSAPP_CHANNEL_LINK"
+                href="https://whatsapp.com/channel/0029VbCxFM2KbYMWPvmVnu3b"
                 target="_blank"
                 rel="noreferrer"
                 className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
@@ -636,7 +636,7 @@ function ResourcesPage() {
               </a>{" "}
               and{" "}
               <a
-                href="YOUR_TELEGRAM_CHANNEL_LINK"
+                href="https://t.me/FYUGPhub"
                 target="_blank"
                 rel="noreferrer"
                 className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
