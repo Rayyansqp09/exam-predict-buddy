@@ -473,13 +473,13 @@ function AdminPage() {
                         <CardContent>
                             <form className="space-y-4" onSubmit={handleResourceUpload}>
 
-                                <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                                <div className="grid grid-cols-2 gap-2 md:grid-cols-2">
                                     <div className="space-y-2">
                                         <Label>Resource Type</Label>
                                         <select
                                             value={resourceType}
                                             onChange={(e) => setResourceType(e.target.value)}
-                                            className="h-10 w-full rounded-md border bg-background px-3"
+                                            className="h-10 w-full rounded-md border bg-background px-1 md:px-3 text-sm md:text-base"
                                         >
                                             <option value="MODEL_PAPER">Model Question Paper</option>
                                             <option value="PYQ">PYQ</option>
@@ -499,7 +499,7 @@ function AdminPage() {
                                             onChange={(e) =>
                                                 setAccessType(e.target.value as "free" | "premium")
                                             }
-                                            className="h-10 w-full rounded-md border bg-background px-3"
+                                            className="h-10 w-full rounded-md border bg-background px-1 md:px-3 text-sm md:text-base"
                                         >
                                             <option value="premium">Premium</option>
                                             <option value="free">Free</option>
@@ -512,6 +512,7 @@ function AdminPage() {
                                             value={course}
                                             onChange={(e) => setCourse(e.target.value)}
                                             placeholder="BCA"
+                                            className="text-sm placeholder:text-sm placeholder:text-muted-foreground"
                                         />
                                     </div>
 
@@ -522,6 +523,7 @@ function AdminPage() {
                                             value={semester}
                                             onChange={(e) => setSemester(e.target.value)}
                                             placeholder="1"
+                                            className="text-sm placeholder:text-sm placeholder:text-muted-foreground"
                                         />
                                     </div>
 
@@ -532,6 +534,7 @@ function AdminPage() {
                                             value={subject}
                                             onChange={(e) => setSubject(e.target.value)}
                                             placeholder="Programming Fundamentals"
+                                            className="text-sm placeholder:text-sm placeholder:text-muted-foreground"
                                         />
                                     </div>
 
@@ -540,7 +543,8 @@ function AdminPage() {
                                         <Input
                                             value={subjectId}
                                             onChange={(e) => setSubjectId(e.target.value)}
-                                            placeholder="cyber-law-bca-sem4"
+                                            placeholder="ABC45J10"
+                                            className="text-sm placeholder:text-sm placeholder:text-muted-foreground"
                                         />
                                     </div>
 
@@ -552,6 +556,7 @@ function AdminPage() {
                                         value={extraInfo}
                                         onChange={(e) => setExtraInfo(e.target.value)}
                                         placeholder="Last two years, Module-wise, Important repeated questions"
+                                        className="text-sm placeholder:text-sm placeholder:text-muted-foreground"
                                     />
                                 </div>
 
@@ -561,29 +566,36 @@ function AdminPage() {
                                         value={description}
                                         onChange={(e) => setDescription(e.target.value)}
                                         placeholder="Short description of this resource..."
+                                        className="text-sm placeholder:text-sm placeholder:text-muted-foreground"
                                     />
                                 </div>
 
                                 {accessType === "premium" ? (
                                     <>
-                                        <div className="grid gap-4 md:grid-cols-2">
+                                        <div className="grid grid-cols-2 gap-2 md:gap-4">
                                             <div className="space-y-2">
-                                                <Label>Price</Label>
+                                                <Label className="text-xs md:text-sm">Price</Label>
+
                                                 <Input
                                                     type="number"
                                                     value={price}
                                                     onChange={(e) => setPrice(e.target.value)}
                                                     placeholder="30"
+                                                    className="h-9 text-sm placeholder:text-xs md:h-10 md:placeholder:text-sm"
                                                 />
                                             </div>
 
                                             <div className="space-y-2">
-                                                <Label>Discount Price</Label>
+                                                <Label className="text-xs md:text-sm">
+                                                    Discount Price
+                                                </Label>
+
                                                 <Input
                                                     type="number"
                                                     value={discountPrice}
                                                     onChange={(e) => setDiscountPrice(e.target.value)}
                                                     placeholder="Optional"
+                                                    className="h-9 text-sm placeholder:text-xs md:h-10 md:placeholder:text-sm"
                                                 />
                                             </div>
                                         </div>
@@ -598,6 +610,7 @@ function AdminPage() {
                                         value={previewPageCount}
                                         onChange={(e) => setPreviewPageCount(e.target.value)}
                                         placeholder="2"
+                                        className="text-sm placeholder:text-sm placeholder:text-muted-foreground"
                                     />
                                 </div>
 
@@ -630,7 +643,7 @@ function AdminPage() {
                     <CardContent>
                         <form className="space-y-4" onSubmit={handleBulkUpdate}>
 
-                            <div className="grid grid-cols-1 gap-3 sm:grid-cols-2">
+                            <div className="grid grid-cols-2 gap-2 md:grid-cols-2">
 
                                 <div className="space-y-2">
                                     <Label>Update Scope</Label>
@@ -638,7 +651,7 @@ function AdminPage() {
                                     <select
                                         value={bulkScope}
                                         onChange={(e) => setBulkScope(e.target.value)}
-                                        className="h-10 w-full rounded-md border bg-background px-3"
+                                        className="h-10 w-full rounded-md border bg-background px-1 md:px-3 text-sm md:text-base"
                                     >
                                         <option value="all">All Resources</option>
                                         <option value="course">Course</option>
@@ -664,7 +677,7 @@ function AdminPage() {
                                                 | "discount_price",
                                             )
                                         }
-                                        className="h-10 w-full rounded-md border bg-background px-3"
+                                        className="h-10 w-full rounded-md border bg-background px-1 md:px-3 text-sm md:text-base"
                                     >
                                         <option value="original_price">
                                             Original Price
@@ -763,6 +776,7 @@ function AdminPage() {
                                     value={bulkValue}
                                     onChange={(e) => setBulkValue(e.target.value)}
                                     placeholder="Leave empty to clear discount price"
+                                    className="text-sm placeholder:text-sm placeholder:text-muted-foreground"
                                 />
                             </div>
 
@@ -786,14 +800,14 @@ function AdminPage() {
                 </Card>
 
 
-                <div className="grid gap-4 md:grid-cols-2 mt-10 mb-10">
+                <div className="grid grid-cols-2 gap-2 md:gap-4 mt-10 mb-10">
 
                     <div className="space-y-2">
                         <Label>Filter by type</Label>
                         <select
                             value={filterResourceType}
                             onChange={(e) => setFilterResourceType(e.target.value)}
-                            className="h-10 w-full rounded-md border bg-background px-3"
+                            className="h-10 w-full rounded-md border bg-background px-2 md:px-3 text-sm md:text-base"
                         >
                             <option value="all">All types</option>
                             <option value="MODEL_PAPER">Model Paper</option>
@@ -812,7 +826,7 @@ function AdminPage() {
                         <select
                             value={filterCourse}
                             onChange={(e) => setFilterCourse(e.target.value)}
-                            className="h-10 w-full rounded-md border bg-background px-3"
+                            className="h-10 w-full rounded-md border bg-background px-2 md:px-3 text-sm md:text-base"
                         >
                             <option value="all">All courses</option>
                             {Array.from(new Set(resources.map((r) => r.course))).map((course) => (
@@ -828,7 +842,7 @@ function AdminPage() {
                         <select
                             value={filterSubject}
                             onChange={(e) => setFilterSubject(e.target.value)}
-                            className="h-10 w-full rounded-md border bg-background px-3"
+                            className="h-10 w-full rounded-md border bg-background px-2 md:px-3 text-sm md:text-base"
                         >
                             <option value="all">All subjects</option>
                             {Array.from(new Set(resources.map((r) => r.subject))).map((subject) => (
@@ -845,7 +859,7 @@ function AdminPage() {
                         <select
                             value={filterAccessType}
                             onChange={(e) => setFilterAccessType(e.target.value)}
-                            className="h-10 w-full rounded-md border bg-background px-3"
+                            className="h-10 w-full rounded-md border bg-background px-2 md:px-3 text-sm md:text-base"
                         >
                             <option value="all">All</option>
                             <option value="premium">Premium</option>
@@ -856,12 +870,14 @@ function AdminPage() {
                 </div>
 
 
-                <Card className="shadow-card">
-                    <CardHeader>
-                        <CardTitle>Uploaded Resources</CardTitle>
+                <Card className="border-0 shadow-none bg-transparent">
+                    <CardHeader className="px-4 py-4 md:px-6 md:py-6">
+                        <CardTitle className="text-base md:text-xl">
+                            Uploaded Resources
+                        </CardTitle>
                     </CardHeader>
 
-                    <CardContent className="space-y-4">
+                    <CardContent className="space-y-4 px-4 pb-4 md:px-6 md:pb-6">
                         {resourcesLoading ? (
                             <p className="text-sm text-muted-foreground">Loading resources...</p>
                         ) : resourcesError ? (
@@ -871,110 +887,122 @@ function AdminPage() {
                         ) : (
                             <div className="space-y-3">
                                 {filteredResources.map((resource) => {
-                                    const salePrice =
-                                        resource.discountPrice ?? resource.originalPrice;
+                                    const salePrice = resource.discountPrice ?? resource.originalPrice;
 
                                     return (
                                         <div
                                             key={resource.id}
-                                            className="w-full rounded-2xl border bg-card p-5 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md"
+                                            className="w-full rounded-2xl border bg-card p-3 shadow-sm transition-all hover:-translate-y-0.5 hover:shadow-md md:p-5"
                                         >
-                                            <div className="flex flex-col gap-4 lg:flex-row lg:items-start lg:justify-between">
-                                                <div className="flex-1 space-y-2 pr-4">
-                                                    <div className="flex flex-wrap items-center gap-2">
-                                                        <h3 className="text-lg font-semibold">{resource.title}</h3>
-                                                        <Badge variant="secondary">{resource.resourceType}</Badge>
-                                                        <Badge variant={resource.accessType === "premium" ? "default" : "outline"}>
+                                            <div className="flex flex-col gap-3 lg:flex-row lg:items-start lg:justify-between">
+                                                <div className="min-w-0 flex-1 space-y-2">
+                                                    <div className="flex flex-wrap items-center gap-1.5 md:gap-2">
+                                                        <h3 className="max-w-full truncate text-sm font-semibold md:text-lg">
+                                                            {resource.title}
+                                                        </h3>
+
+                                                        <Badge variant="secondary" className="text-[10px] md:text-xs">
+                                                            {resource.resourceType}
+                                                        </Badge>
+
+                                                        <Badge
+                                                            variant={resource.accessType === "premium" ? "default" : "outline"}
+                                                            className="text-[10px] md:text-xs"
+                                                        >
                                                             {resource.accessType}
                                                         </Badge>
                                                     </div>
 
-                                                    <p className="text-sm text-muted-foreground">
+                                                    <p className="text-xs text-muted-foreground md:text-sm">
                                                         {resource.course} · Semester {resource.semester} · {resource.subject}
                                                     </p>
 
                                                     {resource.extraInfo ? (
-                                                        <p className="text-sm text-muted-foreground">
+                                                        <p className="text-xs text-muted-foreground md:text-sm">
                                                             Extra: {resource.extraInfo}
                                                         </p>
                                                     ) : null}
 
                                                     {resource.description ? (
-                                                        <p className="mt-2 text-sm">{resource.description}</p>
+                                                        <p className="mt-1 text-xs leading-relaxed md:mt-2 md:text-sm">
+                                                            {resource.description}
+                                                        </p>
                                                     ) : null}
 
-                                                    <p className="mt-2 break-all text-xs text-muted-foreground">
+                                                    <p className="mt-1 break-all text-[10px] text-muted-foreground md:mt-2 md:text-xs">
                                                         {resource.pdfUrl}
                                                     </p>
                                                 </div>
 
-                                                <div className="text-right">
+                                                <div className="flex flex-col gap-3 lg:min-w-[180px] lg:items-end lg:text-right">
                                                     {resource.accessType === "premium" ? (
                                                         resource.discountPrice !== null ? (
-                                                            <div className="flex flex-col items-end gap-1">
-                                                                <span className="text-sm text-muted-foreground line-through">
+                                                            <div className="flex items-end gap-2 lg:flex-col lg:items-end lg:gap-1">
+                                                                <span className="text-xs text-muted-foreground line-through md:text-sm">
                                                                     ₹{resource.originalPrice}
                                                                 </span>
-                                                                <span className="text-lg font-bold text-primary">
+                                                                <span className="text-base font-bold text-primary md:text-lg">
                                                                     ₹{resource.discountPrice}
                                                                 </span>
                                                             </div>
                                                         ) : (
-                                                            <span className="text-lg font-bold">
+                                                            <span className="text-base font-bold md:text-lg">
                                                                 ₹{resource.originalPrice}
                                                             </span>
                                                         )
                                                     ) : (
-                                                        <span className="text-sm font-medium text-success">Free</span>
+                                                        <span className="text-xs font-medium text-success md:text-sm">
+                                                            Free
+                                                        </span>
                                                     )}
 
-                                                    <div className="mt-4 flex flex-col gap-3">
-                                                        <div className="flex flex-wrap justify-end gap-2">
-                                                            <Badge variant={resource.isPublished ? "default" : "secondary"}>
-                                                                {resource.isPublished ? "Published" : "Hidden"}
-                                                            </Badge>
+                                                    <div className="mt-1 flex flex-wrap gap-1.5 lg:justify-end md:mt-4 md:gap-2">
+                                                        <Badge
+                                                            variant={resource.isPublished ? "default" : "secondary"}
+                                                            className="text-[10px] md:text-xs"
+                                                        >
+                                                            {resource.isPublished ? "Published" : "Hidden"}
+                                                        </Badge>
 
-                                                            {resource.isFeatured ? <Badge>Featured</Badge> : null}
-                                                            {resource.isTrending ? <Badge>Trending</Badge> : null}
-                                                        </div>
+                                                        {resource.isFeatured ? (
+                                                            <Badge className="text-[10px] md:text-xs">Featured</Badge>
+                                                        ) : null}
 
-                                                        <div className="flex items-center justify-end gap-2 rounded-xl border bg-muted/40 p-1">
-                                                            <Button
-                                                                variant="ghost"
-                                                                size="sm"
-                                                                className="h-9 gap-2 rounded-lg px-3 font-medium transition-all hover:bg-background hover:shadow-sm"
-                                                                onClick={() => startEditResource(resource)}
-                                                            >
-                                                                <Pencil className="h-4 w-4" />
-                                                                Edit
-                                                            </Button>
+                                                        {resource.isTrending ? (
+                                                            <Badge className="text-[10px] md:text-xs">Trending</Badge>
+                                                        ) : null}
+                                                    </div>
 
-                                                            <Button
-                                                                variant="destructive"
-                                                                size="sm"
-                                                                className="h-9 gap-2 rounded-lg px-3 font-medium shadow-sm transition-all hover:shadow-md"
-                                                                onClick={() => handleDeleteResource(resource.slug)}
-                                                            >
-                                                                <Trash2 className="h-4 w-4" />
-                                                                Delete
-                                                            </Button>
-                                                        </div>
+                                                    <div className="grid grid-cols-2 gap-2 rounded-xl border bg-muted/40 p-2 md:flex md:items-center md:justify-end md:gap-2 md:p-1">
+                                                        <Button
+                                                            variant="ghost"
+                                                            size="sm"
+                                                            className="h-8 w-full gap-1 rounded-lg px-2 text-xs font-medium transition-all hover:bg-background hover:shadow-sm md:h-9 md:w-auto md:gap-2 md:px-3 md:text-sm"
+                                                            onClick={() => startEditResource(resource)}
+                                                        >
+                                                            <Pencil className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                                            Edit
+                                                        </Button>
+
+                                                        <Button
+                                                            variant="destructive"
+                                                            size="sm"
+                                                            className="h-8 w-full gap-1 rounded-lg px-2 text-xs font-medium shadow-sm transition-all hover:shadow-md md:h-9 md:w-auto md:gap-2 md:px-3 md:text-sm"
+                                                            onClick={() => handleDeleteResource(resource.slug)}
+                                                        >
+                                                            <Trash2 className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                                            Delete
+                                                        </Button>
                                                     </div>
                                                 </div>
                                             </div>
                                         </div>
-
-
-
                                     );
                                 })}
                             </div>
                         )}
-
-
                     </CardContent>
                 </Card>
-
                 <Dialog
                     open={Boolean(editingResourceSlug)}
                     onOpenChange={(open) => {

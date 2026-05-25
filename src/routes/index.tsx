@@ -104,12 +104,12 @@ function Hero() {
             <span className="mt-3 block text-sm">
               Join our{" "}
               <a
-                href="https://whatsapp.com/channel/0029VbCxFM2KbYMWPvmVnu3b"
+                href="https://chat.whatsapp.com/DxIoknRVc7a0cZpVMNI6Gr"
                 target="_blank"
                 rel="noreferrer"
                 className="font-medium text-green-600 underline underline-offset-4 hover:text-green-700"
               >
-                WhatsApp channel
+                WhatsApp group
               </a>{" "}
               or{" "}
               <a
@@ -422,7 +422,7 @@ function Channels() {
             <MessageCircle className="h-6 w-6" />
           </div>
           <div className="flex-1">
-            <p className="font-semibold">WhatsApp Channel</p>
+            <p className="font-semibold">WhatsApp Group</p>
             <p className="text-xs text-muted-foreground"></p>
           </div>
           <ArrowRight className="h-5 w-5 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-foreground" />

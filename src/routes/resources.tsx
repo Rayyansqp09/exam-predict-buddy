@@ -627,12 +627,12 @@ function ResourcesPage() {
               </a>{" "}
               or through our{" "}
               <a
-                href="https://whatsapp.com/channel/0029VbCxFM2KbYMWPvmVnu3b"
+                href="https://chat.whatsapp.com/DxIoknRVc7a0cZpVMNI6Gr"
                 target="_blank"
                 rel="noreferrer"
                 className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
               >
-                WhatsApp channel
+                WhatsApp group
               </a>{" "}
               and{" "}
               <a
@@ -793,7 +793,7 @@ function ResourceCard({
           <div className="flex items-center justify-between text-[10px] font-semibold text-muted-foreground">
             <span className="inline-flex items-center gap-1">
               <Download className="h-3 w-3" />
-              {r.downloadCount.toLocaleString()} dl
+               {Math.max(r.downloadCount, 10).toLocaleString()}+ dl
             </span>
 
             <span className="inline-flex items-center gap-1">
@@ -905,7 +905,7 @@ function ResourceCard({
         <div className="mt-4 flex items-center justify-between text-xs text-muted-foreground">
           <span className="inline-flex items-center gap-1">
             <Download className="h-3.5 w-3.5" />
-            {r.downloadCount.toLocaleString()} downloads
+            {Math.max(r.downloadCount, 10).toLocaleString()}+ downloads
           </span>
 
           <span className="inline-flex items-center gap-1">
@@ -1000,7 +1000,9 @@ function Spotlight({
   buyingSlug: string | null;
 }) {
   return (
-    <div className="rounded-2xl mt-0 border border-border bg-card p-3 md:p-5 shadow-soft">
+    <div className="rounded-2xl mt-0 border border-border bg-card p-3 md:p-5 shadow-soft
+w-[calc(100vw-24px)] max-w-[calc(100vw-24px)] mx-auto overflow-hidden box-border
+md:w-full md:max-w-none">
       <h3 className="inline-flex items-center gap-2 text-lg font-bold">
         <Icon className="h-5 w-5 text-primary" />
         {title}
@@ -1066,15 +1068,7 @@ function Spotlight({
           );
         })}
       </ul>
-
-      <div className="mt-3 text-right">
-        {/* <Link
-          to="/resources"
-          className="text-xs text-muted-foreground hover:text-foreground"
-        >
-          Browse all <GraduationCap className="ml-1 inline h-3 w-3" />
-        </Link> */}
-      </div>
+      
     </div>
 
   );

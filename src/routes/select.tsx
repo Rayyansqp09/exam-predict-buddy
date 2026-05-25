@@ -211,7 +211,7 @@ function SelectPage() {
               </a>{" "}
               or through our{" "}
               <a
-                href="https://whatsapp.com/channel/0029VbCxFM2KbYMWPvmVnu3b"
+                href="https://chat.whatsapp.com/DxIoknRVc7a0cZpVMNI6Gr"
                 target="_blank"
                 rel="noreferrer"
                 className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"

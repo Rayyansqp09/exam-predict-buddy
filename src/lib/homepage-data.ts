@@ -166,5 +166,5 @@ export const MATCH_PROOFS: MatchProof[] = [
   },
 ];
 
-export const WHATSAPP_CHANNEL = "https://whatsapp.com/channel/0029VbCxFM2KbYMWPvmVnu3b";
+export const WHATSAPP_CHANNEL = "https://chat.whatsapp.com/DxIoknRVc7a0cZpVMNI6Gr";
 export const TELEGRAM_CHANNEL = "https://t.me/FYUGPhub";
