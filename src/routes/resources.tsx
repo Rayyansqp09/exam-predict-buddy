@@ -24,6 +24,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { FloatingCTA } from "@/components/site/FloatingCTA";
+import { courseMatches } from "@/lib/courseMatch";
 
 type Access = "all" | "free" | "premium";
 type SortKey = "latest" | "trending" | "popular";
@@ -252,13 +253,24 @@ function ResourcesPage() {
     }
   };
 
+  const splitCourses = (courseValue: string) =>
+    courseValue
+      .split(",")
+      .map((c) => c.trim())
+      .filter(Boolean);
+
   const courseOptions = useMemo(() => {
-    return Array.from(new Set(resources.map((r) => r.course))).sort();
+    const allCourses = resources.flatMap((r) => splitCourses(r.course));
+    return Array.from(new Set(allCourses)).sort();
   }, [resources]);
 
   const semesterOptions = useMemo(() => {
     return Array.from(
-      new Set(resources.filter((r) => !course || r.course === course).map((r) => r.semester)),
+      new Set(
+        resources
+          .filter((r) => !course || courseMatches(r.course, course))
+          .map((r) => r.semester),
+      ),
     ).sort((a, b) => a - b);
   }, [resources, course]);
 
@@ -268,13 +280,14 @@ function ResourcesPage() {
         resources
           .filter(
             (r) =>
-              (!course || r.course === course) && (!semester || String(r.semester) === semester),
+              (!course || courseMatches(r.course, course)) &&
+              (!semester || String(r.semester) === semester),
           )
           .map((r) => r.subject),
       ),
     ).sort();
   }, [resources, course, semester]);
-
+  
   const trendingSubjects = useMemo(() => {
     const scores = new Map<string, number>();
 
@@ -314,7 +327,7 @@ function ResourcesPage() {
     const text = query.trim().toLowerCase();
 
     const list = resources.filter((r) => {
-      if (course && r.course !== course) return false;
+      if (course && !courseMatches(r.course, course)) return false;
       if (semester && String(r.semester) !== semester) return false;
       if (subject && r.subject !== subject) return false;
       if (resourceType && r.resourceType !== resourceType) return false;
@@ -793,7 +806,7 @@ function ResourceCard({
           <div className="flex items-center justify-between text-[10px] font-semibold text-muted-foreground">
             <span className="inline-flex items-center gap-1">
               <Download className="h-3 w-3" />
-               {Math.max(r.downloadCount, 10).toLocaleString()}+ dl
+              {Math.max(r.downloadCount, 10).toLocaleString()}+ dl
             </span>
 
             <span className="inline-flex items-center gap-1">
@@ -1068,7 +1081,7 @@ md:w-full md:max-w-none">
           );
         })}
       </ul>
-      
+
     </div>
 
   );

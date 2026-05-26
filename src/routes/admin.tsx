@@ -89,7 +89,7 @@ function AdminPage() {
     const [bulkMessage, setBulkMessage] = useState("");
 
     const [previewPageCount, setPreviewPageCount] = useState("2");
-    const [editPreviewPageCount, setEditPreviewPageCount] = useState("2");
+    const [editPreviewPageCount, setEditPreviewPageCount] = useState("");
 
     type ResourceItem = {
         id: number;
@@ -105,6 +105,7 @@ function AdminPage() {
         subjectId: string | null;
         originalPrice: number | null;
         discountPrice: number | null;
+        previewPageCount: number | null;
         pdfUrl: string | null;
         storagePath: string | null;
         isFeatured: boolean;
@@ -511,7 +512,7 @@ function AdminPage() {
                                         <Input
                                             value={course}
                                             onChange={(e) => setCourse(e.target.value)}
-                                            placeholder="BCA"
+                                            placeholder="BCA,BA"
                                             className="text-sm placeholder:text-sm placeholder:text-muted-foreground"
                                         />
                                     </div>

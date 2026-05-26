@@ -13,7 +13,7 @@ import {
 } from "lucide-react";
 
 
-
+import { courseMatches } from "@/lib/courseMatch";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
 import { Button } from "@/components/ui/button";
@@ -166,7 +166,7 @@ function PurchasePage() {
 
     const filteredResources = useMemo(() => {
         return resources.filter(
-            (resource) => resource.course === course && resource.semester === semesterNumber,
+            (resource) => courseMatches(resource.course, course) && resource.semester === semesterNumber,
         );
     }, [resources, course, semesterNumber]);
 
@@ -269,6 +269,14 @@ function PurchasePage() {
                 description: resource.title,
                 order_id: data.orderId,
                 handler: async function (paymentResponse: any) {
+
+                    setRedirectLabel(`${course} Semester ${semesterNumber} · ${resource.title}`);
+                    setRedirecting(true);
+
+                    await new Promise((resolve) =>
+                        requestAnimationFrame(() => resolve(null)),
+                    );
+
                     const verifyResponse = await fetch("/api/verify-payment", {
                         method: "POST",
                         headers: {
@@ -294,14 +302,7 @@ function PurchasePage() {
                         throw new Error("Payment verification failed");
                     }
 
-                    setRedirectLabel(`${course} Semester ${semesterNumber} · ${resource.title}`);
-                    setRedirecting(true);
-
-                    await new Promise((resolve) => setTimeout(resolve, 1200));
-
-                    if (resource.pdfUrl) {
-                        window.location.href = `/api/resource/download/${resource.slug}`;
-                    }
+                    window.location.href = `/api/resource/download/${resource.slug}`;
                 },
                 prefill: {
                     name: "",
@@ -518,7 +519,7 @@ function PurchasePage() {
 
                                             <span className="inline-flex items-center gap-1">
                                                 <Download className="h-3.5 w-3.5" />
-                                                {resource.downloadCount.toLocaleString()} Downloads
+                                                {Math.max(resource.downloadCount, 10).toLocaleString()}+ Downloads
                                             </span>
 
                                             <span>{formatTimeAgo(resource.createdAt)}</span>

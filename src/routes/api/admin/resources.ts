@@ -15,6 +15,7 @@ type ResourceRow = {
   subject: string;
   original_price: number | null;
   discount_price: number | null;
+  preview_page_count: number | null;
   pdf_url: string | null;
   storage_path: string | null;
   is_featured: boolean;
@@ -39,7 +40,7 @@ export const Route = createFileRoute("/api/admin/resources")({
           const { data, error } = await supabaseAdmin
             .from("resources")
             .select(
-              "id,resource_slug,title,extra_info,description,resource_type,access_type,course,semester,subject,subject_id,original_price,discount_price,pdf_url,storage_path,is_featured,is_trending,is_published,created_at,updated_at",
+              "id,resource_slug,title,extra_info,description,resource_type,access_type,course,semester,subject,subject_id,original_price,discount_price,preview_page_count,pdf_url,storage_path,is_featured,is_trending,is_published,created_at,updated_at",
             )
             .order("created_at", { ascending: false });
 
@@ -65,6 +66,7 @@ export const Route = createFileRoute("/api/admin/resources")({
               subjectId: row.subject_id,
               originalPrice: row.original_price,
               discountPrice: row.discount_price,
+              previewPageCount: row.preview_page_count,
               pdfUrl: row.pdf_url,
               storagePath: row.storage_path,
               isFeatured: row.is_featured,
