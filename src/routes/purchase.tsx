@@ -113,10 +113,14 @@ function PurchasePage() {
     const [redirectLabel, setRedirectLabel] = useState("");
     const [buyingSlug, setBuyingSlug] = useState<string | null>(null);
 
+    const [selectedSubject, setSelectedSubject] = useState("");
+    const [selectedType, setSelectedType] = useState("");
+
     useEffect(() => {
         const script = document.createElement("script");
         script.src = "https://checkout.razorpay.com/v1/checkout.js";
         script.async = true;
+
         document.body.appendChild(script);
 
         return () => {
@@ -165,9 +169,64 @@ function PurchasePage() {
     );
 
     const filteredResources = useMemo(() => {
-        return resources.filter(
-            (resource) => courseMatches(resource.course, course) && resource.semester === semesterNumber,
-        );
+        return resources.filter((resource) => {
+            if (
+                !courseMatches(resource.course, course) ||
+                resource.semester !== semesterNumber
+            ) {
+                return false;
+            }
+
+            if (
+                selectedSubject &&
+                resource.subject !== selectedSubject
+            ) {
+                return false;
+            }
+
+            if (
+                selectedType &&
+                resource.resourceType !== selectedType
+            ) {
+                return false;
+            }
+
+            return true;
+        });
+    }, [
+        resources,
+        course,
+        semesterNumber,
+        selectedSubject,
+        selectedType,
+    ]);
+
+    const subjectOptions = useMemo(() => {
+        return Array.from(
+            new Set(
+                resources
+                    .filter(
+                        (resource) =>
+                            courseMatches(resource.course, course) &&
+                            resource.semester === semesterNumber,
+                    )
+                    .map((resource) => resource.subject),
+            ),
+        ).sort();
+    }, [resources, course, semesterNumber]);
+
+    const typeOptions = useMemo(() => {
+        return Array.from(
+            new Set(
+                resources
+                    .filter(
+                        (resource) =>
+                            courseMatches(resource.course, course) &&
+                            resource.semester === semesterNumber,
+                    )
+                    .map((resource) => resource.resourceType),
+            ),
+        ).sort();
     }, [resources, course, semesterNumber]);
 
     const money = useMemo(
@@ -387,6 +446,46 @@ function PurchasePage() {
                         Free and premium FYUGP resources organized by subject.
                     </p>
                 </div>
+<div className="mt-6 flex items-center justify-center gap-3 flex-nowrap md:flex-wrap">
+  <select
+    value={selectedSubject}
+    onChange={(e) => setSelectedSubject(e.target.value)}
+    className="h-10 w-40 rounded-lg border bg-background px-3 text-sm"
+  >
+    <option value="">All Subjects</option>
+    {subjectOptions.map((subject) => (
+      <option key={subject} value={subject}>
+        {subject}
+      </option>
+    ))}
+  </select>
+
+  <select
+    value={selectedType}
+    onChange={(e) => setSelectedType(e.target.value)}
+    className="h-10 w-40 rounded-lg border bg-background px-3 text-sm"
+  >
+    <option value="">All Types</option>
+    {typeOptions.map((type) => (
+      <option key={type} value={type}>
+        {formatResourceType(type)}
+      </option>
+    ))}
+  </select>
+
+  {(selectedSubject || selectedType) && (
+    <Button
+      variant="outline"
+      size="sm"
+      onClick={() => {
+        setSelectedSubject("");
+        setSelectedType("");
+      }}
+    >
+      Clear Filters
+    </Button>
+  )}
+</div>
 
                 <div className="mt-10">
                     {loadingResources ? (

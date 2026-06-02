@@ -459,7 +459,7 @@ function ResourcesPage() {
           <div className="mt-6 rounded-2xl border bg-card p-4 shadow-soft">
             <div className="grid grid-cols-2 gap-2 md:flex md:flex-wrap md:items-end md:gap-3">
               <FilterSelect
-                label="Access"
+                label="Free/premium"
                 value={access}
                 onChange={(v) => setAccess(v as Access)}
                 options={[
