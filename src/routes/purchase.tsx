@@ -446,46 +446,52 @@ function PurchasePage() {
                         Free and premium FYUGP resources organized by subject.
                     </p>
                 </div>
-<div className="mt-6 flex items-center justify-center gap-3 flex-nowrap md:flex-wrap">
-  <select
-    value={selectedSubject}
-    onChange={(e) => setSelectedSubject(e.target.value)}
-    className="h-10 w-40 rounded-lg border bg-background px-3 text-sm"
-  >
-    <option value="">All Subjects</option>
-    {subjectOptions.map((subject) => (
-      <option key={subject} value={subject}>
-        {subject}
-      </option>
-    ))}
-  </select>
 
-  <select
-    value={selectedType}
-    onChange={(e) => setSelectedType(e.target.value)}
-    className="h-10 w-40 rounded-lg border bg-background px-3 text-sm"
-  >
-    <option value="">All Types</option>
-    {typeOptions.map((type) => (
-      <option key={type} value={type}>
-        {formatResourceType(type)}
-      </option>
-    ))}
-  </select>
+                <div className="mt-6 flex flex-col items-center gap-3 md:flex-row md:justify-center">
+                    {/* Filters row */}
+                    <div className="flex items-center justify-center gap-3">
+                        <select
+                            value={selectedSubject}
+                            onChange={(e) => setSelectedSubject(e.target.value)}
+                            className="h-10 w-40 rounded-lg border bg-background px-3 text-sm"
+                        >
+                            <option value="">All Subjects</option>
+                            {subjectOptions.map((subject) => (
+                                <option key={subject} value={subject}>
+                                    {subject}
+                                </option>
+                            ))}
+                        </select>
 
-  {(selectedSubject || selectedType) && (
-    <Button
-      variant="outline"
-      size="sm"
-      onClick={() => {
-        setSelectedSubject("");
-        setSelectedType("");
-      }}
-    >
-      Clear Filters
-    </Button>
-  )}
-</div>
+                        <select
+                            value={selectedType}
+                            onChange={(e) => setSelectedType(e.target.value)}
+                            className="h-10 w-40 rounded-lg border bg-background px-3 text-sm"
+                        >
+                            <option value="">All Types</option>
+                            {typeOptions.map((type) => (
+                                <option key={type} value={type}>
+                                    {formatResourceType(type)}
+                                </option>
+                            ))}
+                        </select>
+                    </div>
+
+                    {/* Clear button row */}
+                    {(selectedSubject || selectedType) && (
+                        <Button
+                            variant="outline"
+                            size="sm"
+                             className="md:ml-2"
+                            onClick={() => {
+                                setSelectedSubject("");
+                                setSelectedType("");
+                            }}
+                        >
+                            Clear Filters
+                        </Button>
+                    )}
+                </div>
 
                 <div className="mt-10">
                     {loadingResources ? (
