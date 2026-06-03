@@ -64,6 +64,9 @@ export const Route = createFileRoute("/")({
 
 
 function HomePage() {
+
+  const [showMatchProof, setShowMatchProof] = useState(false);
+
   return (
     <div className="min-h-screen bg-background">
       <Header />
@@ -71,7 +74,10 @@ function HomePage() {
         <Hero />
         <ResourceHub />
         <Overview />
-        <MatchProof />
+        <MatchProof
+          showMobile={showMatchProof}
+          onToggleMobile={() => setShowMatchProof((prev) => !prev)}
+        />
         <Courses />
         <HowItWorks />
         <Channels />
@@ -88,15 +94,18 @@ function Hero() {
     <section className="relative overflow-hidden bg-gradient-hero">
       <div className="pointer-events-none absolute -top-32 -right-32 h-96 w-96 rounded-full bg-primary/10 blur-3xl" />
       <div className="pointer-events-none absolute -bottom-32 -left-32 h-96 w-96 rounded-full bg-primary-glow/15 blur-3xl" />
-      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-10 md:grid-cols-2 md:items-center md:px-6 md:py-28">
+      <div className="mx-auto grid max-w-7xl gap-12 px-4 py-10 md:grid-cols-2 md:items-center md:px-6 md:py-25">
         <div>
-          <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-background/70 px-3 py-1 text-xs font-medium text-primary shadow-sm backdrop-blur">
-            <Sparkles className="h-3.5 w-3.5" /> Calicut University · FYUGP Resource Hub
+
+          <span className="inline-flex items-center gap-1 sm:gap-2 rounded-full border border-primary/20 bg-background/70 px-2 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-medium text-primary shadow-sm backdrop-blur">
+            <Sparkles className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+            Calicut University · FYUGP Resource Hub
           </span>
-          <h1 className="mt-5 font-display text-4xl font-bold leading-tight text-foreground md:text-6xl">
+
+          <h1 className="mt-2 md:mt-5 font-display text-3xl font-bold leading-tight text-foreground md:text-6xl">
             Everything you need for <span className="text-gradient">FYUGP exam preparation</span> in one place.
           </h1>
-          <p className="mt-5 max-w-xl text-base text-muted-foreground md:text-lg">
+          <p className="mt-5 max-w-xl text-[14px] text-muted-foreground md:text-lg">
             Handwritten notes, PYQs, predicted model papers, micro pocket notes,
             module-wise notes, question banks &amp; important questions — organized
             by course, semester and subject. Prepare smarter, not harder.
@@ -138,25 +147,27 @@ function Hero() {
             </Button>
           </div>
 
-          <div className="mt-5 flex flex-col gap-2 text-xs text-muted-foreground md:mt-8 md:flex-row md:flex-wrap md:items-center md:gap-5 md:text-sm">
-
-            <span className="inline-flex items-center gap-2">
-              <ShieldCheck className="h-4 w-4 text-primary" />
-              Secure Razorpay payment
-            </span>
+          <div className="mt-5 grid grid-cols-2 gap-y-3 text-xs text-muted-foreground md:mt-8 md:flex md:flex-wrap md:items-center md:gap-5 md:text-sm">
 
             <span className="inline-flex items-center gap-2">
               <Download className="h-4 w-4 text-primary" />
               Instant PDF access
             </span>
 
-            <span className="inline-flex items-center gap-2">
+            <span className="inline-flex items-center justify-end gap-2">
               <Unlock className="h-4 w-4 text-success" />
               Free study material
             </span>
 
+            <span className="col-span-2 flex justify-center items-center gap-2 md:col-auto md:justify-start">
+              <ShieldCheck className="h-4 w-4 text-primary" />
+              Secure Razorpay payment
+            </span>
+
           </div>
+
         </div>
+
         <div className="relative">
           <div className="absolute inset-0 -z-10 rounded-3xl bg-gradient-primary opacity-20 blur-2xl" />
           <div className="overflow-hidden rounded-3xl border border-border bg-card shadow-card">
@@ -294,7 +305,8 @@ function Overview() {
             ))}
           </ul>
         </div>
-        <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
+
+        {/* <div className="grid grid-cols-1 gap-4 md:grid-cols-2">
           {[
             { icon: Brain, label: "Smart Analysis" },
             { icon: BookOpen, label: "Syllabus First" },
@@ -314,7 +326,8 @@ function Overview() {
               </p>
             </div>
           ))}
-        </div>
+        </div> */}
+
       </div>
     </section>
   );
@@ -344,9 +357,16 @@ function Features() {
   );
 }
 
-function MatchProof() {
+function MatchProof({
+  showMobile,
+  onToggleMobile,
+}: {
+  showMobile: boolean;
+  onToggleMobile: () => void;
+}) {
   const totalMatched = MATCH_PROOFS.reduce((s, p) => s + p.matchedQuestions, 0);
   const totalQuestions = MATCH_PROOFS.reduce((s, p) => s + p.totalQuestions, 0);
+
   return (
     <section className="mx-auto max-w-7xl px-4 py-5 md:px-6">
       <div className="overflow-hidden rounded-3xl border border-border bg-gradient-hero p-5 shadow-card md:p-14">
@@ -354,45 +374,145 @@ function MatchProof() {
           <span className="inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
             <TrendingUp className="h-3.5 w-3.5" /> Verified Match Reports
           </span>
-          <h2 className="mt-4 font-display text-left md:text-center text-2xl font-bold md:text-4xl">
-            Last semester, <span className="text-gradient">{totalMatched} of {totalQuestions} predicted questions</span> appeared in the actual exam.
+
+          <h2 className="mt-4 text-left font-display text-2xl font-bold md:text-center md:text-4xl">
+            Last semester,{" "}
+            <span className="text-gradient">
+              {totalMatched} of {totalQuestions} predicted questions
+            </span>{" "}
+            appeared in the actual exam.
           </h2>
-          <p className="mt-2 text-sm text-left md:text-center text-muted-foreground md:mt-3 md:text-base">
-            Real comparisons between our predicted model papers and the official Calicut University question papers — not abstract percentages.
+
+          <p className="mt-2 text-left text-sm text-muted-foreground md:mt-3 md:text-center md:text-base">
+            Real comparisons between our predicted model papers and the official
+            Calicut University question papers — not abstract percentages.
           </p>
         </div>
 
-        <div className="mt-5 md:mt-10 grid gap-2.5 md:gap-5 md:grid-cols-3">
-          {MATCH_PROOFS.map((p) => {
-            const pct = Math.round((p.matchedQuestions / p.totalQuestions) * 100);
-            return (
-              <div key={`${p.course}-${p.semester}-${p.subject}`} className="rounded-2xl border border-border bg-card p-6 shadow-soft">
-                <div className="flex items-center justify-between">
-                  <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-semibold text-primary">
-                    {p.course} · Sem {p.semester}
-                  </span>
-                  <span className="inline-flex items-center gap-1 rounded-full bg-success/10 px-2.5 py-0.5 text-[11px] font-semibold text-success">
-                    <CheckCircle2 className="h-3 w-3" /> {pct}% matched
-                  </span>
-                </div>
-                <h3 className="mt-4 font-semibold leading-snug">{p.subject}</h3>
-                <p className="mt-3 font-display text-3xl font-bold text-gradient">
-                  {p.matchedQuestions}<span className="text-xl text-muted-foreground">/{p.totalQuestions}</span>
-                </p>
-                <p className="text-xs uppercase tracking-wider text-muted-foreground">questions matched</p>
-                {p.highlight && (
-                  <p className="mt-4 rounded-lg border border-border bg-secondary/50 p-3 text-xs text-muted-foreground">
-                    <span className="font-semibold text-foreground">Highlight:</span> {p.highlight}
+        <div className="mt-5 md:mt-10">
+          <div className="md:hidden">
+            {!showMobile ? (
+              <Button
+                variant="outline"
+                onClick={onToggleMobile}
+                className="w-full h-auto py-4 px-4 rounded-xl flex items-center justify-between"
+              >
+                <div className="text-left">
+                  <p className="font-medium text-sm">
+                    Previous Predicted Paper Accuracy
                   </p>
-                )}
+
+
+                </div>
+
+                <ChevronDown
+                  className={`h-5 w-5 transition-transform duration-300 ${showMobile ? "rotate-180" : ""
+                    }`}
+                />
+              </Button>
+            ) : (
+              <div className="space-y-4">
+                <Button variant="outline" className="w-full" onClick={onToggleMobile}>
+                  Hide accuracy reports
+                </Button>
+
+                <div className="grid gap-2.5">
+                  {MATCH_PROOFS.map((p) => {
+                    const pct = Math.round((p.matchedQuestions / p.totalQuestions) * 100);
+
+                    return (
+                      <div
+                        key={`${p.course}-${p.semester}-${p.subject}`}
+                        className="rounded-2xl border border-border bg-card p-4 shadow-soft"
+                      >
+                        <div className="flex items-center justify-between">
+                          <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-semibold text-primary">
+                            {p.course} · Sem {p.semester}
+                          </span>
+                          <span className="inline-flex items-center gap-1 rounded-full bg-success/10 px-2.5 py-0.5 text-[11px] font-semibold text-success">
+                            <CheckCircle2 className="h-3 w-3" /> {pct}% matched
+                          </span>
+                        </div>
+
+                        <h3 className="mt-4 font-semibold leading-snug">{p.subject}</h3>
+
+                        <p className="mt-3 font-display text-3xl font-bold text-gradient">
+                          {p.matchedQuestions}
+                          <span className="text-xl text-muted-foreground">
+                            /{p.totalQuestions}
+                          </span>
+                        </p>
+
+                        <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                          questions matched
+                        </p>
+
+                        {p.highlight ? (
+                          <p className="mt-4 rounded-lg border border-border bg-secondary/50 p-3 text-xs text-muted-foreground">
+                            <span className="font-semibold text-foreground">
+                              Highlight:
+                            </span>{" "}
+                            {p.highlight}
+                          </p>
+                        ) : null}
+                      </div>
+                    );
+                  })}
+                </div>
+
+                <p className="mx-auto mt-8 max-w-2xl rounded-xl border border-border bg-background/70 p-4 text-center text-xs text-muted-foreground">
+                  <strong className="text-foreground">Honest note:</strong> Match counts
+                  are based on side-by-side comparison after each exam. Predictions are
+                  syllabus &amp; trend driven — not leaked papers, and never a guarantee
+                  of exact questions.
+                </p>
               </div>
-            );
-          })}
+            )}
+          </div>
+
+          <div className="hidden gap-5 md:grid md:grid-cols-3">
+            {MATCH_PROOFS.map((p) => {
+              const pct = Math.round((p.matchedQuestions / p.totalQuestions) * 100);
+
+              return (
+                <div
+                  key={`${p.course}-${p.semester}-${p.subject}`}
+                  className="rounded-2xl border border-border bg-card p-6 shadow-soft"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="rounded-full bg-primary/10 px-2.5 py-0.5 text-[11px] font-semibold text-primary">
+                      {p.course} · Sem {p.semester}
+                    </span>
+                    <span className="inline-flex items-center gap-1 rounded-full bg-success/10 px-2.5 py-0.5 text-[11px] font-semibold text-success">
+                      <CheckCircle2 className="h-3 w-3" /> {pct}% matched
+                    </span>
+                  </div>
+
+                  <h3 className="mt-4 font-semibold leading-snug">{p.subject}</h3>
+
+                  <p className="mt-3 font-display text-3xl font-bold text-gradient">
+                    {p.matchedQuestions}
+                    <span className="text-xl text-muted-foreground">
+                      /{p.totalQuestions}
+                    </span>
+                  </p>
+
+                  <p className="text-xs uppercase tracking-wider text-muted-foreground">
+                    questions matched
+                  </p>
+
+                  {p.highlight ? (
+                    <p className="mt-4 rounded-lg border border-border bg-secondary/50 p-3 text-xs text-muted-foreground">
+                      <span className="font-semibold text-foreground">Highlight:</span>{" "}
+                      {p.highlight}
+                    </p>
+                  ) : null}
+                </div>
+              );
+            })}
+          </div>
         </div>
 
-        <p className="mx-auto mt-8 max-w-2xl rounded-xl border border-border bg-background/70 p-4 text-center text-xs text-muted-foreground">
-          <strong className="text-foreground">Honest note:</strong> Match counts are based on side-by-side comparison after each exam. Predictions are syllabus &amp; trend driven — not leaked papers, and never a guarantee of exact questions.
-        </p>
       </div>
     </section>
   );
@@ -416,31 +536,34 @@ function Channels() {
           href={WHATSAPP_CHANNEL}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-4 rounded-2xl border border-border bg-card p-6 shadow-soft transition hover:-translate-y-1 hover:border-success/40 hover:shadow-card"
+          className="group flex items-center gap-3 md:gap-4 rounded-2xl border border-border bg-card p-4 md:p-6 shadow-soft transition hover:-translate-y-1 hover:border-success/40 hover:shadow-card"
         >
-          <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-success/15 text-success">
-            <MessageCircle className="h-6 w-6" />
+          <div className="grid h-10 w-10 md:h-12 md:w-12 shrink-0 place-items-center rounded-xl bg-success/15 text-success">
+            <MessageCircle className="h-5 w-5 md:h-6 md:w-6" />
           </div>
+
           <div className="flex-1">
-            <p className="font-semibold">WhatsApp Group</p>
-            <p className="text-xs text-muted-foreground"></p>
+            <p className="text-sm md:text-base font-semibold">WhatsApp Group</p>
           </div>
-          <ArrowRight className="h-5 w-5 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-foreground" />
+
+          <ArrowRight className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-foreground" />
         </a>
+
         <a
           href={TELEGRAM_CHANNEL}
           target="_blank"
           rel="noopener noreferrer"
-          className="group flex items-center gap-4 rounded-2xl border border-border bg-card p-6 shadow-soft transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-card"
+          className="group flex items-center gap-3 md:gap-4 rounded-2xl border border-border bg-card p-4 md:p-6 shadow-soft transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-card"
         >
-          <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
-            <Send className="h-6 w-6" />
+          <div className="grid h-10 w-10 md:h-12 md:w-12 shrink-0 place-items-center rounded-xl bg-primary/10 text-primary">
+            <Send className="h-5 w-5 md:h-6 md:w-6" />
           </div>
+
           <div className="flex-1">
-            <p className="font-semibold">Telegram Channel</p>
-            <p className="text-xs text-muted-foreground"></p>
+            <p className="text-sm md:text-base font-semibold">Telegram Channel</p>
           </div>
-          <ArrowRight className="h-5 w-5 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-foreground" />
+
+          <ArrowRight className="h-4 w-4 md:h-5 md:w-5 text-muted-foreground transition group-hover:translate-x-1 group-hover:text-foreground" />
         </a>
       </div>
     </section>
@@ -454,18 +577,23 @@ function Courses() {
         <h2 className="font-display text-3xl font-bold md:text-4xl">Supported courses</h2>
         <p className="mt-3 mx-8 text-sm md:text-base text-muted-foreground">Calicut University degree programs we currently cover.</p>
       </div>
-      <div className="mt-7 md:mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
+
+      <div className="mt-7 md:mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
         {courses.map((c) => (
-          <div key={c} className="group rounded-2xl border border-border bg-card p-6 text-center shadow-soft transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-card">
-            <div className="mx-auto grid h-12 w-12 place-items-center rounded-xl bg-primary/10 text-primary group-hover:bg-gradient-primary group-hover:text-primary-foreground">
-              <GraduationCap className="h-6 w-6" />
+          <Link key={c} href="/select">
+            <div className="group rounded-xl md:rounded-2xl border border-border bg-card p-4 md:p-6 text-center shadow-soft transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-card">
+              <div className="mx-auto grid h-10 w-10 md:h-12 md:w-12 place-items-center rounded-lg md:rounded-xl bg-primary/10 text-primary group-hover:bg-gradient-primary group-hover:text-primary-foreground">
+                <GraduationCap className="h-5 w-5 md:h-6 md:w-6" />
+              </div>
+
+              <p className="mt-3 md:mt-4 text-xs md:text-base font-semibold">
+                {c}
+              </p>
             </div>
-            <p className="mt-4 text-sm font-semibold md:text-base">
-              {c}
-            </p>
-          </div>
+          </Link>
         ))}
       </div>
+
     </section>
   );
 }
@@ -620,7 +748,7 @@ function FAQ() {
           Get instant access to high-quality study resources designed to help you prepare faster and better.
         </p>
         <Button asChild size="lg" className="mt-6 bg-gradient-primary shadow-glow">
-          <Link to="/select">Buy Now <ArrowRight className="ml-1 h-4 w-4" /></Link>
+          <Link to="/select">Download Now <ArrowRight className="ml-1 h-4 w-4" /></Link>
         </Button>
         <div className="mt-4 text-xs text-muted-foreground">
           Read our <Link to="/privacy" className="underline hover:text-foreground">Privacy Policy</Link>.

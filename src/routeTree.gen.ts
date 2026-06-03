@@ -15,14 +15,17 @@ import { Route as SelectRouteImport } from './routes/select'
 import { Route as ResourcesRouteImport } from './routes/resources'
 import { Route as PurchaseRouteImport } from './routes/purchase'
 import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as ContactRouteImport } from './routes/contact'
 import { Route as AdminDashboardRouteImport } from './routes/admin-dashboard'
 import { Route as AdminRouteImport } from './routes/admin'
+import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as PreviewSlugRouteImport } from './routes/preview/$slug'
 import { Route as ApiVerifyPaymentRouteImport } from './routes/api/verify-payment'
 import { Route as ApiSubjectsRouteImport } from './routes/api/subjects'
 import { Route as ApiResourcesRouteImport } from './routes/api/resources'
 import { Route as ApiCreateOrderRouteImport } from './routes/api/create-order'
+import { Route as ApiContactRouteImport } from './routes/api/contact'
 import { Route as ApiResourceSlugRouteImport } from './routes/api/resource/$slug'
 import { Route as ApiAdminUploadSubjectRouteImport } from './routes/api/admin/upload-subject'
 import { Route as ApiAdminUploadResourceRouteImport } from './routes/api/admin/upload-resource'
@@ -71,6 +74,11 @@ const PrivacyRoute = PrivacyRouteImport.update({
   path: '/privacy',
   getParentRoute: () => rootRouteImport,
 } as any)
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const AdminDashboardRoute = AdminDashboardRouteImport.update({
   id: '/admin-dashboard',
   path: '/admin-dashboard',
@@ -79,6 +87,11 @@ const AdminDashboardRoute = AdminDashboardRouteImport.update({
 const AdminRoute = AdminRouteImport.update({
   id: '/admin',
   path: '/admin',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AboutRoute = AboutRouteImport.update({
+  id: '/about',
+  path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
 const IndexRoute = IndexRouteImport.update({
@@ -109,6 +122,11 @@ const ApiResourcesRoute = ApiResourcesRouteImport.update({
 const ApiCreateOrderRoute = ApiCreateOrderRouteImport.update({
   id: '/api/create-order',
   path: '/api/create-order',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiContactRoute = ApiContactRouteImport.update({
+  id: '/api/contact',
+  path: '/api/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiResourceSlugRoute = ApiResourceSlugRouteImport.update({
@@ -200,14 +218,17 @@ const ApiResourceDownloadSlugRoute = ApiResourceDownloadSlugRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/admin-dashboard': typeof AdminDashboardRoute
+  '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/purchase': typeof PurchaseRoute
   '/resources': typeof ResourcesRoute
   '/select': typeof SelectRoute
   '/sitemapfyugp.xml': typeof SitemapfyugpDotxmlRoute
   '/view': typeof ViewRoute
+  '/api/contact': typeof ApiContactRoute
   '/api/create-order': typeof ApiCreateOrderRoute
   '/api/resources': typeof ApiResourcesRoute
   '/api/subjects': typeof ApiSubjectsRoute
@@ -233,14 +254,17 @@ export interface FileRoutesByFullPath {
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/admin-dashboard': typeof AdminDashboardRoute
+  '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/purchase': typeof PurchaseRoute
   '/resources': typeof ResourcesRoute
   '/select': typeof SelectRoute
   '/sitemapfyugp.xml': typeof SitemapfyugpDotxmlRoute
   '/view': typeof ViewRoute
+  '/api/contact': typeof ApiContactRoute
   '/api/create-order': typeof ApiCreateOrderRoute
   '/api/resources': typeof ApiResourcesRoute
   '/api/subjects': typeof ApiSubjectsRoute
@@ -267,14 +291,17 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/about': typeof AboutRoute
   '/admin': typeof AdminRoute
   '/admin-dashboard': typeof AdminDashboardRoute
+  '/contact': typeof ContactRoute
   '/privacy': typeof PrivacyRoute
   '/purchase': typeof PurchaseRoute
   '/resources': typeof ResourcesRoute
   '/select': typeof SelectRoute
   '/sitemapfyugp.xml': typeof SitemapfyugpDotxmlRoute
   '/view': typeof ViewRoute
+  '/api/contact': typeof ApiContactRoute
   '/api/create-order': typeof ApiCreateOrderRoute
   '/api/resources': typeof ApiResourcesRoute
   '/api/subjects': typeof ApiSubjectsRoute
@@ -302,14 +329,17 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/about'
     | '/admin'
     | '/admin-dashboard'
+    | '/contact'
     | '/privacy'
     | '/purchase'
     | '/resources'
     | '/select'
     | '/sitemapfyugp.xml'
     | '/view'
+    | '/api/contact'
     | '/api/create-order'
     | '/api/resources'
     | '/api/subjects'
@@ -335,14 +365,17 @@ export interface FileRouteTypes {
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/about'
     | '/admin'
     | '/admin-dashboard'
+    | '/contact'
     | '/privacy'
     | '/purchase'
     | '/resources'
     | '/select'
     | '/sitemapfyugp.xml'
     | '/view'
+    | '/api/contact'
     | '/api/create-order'
     | '/api/resources'
     | '/api/subjects'
@@ -368,14 +401,17 @@ export interface FileRouteTypes {
   id:
     | '__root__'
     | '/'
+    | '/about'
     | '/admin'
     | '/admin-dashboard'
+    | '/contact'
     | '/privacy'
     | '/purchase'
     | '/resources'
     | '/select'
     | '/sitemapfyugp.xml'
     | '/view'
+    | '/api/contact'
     | '/api/create-order'
     | '/api/resources'
     | '/api/subjects'
@@ -402,14 +438,17 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AboutRoute: typeof AboutRoute
   AdminRoute: typeof AdminRoute
   AdminDashboardRoute: typeof AdminDashboardRoute
+  ContactRoute: typeof ContactRoute
   PrivacyRoute: typeof PrivacyRoute
   PurchaseRoute: typeof PurchaseRoute
   ResourcesRoute: typeof ResourcesRoute
   SelectRoute: typeof SelectRoute
   SitemapfyugpDotxmlRoute: typeof SitemapfyugpDotxmlRoute
   ViewRoute: typeof ViewRoute
+  ApiContactRoute: typeof ApiContactRoute
   ApiCreateOrderRoute: typeof ApiCreateOrderRoute
   ApiResourcesRoute: typeof ApiResourcesRoute
   ApiSubjectsRoute: typeof ApiSubjectsRoute
@@ -478,6 +517,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof PrivacyRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/admin-dashboard': {
       id: '/admin-dashboard'
       path: '/admin-dashboard'
@@ -490,6 +536,13 @@ declare module '@tanstack/react-router' {
       path: '/admin'
       fullPath: '/admin'
       preLoaderRoute: typeof AdminRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/about': {
+      id: '/about'
+      path: '/about'
+      fullPath: '/about'
+      preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/': {
@@ -532,6 +585,13 @@ declare module '@tanstack/react-router' {
       path: '/api/create-order'
       fullPath: '/api/create-order'
       preLoaderRoute: typeof ApiCreateOrderRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/contact': {
+      id: '/api/contact'
+      path: '/api/contact'
+      fullPath: '/api/contact'
+      preLoaderRoute: typeof ApiContactRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/resource/$slug': {
@@ -658,14 +718,17 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AboutRoute: AboutRoute,
   AdminRoute: AdminRoute,
   AdminDashboardRoute: AdminDashboardRoute,
+  ContactRoute: ContactRoute,
   PrivacyRoute: PrivacyRoute,
   PurchaseRoute: PurchaseRoute,
   ResourcesRoute: ResourcesRoute,
   SelectRoute: SelectRoute,
   SitemapfyugpDotxmlRoute: SitemapfyugpDotxmlRoute,
   ViewRoute: ViewRoute,
+  ApiContactRoute: ApiContactRoute,
   ApiCreateOrderRoute: ApiCreateOrderRoute,
   ApiResourcesRoute: ApiResourcesRoute,
   ApiSubjectsRoute: ApiSubjectsRoute,

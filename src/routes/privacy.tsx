@@ -44,14 +44,16 @@ function PrivacyPage() {
   return (
     <div className="min-h-screen bg-background">
       <Header />
-      <main className="mx-auto max-w-3xl px-4 py-16 md:px-6">
+      <main className="mx-auto max-w-3xl px-4 py-5 md:px-6">
         <Link to="/" className="inline-flex items-center gap-2 text-sm text-muted-foreground hover:text-foreground">
           <ArrowLeft className="h-4 w-4" /> Back to home
         </Link>
-        <div className="mt-6 ml-3 inline-flex items-center gap-2 rounded-full bg-primary/10 px-3 py-1 text-xs font-medium text-primary">
-          <ShieldCheck className="h-3.5 w-3.5" /> Your privacy matters
+        <div className="mt-0 ml-2 sm:ml-3 inline-flex items-center gap-1 sm:gap-2 rounded-full bg-primary/10 px-2 py-0.5 sm:px-3 sm:py-1 text-[10px] sm:text-xs font-medium text-primary">
+          <ShieldCheck className="h-3 w-3 sm:h-3.5 sm:w-3.5" />
+          Your privacy matters
         </div>
-        <h1 className="mt-3 font-display text-4xl font-bold">Privacy Policy</h1>
+
+        <h1 className="mt-10 font-display text-3xl md:text-4xl font-bold">Privacy Policy</h1>
         <p className="mt-3 text-sm text-muted-foreground">
           FYUGP HUB — last updated {new Date().toLocaleDateString()}
         </p>

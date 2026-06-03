@@ -9,6 +9,8 @@ const navLinks = [
   { label: "Join the community", href: "/#Channels" },
   { label: "How it works", href: "/#how" },
   { label: "FAQ", href: "/#faq" },
+  { label: "About", href: "/about" },
+  { label: "Contact", href: "/contact" },
 ];
 
 export function Header() {
