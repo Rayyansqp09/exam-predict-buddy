@@ -74,8 +74,15 @@ export const Route = createFileRoute("/api/contact")({
           });
         } catch (error) {
           console.error("CONTACT API ERROR:", error);
+
           return Response.json(
-            { success: false, message: "Failed to send message" },
+            {
+              success: false,
+              message:
+                error instanceof Error
+                  ? error.message
+                  : JSON.stringify(error),
+            },
             { status: 500 },
           );
         }

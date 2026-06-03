@@ -47,6 +47,7 @@ function ContactPage() {
 
       if (!res.ok || !data.success) {
         throw new Error(data.message || "Failed to send message");
+        console.log("CONTACT RESPONSE:", data);
       }
 
       setStatus("Message sent successfully.");
@@ -54,9 +55,17 @@ function ContactPage() {
       setEmail("");
       setSubject("");
       setMessage("");
-    } catch (err) {
-      setStatus(err instanceof Error ? err.message : "Failed to send message");
-    } finally {
+    }
+    catch (err) {
+      console.error("CONTACT FORM ERROR:", err);
+
+      setStatus(
+        err instanceof Error
+          ? err.message
+          : JSON.stringify(err),
+      );
+    }
+    finally {
       setSending(false);
     }
   };
