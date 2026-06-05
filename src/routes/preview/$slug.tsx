@@ -124,6 +124,14 @@ function PreviewPage() {
 
   const navigate = useNavigate({ from: "/preview/$slug" });
 
+  const handleBack = () => {
+    if (window.history.length > 1) {
+      window.history.back();
+    } else {
+      navigate({ to: "/resources" });
+    }
+  };
+
   const handlePurchase = () => {
     if (!resource) return;
     if (!resource.course) return;
@@ -143,11 +151,13 @@ function PreviewPage() {
       <Header />
 
       <main className="mx-auto max-w-6xl px-3 py-4 sm:px-4 sm:py-6 md:px-6 md:py-12">
-        <Button asChild variant="outline" className="mb-4 w-full sm:mb-6 sm:w-auto">
-          <Link to="/resources">
-            <ArrowLeft className="h-4 w-4" />
-            Back to resources
-          </Link>
+        <Button
+          variant="outline"
+          className="mb-4 w-full sm:mb-6 sm:w-auto"
+          onClick={handleBack}
+        >
+          <ArrowLeft className="h-4 w-4" />
+          Back
         </Button>
 
         {loading ? (

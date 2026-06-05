@@ -47,7 +47,7 @@ function ContactPage() {
 
       if (!res.ok || !data.success) {
         throw new Error(data.message || "Failed to send message");
-        console.log("CONTACT RESPONSE:", data);
+        // console.log("CONTACT RESPONSE:", data);
       }
 
       setStatus("Message sent successfully.");
