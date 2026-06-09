@@ -28,7 +28,7 @@ type UploadResponse =
     | { success: true; message: string; resourceSlug: string; pdfUrl: string }
     | { success: false; message: string };
 
-export const Route = createFileRoute("/admin")({
+export const Route = createFileRoute("/admin/")({
     component: AdminPage,
 });
 
@@ -426,7 +426,7 @@ function AdminPage() {
 
     return (
         <div className="min-h-screen bg-background">
-            <Header />
+            <Header admin />
 
             <main className="mx-auto max-w-5xl px-4 py-10 md:px-6 md:py-16 space-y-8">
                 {checking ? (

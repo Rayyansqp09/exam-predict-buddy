@@ -1,5 +1,6 @@
 // src/routes/sitemap[.]xml.ts
 import { createFileRoute } from "@tanstack/react-router";
+import { supabaseAdmin } from "@/lib/supabase.server";
 
 type SitemapEntry = {
   loc: string;
@@ -15,6 +16,13 @@ const STATIC_PATHS = [
   { path: "/resources", changefreq: "daily", priority: "0.8" },
   { path: "/select", changefreq: "weekly", priority: "0.7" },
   { path: "/view", changefreq: "weekly", priority: "0.7" },
+  { path: "/about", changefreq: "monthly", priority: "0.6" },
+  { path: "/contact", changefreq: "monthly", priority: "0.5" },
+  {
+    path: "/articles",
+    changefreq: "daily",
+    priority: "0.9",
+  },
 ] as const;
 
 function escapeXml(value: string) {
@@ -47,19 +55,36 @@ function buildSitemapXml(entries: SitemapEntry[]) {
 
 // Replace this with your real DB/Supabase query.
 // Return only PUBLIC, indexable pages here.
-async function getDynamicEntries(origin: string): Promise<SitemapEntry[]> {
-  // Example shape:
-  // const rows = await db.select(...)
-  // return rows.map((row) => ({ loc: `${origin}/your-public-route/${row.slug}`, lastmod: row.updatedAt }))
+async function getDynamicEntries(
+  origin: string,
+): Promise<SitemapEntry[]> {
+  const entries: SitemapEntry[] = [];
 
-  const rows: Array<{ slug: string; updatedAt?: string }> = [];
+  // Articles
+  const { data: articles } =
+    await supabaseAdmin
+      .from("articles")
+      .select(
+        "slug, updated_at, published",
+      )
+      .eq("published", true);
 
-  return rows.map((row) => ({
-    loc: `${origin}/view/${encodeURIComponent(row.slug)}`, // change this to your real public URL pattern
-    lastmod: row.updatedAt ? new Date(row.updatedAt).toISOString() : undefined,
-    changefreq: "weekly",
-    priority: "0.8",
-  }));
+  if (articles) {
+    entries.push(
+      ...articles.map((article) => ({
+        loc: `${origin}/articles/${article.slug}`,
+        lastmod: article.updated_at
+          ? new Date(
+            article.updated_at,
+          ).toISOString()
+          : undefined,
+        changefreq: "weekly" as const,
+        priority: "0.8",
+      })),
+    );
+  }
+
+  return entries;
 }
 
 export const Route = createFileRoute("/sitemapfyugp.xml")({

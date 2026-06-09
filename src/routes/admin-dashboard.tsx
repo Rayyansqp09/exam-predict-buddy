@@ -156,7 +156,7 @@ function AdminDashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <Header />
+      <Header admin />
 
       <main className="mx-auto max-w-7xl px-4 py-8 md:px-6 md:py-12">
         <div className="mb-6 flex items-center justify-between gap-4">
