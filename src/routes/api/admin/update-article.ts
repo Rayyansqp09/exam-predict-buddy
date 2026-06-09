@@ -27,6 +27,7 @@ export const Route = createFileRoute("/api/admin/update-article")({
             category,
             author,
             published,
+            tags,
           } = await request.json();
 
           if (!id) {
@@ -50,6 +51,7 @@ export const Route = createFileRoute("/api/admin/update-article")({
               category,
               author,
               published,
+              tags,
               updated_at: new Date().toISOString(),
             })
             .eq("id", id);

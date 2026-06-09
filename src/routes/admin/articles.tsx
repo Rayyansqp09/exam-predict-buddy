@@ -30,6 +30,7 @@ type ArticleItem = {
     excerpt: string | null;
     content: string;
     cover_image: string | null;
+    tags?: string[];
 };
 
 function ArticlesAdminPage() {
@@ -64,6 +65,8 @@ function ArticlesAdminPage() {
     const [editPublished, setEditPublished] = useState(true);
 
     const [editLoading, setEditLoading] = useState(false);
+    const [tagsInput, setTagsInput] = useState("");
+    const [editTagsInput, setEditTagsInput] = useState("");
 
     const handleCreateArticle = async (
         e: React.FormEvent,
@@ -90,6 +93,10 @@ function ArticlesAdminPage() {
                         category,
                         author,
                         published,
+                        tags: tagsInput
+                            .split(",")
+                            .map((tag) => tag.trim())
+                            .filter(Boolean),
                     }),
                 },
             );
@@ -110,6 +117,7 @@ function ArticlesAdminPage() {
             setCoverImage("");
             setExcerpt("");
             setContent("");
+            setTagsInput("");
 
             await loadArticles();
         } catch (error) {
@@ -151,6 +159,10 @@ function ArticlesAdminPage() {
                         category: editCategory,
                         author: editAuthor,
                         published: editPublished,
+                        tags: editTagsInput
+                            .split(",")
+                            .map((tag) => tag.trim())
+                            .filter(Boolean),
                     }),
                 },
             );
@@ -372,6 +384,14 @@ function ArticlesAdminPage() {
                                         />
                                     </div>
 
+                                    <Input
+                                        placeholder="Admission, UG, 2026"
+                                        value={tagsInput}
+                                        onChange={(e) =>
+                                            setTagsInput(e.target.value)
+                                        }
+                                    />
+
                                     <label className="flex items-center gap-2">
                                         <input
                                             type="checkbox"
@@ -478,6 +498,7 @@ function ArticlesAdminPage() {
                                                                 setEditExcerpt(article.excerpt ?? "");
                                                                 setEditContent(article.content ?? "");
                                                                 setEditPublished(article.published);
+                                                                setEditTagsInput((article.tags || []).join(", "));
                                                             }}
                                                         >
                                                             <Pencil className="h-4 w-4" />
@@ -590,6 +611,18 @@ function ArticlesAdminPage() {
                                     onChange={(e) =>
                                         setEditContent(e.target.value)
                                     }
+                                />
+                            </div>
+
+                            <div className="space-y-2">
+                                <Label>Tags</Label>
+
+                                <Input
+                                    value={editTagsInput}
+                                    onChange={(e) =>
+                                        setEditTagsInput(e.target.value)
+                                    }
+                                    placeholder="Admission, UG, 2026"
                                 />
                             </div>
 

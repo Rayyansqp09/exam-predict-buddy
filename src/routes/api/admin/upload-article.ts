@@ -28,6 +28,7 @@ export const Route = createFileRoute("/api/admin/upload-article")({
             category,
             author,
             published,
+            tags,
           } = body;
 
           if (!title?.trim()) {
@@ -71,6 +72,7 @@ export const Route = createFileRoute("/api/admin/upload-article")({
               category: category?.trim() || null,
               author: author?.trim() || "FYUGP Hub",
               published: Boolean(published),
+              tags: tags ?? [],
             })
             .select()
             .single();

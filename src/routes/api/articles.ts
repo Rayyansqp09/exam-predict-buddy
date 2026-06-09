@@ -9,7 +9,7 @@ export const Route = createFileRoute("/api/articles")({
           const { data, error } = await supabaseAdmin
             .from("articles")
             .select(
-              "id,title,slug,excerpt,cover_image,category,author,created_at",
+              "id,title,slug,excerpt,cover_image,category,author,created_at,tags",
             )
             .eq("published", true)
             .order("created_at", { ascending: false });

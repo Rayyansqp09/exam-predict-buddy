@@ -251,12 +251,10 @@ function ResourceHub() {
               "PYQs",
               "Predicted Model Question Papers",
               "Micro Notes",
-              "Module-wise Notes",
               "Question Banks",
-              "Important Questions",
               "Revision Materials",
               "Exam-focused Notes",
-              "Semester-wise Resources",
+              "Updates & Articles",
             ].map((item) => (
               <div
                 key={item}
@@ -578,20 +576,22 @@ function Courses() {
         <p className="mt-3 mx-8 text-sm md:text-base text-muted-foreground">Calicut University degree programs we currently cover.</p>
       </div>
 
-      <div className="mt-7 md:mt-10 grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
-        {courses.map((c) => (
-          <Link key={c} href="/select">
-            <div className="group rounded-xl md:rounded-2xl border border-border bg-card p-4 md:p-6 text-center shadow-soft transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-card">
-              <div className="mx-auto grid h-10 w-10 md:h-12 md:w-12 place-items-center rounded-lg md:rounded-xl bg-primary/10 text-primary group-hover:bg-gradient-primary group-hover:text-primary-foreground">
-                <GraduationCap className="h-5 w-5 md:h-6 md:w-6" />
-              </div>
+      <div className="mt-7 md:mt-10 max-h-[340px] overflow-y-auto md:max-h-none md:overflow-visible">
+        <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 lg:grid-cols-4">
+          {courses.map((c) => (
+            <Link key={c} href="/select">
+              <div className="group rounded-xl md:rounded-2xl border border-border bg-card p-4 md:p-6 text-center shadow-soft transition hover:-translate-y-1 hover:border-primary/40 hover:shadow-card">
+                <div className="mx-auto grid h-10 w-10 md:h-12 md:w-12 place-items-center rounded-lg md:rounded-xl bg-primary/10 text-primary group-hover:bg-gradient-primary group-hover:text-primary-foreground">
+                  <GraduationCap className="h-5 w-5 md:h-6 md:w-6" />
+                </div>
 
-              <p className="mt-3 md:mt-4 text-xs md:text-base font-semibold">
-                {c}
-              </p>
-            </div>
-          </Link>
-        ))}
+                <p className="mt-3 md:mt-4 text-xs md:text-base font-semibold">
+                  {c}
+                </p>
+              </div>
+            </Link>
+          ))}
+        </div>
       </div>
 
     </section>

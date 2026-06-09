@@ -7,6 +7,7 @@ import { Button } from "@/components/ui/button";
 const publicLinks = [
   { label: "Features", href: "/#features" },
   { label: "Courses", href: "/#courses" },
+  { label: "Articles", href: "/articles" },
   { label: "Join the community", href: "/#Channels" },
   { label: "How it works", href: "/#how" },
   { label: "FAQ", href: "/#faq" },
