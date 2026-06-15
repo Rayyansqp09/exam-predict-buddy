@@ -1,4 +1,5 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
+import ReactMarkdown from "react-markdown";
 import { useEffect, useMemo, useState } from "react";
 import {
   ArrowLeft,
@@ -278,7 +279,9 @@ function ArticlePage() {
 
               <div className="prose prose-neutral mt-6 max-w-none text-[16px] text-gray-700 md:text-[16px] leading-6 md:leading-7 prose-p:my-3 prose-headings:tracking-tight prose-img:rounded-2xl dark:prose-invert">
                 <div className="whitespace-pre-wrap">
-                  {article.content}
+                  <ReactMarkdown>
+                    {article.content}
+                  </ReactMarkdown>
                 </div>
               </div>
 
