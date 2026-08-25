@@ -25,8 +25,18 @@ type LoginResponse =
     | { success: false; message: string };
 
 type UploadResponse =
-    | { success: true; message: string; resourceSlug: string; pdfUrl: string }
-    | { success: false; message: string };
+    | {
+        success: true;
+        message: string;
+        resourceSlug: string;
+        pdfUrl: string;
+    }
+    | {
+        success: false;
+        message: string;
+        code?: string;
+        maxSizeMB?: number;
+    };
 
 export const Route = createFileRoute("/admin/")({
     component: AdminPage,
@@ -52,6 +62,15 @@ function AdminPage() {
     const [pdfFile, setPdfFile] = useState<File | null>(null);
     const [uploadLoading, setUploadLoading] = useState(false);
     const [uploadMessage, setUploadMessage] = useState("");
+
+    const [uploadPopupOpen, setUploadPopupOpen] = useState(false);
+
+    const [uploadPopup, setUploadPopup] = useState({
+        title: "",
+        description: "",
+        solution: "",
+    });
+
     const [subjectId, setSubjectId] = useState("");
     const [editSubjectId, setEditSubjectId] = useState("");
 
@@ -366,17 +385,78 @@ function AdminPage() {
         setAuthenticated(false);
     };
 
+    const showUploadError = (
+        code?: string,
+        message?: string,
+        maxSizeMB?: number,
+    ) => {
+        let title = "Upload Failed";
+        let description = message || "Something went wrong while uploading the file.";
+        let solution = "Please try again.";
+
+        switch (code) {
+            case "NO_FILE":
+                title = "No File Selected";
+                description = "You have not selected a PDF file.";
+                solution = "Please choose a PDF file and try again.";
+                break;
+
+            case "FILE_TOO_LARGE":
+                title = "File Too Large";
+                description = "The selected PDF is larger than the allowed upload limit.";
+                solution = `Please select a file smaller than ${maxSizeMB ?? 20} MB.`;
+                break;
+
+            case "INVALID_FILE_TYPE":
+                title = "Unsupported File";
+                description = "The selected file is not a valid PDF.";
+                solution = "Please select a PDF file and try again.";
+                break;
+
+            case "STORAGE_ERROR":
+                title = "Upload Temporarily Unavailable";
+                description = "The file could not be saved to the server.";
+                solution = "Please wait a moment and try uploading again.";
+                break;
+
+            case "UPLOAD_ERROR":
+                title = "Upload Failed";
+                description = "Something went wrong while processing your upload.";
+                solution = "Please check your internet connection and try again.";
+                break;
+
+            default:
+                title = "Upload Failed";
+                description = message || "Something went wrong.";
+                solution = "Please check your internet connection and try again.";
+        }
+
+        setUploadPopup({
+            title,
+            description,
+            solution,
+        });
+
+        setUploadPopupOpen(true);
+    };
+
     const handleResourceUpload = async (e: React.FormEvent) => {
         e.preventDefault();
+
         setUploadMessage("");
         setUploadLoading(true);
 
         try {
             if (!pdfFile) {
-                throw new Error("Select a PDF file");
+                showUploadError(
+                    "NO_FILE",
+                    "You have not selected a file.",
+                );
+                return;
             }
 
             const formData = new FormData();
+
             formData.append("resourceType", resourceType);
             formData.append("accessType", accessType);
             formData.append("course", course);
@@ -390,21 +470,61 @@ function AdminPage() {
 
             if (accessType === "premium") {
                 formData.append("price", price);
-                formData.append("discountPrice", discountPrice);
+                formData.append(
+                    "discountPrice",
+                    discountPrice,
+                );
             }
 
-            const res = await fetch("/api/admin/upload-resource", {
-                method: "POST",
-                body: formData,
-            });
+            let res: Response;
 
-            const data = (await res.json()) as UploadResponse;
+            try {
+                res = await fetch(
+                    "/api/admin/upload-resource",
+                    {
+                        method: "POST",
+                        body: formData,
+                    },
+                );
+            } catch {
+                showUploadError(
+                    "NETWORK_ERROR",
+                    "Unable to connect to the server.",
+                );
+                return;
+            }
+
+            let data: UploadResponse;
+
+            try {
+                data = (await res.json()) as UploadResponse;
+            } catch {
+                showUploadError(
+                    "UPLOAD_ERROR",
+                    "The server returned an invalid response.",
+                );
+                return;
+            }
 
             if (!res.ok || !data.success) {
-                throw new Error(data.success ? "Upload failed" : data.message);
+                if (!data.success) {
+                    showUploadError(
+                        data.code,
+                        data.message,
+                        data.maxSizeMB,
+                    );
+                } else {
+                    showUploadError(
+                        "UPLOAD_ERROR",
+                        "Upload failed.",
+                    );
+                }
+
+                return;
             }
 
-            setUploadMessage(`Uploaded successfully`);
+            setUploadMessage("Resource uploaded successfully.");
+
             setResourceType("MODEL_PAPER");
             setAccessType("premium");
             setCourse("");
@@ -417,13 +537,13 @@ function AdminPage() {
             setDiscountPrice("");
             setPdfFile(null);
             setPreviewPageCount("2");
-        } catch (error) {
-            setUploadMessage(error instanceof Error ? error.message : "Upload failed");
+
+            await loadResources();
+
         } finally {
             setUploadLoading(false);
         }
     };
-
     return (
         <div className="min-h-screen bg-background">
             <Header admin />
@@ -1180,6 +1300,45 @@ function AdminPage() {
             </main>
 
             <Footer />
+
+            <Dialog
+                open={uploadPopupOpen}
+                onOpenChange={setUploadPopupOpen}
+            >
+                <DialogContent className="sm:max-w-md">
+                    <DialogHeader>
+                        <DialogTitle>
+                            {uploadPopup.title}
+                        </DialogTitle>
+                    </DialogHeader>
+
+                    <div className="space-y-4">
+                        <p className="text-sm text-muted-foreground">
+                            {uploadPopup.description}
+                        </p>
+
+                        <div className="rounded-lg border bg-muted/50 p-4">
+                            <p className="text-sm font-medium">
+                                What you can do
+                            </p>
+
+                            <p className="mt-1 text-sm text-muted-foreground">
+                                {uploadPopup.solution}
+                            </p>
+                        </div>
+
+                        <Button
+                            className="w-full"
+                            onClick={() =>
+                                setUploadPopupOpen(false)
+                            }
+                        >
+                            Got it
+                        </Button>
+                    </div>
+                </DialogContent>
+            </Dialog>
+
         </div>
     );
 }

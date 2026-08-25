@@ -1,6 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/lib/supabase.server";
 import { isAdminRequest } from "@/lib/admin-auth.server";
+const MAX_FILE_SIZE = 10 * 1024 * 1024; // 10 MB
 
 function slugify(value: string) {
   return value
@@ -110,14 +111,34 @@ export const Route = createFileRoute("/api/admin/upload-resource")({
 
           if (!(pdf instanceof File)) {
             return Response.json(
-              { success: false, message: "PDF file is required" },
+              {
+                success: false,
+                code: "NO_FILE",
+                message: "Please select a PDF file",
+              },
               { status: 400 },
+            );
+          }
+
+          if (pdf.size > MAX_FILE_SIZE) {
+            return Response.json(
+              {
+                success: false,
+                code: "FILE_TOO_LARGE",
+                message: "File is too large",
+                maxSizeMB: 10,
+              },
+              { status: 413 },
             );
           }
 
           if (pdf.type !== "application/pdf") {
             return Response.json(
-              { success: false, message: "Only PDF files are allowed" },
+              {
+                success: false,
+                code: "INVALID_FILE_TYPE",
+                message: "Only PDF files are allowed",
+              },
               { status: 400 },
             );
           }
@@ -174,8 +195,17 @@ export const Route = createFileRoute("/api/admin/upload-resource")({
             });
 
           if (uploadResult.error) {
+            console.error(
+              "Resource storage upload error:",
+              uploadResult.error,
+            );
+
             return Response.json(
-              { success: false, message: uploadResult.error.message },
+              {
+                success: false,
+                code: "STORAGE_ERROR",
+                message: "Unable to upload the file",
+              },
               { status: 500 },
             );
           }
@@ -220,11 +250,13 @@ export const Route = createFileRoute("/api/admin/upload-resource")({
             title,
           });
         } catch (error) {
-          console.error(error);
+          console.error("Resource upload error:", error);
+
           return Response.json(
             {
               success: false,
-              message: error instanceof Error ? error.message : "Upload failed",
+              code: "UPLOAD_ERROR",
+              message: "Upload failed",
             },
             { status: 500 },
           );
