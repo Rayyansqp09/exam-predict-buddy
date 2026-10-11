@@ -142,7 +142,7 @@ function Hero() {
 
             <Button asChild size="lg" variant="outline" className="w-full sm:w-auto">
               <Link to="/resources" className="w-full">
-                Latest Uploads <FileText className="ml-2 h-4 w-4" />
+                Explore Resources <FileText className="ml-2 h-4 w-4" />
               </Link>
             </Button>
           </div>

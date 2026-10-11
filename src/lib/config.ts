@@ -1,8 +1,58 @@
 // Sample PDF preview link
 export const SAMPLE_PDF_LINK = "#";
 
-// Supported courses and semesters
-export const COURSES = ["B.Com", "BBA", "BA English Language and Literature", "BCA","BA Economics","BSc Botany","BSc Mathematics","BSc Computer Science","BSc Microbiology", "BA History","BSc Physics","BSc Chemistry","BSc Zoology"] as const;
+// Supported UG courses — University of Calicut
+export const COURSES = [
+  "B.Com",
+  "BBA",
+  "BCA",
+  "BA English Language and Literature",
+  "BA Economics",
+  "BSc Botany",
+  "BSc Mathematics",
+  "BSc Computer Science",
+  "BSc Microbiology",
+  "BA History",
+  "BSc Physics",
+  "BSc Chemistry",
+  "BSc Zoology",
+
+  // Additional BA courses
+  "BA Arabic",
+  "BA Sanskrit",
+  "BA Sociology",
+  "BA Political Science",
+  "BA Philosophy",
+  "BA Functional English",
+  "BA Journalism and Mass Communication",
+  "BA Islamic History",
+  "BA Afsal Ul Ulama",
+  "BA Multimedia",
+  "BA Psychology",
+  "BA Geography",
+  "BA Malayalam Language and Literature",
+  "BA Hindi Language and Literature",
+
+  // Additional BSc courses
+  "BSc Statistics",
+  "BSc Psychology",
+  "BSc Biotechnology",
+  "BSc Biochemistry",
+  "BSc Electronics",
+  "BSc Geology",
+  "BSc Food Technology",
+  "BSc Geography",
+  "BSc Computer Science",
+  "BSc Artificial Intelligence",
+  "BSc Information Technology",
+  "BSc Hotel Management and Catering Science",
+  "BSc Costume and Fashion Designing",
+  "BSc Family and Community Science",
+
+  // Additional bachelor's programmes
+  "Bachelor of Social Work",
+] as const;
+
 export type Course = (typeof COURSES)[number];
 
 export const SEMESTERS = [1, 2, 3, 4, 5, 6] as const;
