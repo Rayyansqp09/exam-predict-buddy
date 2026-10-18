@@ -536,7 +536,7 @@ function AdminPage() {
             setPrice("30");
             setDiscountPrice("");
             setPdfFile(null);
-            setPreviewPageCount("2");
+            setPreviewPageCount("5");
 
             await loadResources();
 
@@ -605,7 +605,8 @@ function AdminPage() {
                                             <option value="MODEL_PAPER">Model Question Paper</option>
                                             <option value="PYQ">PYQ</option>
                                             <option value="QUESTION_BANK">Question Bank</option>
-                                            <option value="STUDY_MATERIAL">Study Material</option>
+                                            <option value="DETAILED_NOTES">Detailed Notes</option>
+                                            <option value="SHORT_NOTES">Short Notes</option>
                                             <option value="TEXTBOOK_PDF">Textbook PDF</option>
                                             <option value="HANDWRITTEN_NOTE">Handwritten Notes</option>
                                             <option value="MICRO_NOTE">Micro Notes</option>
@@ -859,6 +860,12 @@ function AdminPage() {
                                         <option value="STUDY_MATERIAL">
                                             Study Material
                                         </option>
+                                        <option value="DETAILED_NOTES">
+                                            Detailed Notes
+                                        </option>
+                                        <option value="SHORT_NOTES">
+                                            Short Notes
+                                        </option>
                                         <option value="TEXTBOOK_PDF">
                                             Textbook PDF
                                         </option>
@@ -935,6 +942,8 @@ function AdminPage() {
                             <option value="PYQ">PYQ</option>
                             <option value="QUESTION_BANK">Question Bank</option>
                             <option value="STUDY_MATERIAL">Study Material</option>
+                            <option value="DETAILED_NOTES">Detailed Notes</option>
+                            <option value="SHORT_NOTES">Short Notes</option>
                             <option value="TEXTBOOK_PDF">Textbook PDF</option>
                             <option value="HANDWRITTEN_NOTE">Handwritten Notes</option>
                             <option value="MICRO_NOTE">Micro Notes</option>
@@ -1150,6 +1159,8 @@ function AdminPage() {
                                     <option value="PYQ">PYQ</option>
                                     <option value="QUESTION_BANK">Question Bank</option>
                                     <option value="STUDY_MATERIAL">Study Material</option>
+                                    <option value="DETAILED_NOTES">Detailed Notes</option>
+                                    <option value="SHORT_NOTES">Short Notes</option>
                                     <option value="TEXTBOOK_PDF">Textbook PDF</option>
                                     <option value="HANDWRITTEN_NOTE">Handwritten Notes</option>
                                     <option value="MICRO_NOTE">Micro Notes</option>

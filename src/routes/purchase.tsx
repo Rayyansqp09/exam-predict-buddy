@@ -247,10 +247,13 @@ function PurchasePage() {
             PYQ: "PYQ",
             QUESTION_BANK: "Question Bank",
             STUDY_MATERIAL: "Study Material",
+            DETAILED_NOTES: "Detailed Notes",
+            SHORT_NOTES: "Short Notes",
             TEXTBOOK_PDF: "Textbook PDF",
             HANDWRITTEN_NOTE: "Handwritten Notes",
             MICRO_NOTE: "Micro Notes",
             IMPORTANT_QUESTION: "Important Questions",
+            UNKNOWN: "Unknown",
         };
 
         return map[type] ?? type;
@@ -482,7 +485,7 @@ function PurchasePage() {
                         <Button
                             variant="outline"
                             size="sm"
-                             className="md:ml-2"
+                            className="md:ml-2"
                             onClick={() => {
                                 setSelectedSubject("");
                                 setSelectedType("");
@@ -541,7 +544,18 @@ function PurchasePage() {
                                 <Button asChild className="w-full bg-gradient-primary shadow-soft">
                                     <Link to="/select">Go back to selection</Link>
                                 </Button>
+
+                                <div className="mt-3 md:mt-3 text-center">
+                                    <a
+                                        href="/select#find"
+                                        className="text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground"
+                                    >
+                                        Can't find the materials you're looking for?
+                                    </a>
+                                </div>
+
                             </CardContent>
+
                         </Card>
                     ) : (
                         <div className="mt-10 grid gap-4 md:grid-cols-2">
@@ -720,6 +734,60 @@ function PurchasePage() {
                 <p className="mt-12 text-center text-xs text-muted-foreground">
                     Secure payments via Razorpay. Resources are organized by course and semester.
                 </p>
+
+                <section
+                    id="find"
+                    className="mt-10 rounded-3xl border border-border bg-card p-5 text-center shadow-soft md:mt-14 md:p-8"
+                >
+                    <h2 className="font-display text-[1.25rem] font-bold md:text-2xl">
+                        Can’t find the material you need?
+                    </h2>
+
+                    <p className="mx-auto mt-3 max-w-2xl text-[13px] leading-5 text-muted-foreground">
+                        If the study material you need is not available yet, please let us know.
+                        Tell us the course, semester, subject name, and the specific study material you need.
+                        We’ll try our best to add it as soon as possible and notify you once it becomes available.
+                    </p>
+
+                    <p className="mt-3 text-[13px] text-muted-foreground">
+                        Reach us at{" "}
+                        <a
+                            href="mailto:support.fyugphub@gmail.com"
+                            className="font-medium underline underline-offset-4 hover:text-foreground"
+                        >
+                            support.fyugphub@gmail.com
+                        </a>{" "}
+                        or through our{" "}
+                        <a
+                            href="https://chat.whatsapp.com/DxIoknRVc7a0cZpVMNI6Gr"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
+                        >
+                            WhatsApp group
+                        </a>{" "}
+                        and{" "}
+                        <a
+                            href="https://t.me/FYUGPhub"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
+                        >
+                            Telegram channel
+                        </a> , or just message{" "}
+                        <a
+                            href="https://t.me/fyugp_hub"
+                            target="_blank"
+                            rel="noreferrer"
+                            className="font-medium text-blue-600 underline underline-offset-4 hover:text-blue-700"
+                        >
+                            @fyugp_hub
+                        </a>{" "}
+                        on Telegram.
+
+                    </p>
+                </section>
+
             </main>
 
             <Footer />

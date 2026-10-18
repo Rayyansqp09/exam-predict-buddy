@@ -9,88 +9,53 @@
 // Additionally, you should also exclude this file from your linter and/or formatter to prevent it from being checked or modified.
 
 import { Route as rootRouteImport } from './routes/__root'
-import { Route as ViewRouteImport } from './routes/view'
-import { Route as SitemapfyugpDotxmlRouteImport } from './routes/sitemapfyugp[.]xml'
-import { Route as SelectRouteImport } from './routes/select'
-import { Route as ResourcesRouteImport } from './routes/resources'
-import { Route as PurchaseRouteImport } from './routes/purchase'
-import { Route as PrivacyRouteImport } from './routes/privacy'
-import { Route as ContactRouteImport } from './routes/contact'
-import { Route as AdminDashboardRouteImport } from './routes/admin-dashboard'
-import { Route as AboutRouteImport } from './routes/about'
 import { Route as IndexRouteImport } from './routes/index'
-import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
+import { Route as AboutRouteImport } from './routes/about'
+import { Route as AdminDashboardRouteImport } from './routes/admin-dashboard'
+import { Route as ContactRouteImport } from './routes/contact'
+import { Route as PrivacyRouteImport } from './routes/privacy'
+import { Route as PurchaseRouteImport } from './routes/purchase'
+import { Route as ResourcesRouteImport } from './routes/resources'
+import { Route as SelectRouteImport } from './routes/select'
+import { Route as SitemapfyugpDotxmlRouteImport } from './routes/sitemapfyugp[.]xml'
+import { Route as ViewRouteImport } from './routes/view'
 import { Route as AdminIndexRouteImport } from './routes/admin/index'
-import { Route as PreviewSlugRouteImport } from './routes/preview/$slug'
-import { Route as ArticlesSlugRouteImport } from './routes/articles/$slug'
-import { Route as ApiVerifyPaymentRouteImport } from './routes/api/verify-payment'
-import { Route as ApiSubjectsRouteImport } from './routes/api/subjects'
-import { Route as ApiResourcesRouteImport } from './routes/api/resources'
-import { Route as ApiCreateOrderRouteImport } from './routes/api/create-order'
-import { Route as ApiContactRouteImport } from './routes/api/contact'
-import { Route as ApiArticlesRouteImport } from './routes/api/articles'
 import { Route as AdminArticlesRouteImport } from './routes/admin/articles'
-import { Route as ApiResourceSlugRouteImport } from './routes/api/resource/$slug'
-import { Route as ApiArticleSlugRouteImport } from './routes/api/article/$slug'
-import { Route as ApiAdminUploadSubjectRouteImport } from './routes/api/admin/upload-subject'
-import { Route as ApiAdminUploadResourceRouteImport } from './routes/api/admin/upload-resource'
-import { Route as ApiAdminUploadArticleRouteImport } from './routes/api/admin/upload-article'
-import { Route as ApiAdminUpdateSubjectRouteImport } from './routes/api/admin/update-subject'
-import { Route as ApiAdminUpdateResourceRouteImport } from './routes/api/admin/update-resource'
-import { Route as ApiAdminUpdateArticleRouteImport } from './routes/api/admin/update-article'
-import { Route as ApiAdminSubjectsRouteImport } from './routes/api/admin/subjects'
-import { Route as ApiAdminResourcesRouteImport } from './routes/api/admin/resources'
-import { Route as ApiAdminMeRouteImport } from './routes/api/admin/me'
-import { Route as ApiAdminLogoutRouteImport } from './routes/api/admin/logout'
-import { Route as ApiAdminLoginRouteImport } from './routes/api/admin/login'
-import { Route as ApiAdminDeleteSubjectRouteImport } from './routes/api/admin/delete-subject'
-import { Route as ApiAdminDeleteResourceRouteImport } from './routes/api/admin/delete-resource'
-import { Route as ApiAdminDeleteArticleRouteImport } from './routes/api/admin/delete-article'
-import { Route as ApiAdminDashboardRouteImport } from './routes/api/admin/dashboard'
-import { Route as ApiAdminBulkResourceUpdateRouteImport } from './routes/api/admin/bulk-resource-update'
-import { Route as ApiAdminBulkPriceUpdateRouteImport } from './routes/api/admin/bulk-price-update'
+import { Route as ApiArticlesRouteImport } from './routes/api/articles'
+import { Route as ApiContactRouteImport } from './routes/api/contact'
+import { Route as ApiCreateOrderRouteImport } from './routes/api/create-order'
+import { Route as ApiResourcesRouteImport } from './routes/api/resources'
+import { Route as ApiSubjectsRouteImport } from './routes/api/subjects'
+import { Route as ApiVerifyPaymentRouteImport } from './routes/api/verify-payment'
+import { Route as ArticlesIndexRouteImport } from './routes/articles/index'
+import { Route as ArticlesSlugRouteImport } from './routes/articles/$slug'
+import { Route as PreviewSlugRouteImport } from './routes/preview/$slug'
 import { Route as ApiAdminArticlesRouteImport } from './routes/api/admin/articles'
-import { Route as ApiResourcePdfSlugRouteImport } from './routes/api/resource/pdf/$slug'
+import { Route as ApiAdminBulkPriceUpdateRouteImport } from './routes/api/admin/bulk-price-update'
+import { Route as ApiAdminBulkResourceUpdateRouteImport } from './routes/api/admin/bulk-resource-update'
+import { Route as ApiAdminDashboardRouteImport } from './routes/api/admin/dashboard'
+import { Route as ApiAdminDeleteArticleRouteImport } from './routes/api/admin/delete-article'
+import { Route as ApiAdminDeleteResourceRouteImport } from './routes/api/admin/delete-resource'
+import { Route as ApiAdminDeleteSubjectRouteImport } from './routes/api/admin/delete-subject'
+import { Route as ApiAdminLoginRouteImport } from './routes/api/admin/login'
+import { Route as ApiAdminLogoutRouteImport } from './routes/api/admin/logout'
+import { Route as ApiAdminMeRouteImport } from './routes/api/admin/me'
+import { Route as ApiAdminResourcesRouteImport } from './routes/api/admin/resources'
+import { Route as ApiAdminSubjectsRouteImport } from './routes/api/admin/subjects'
+import { Route as ApiAdminUpdateArticleRouteImport } from './routes/api/admin/update-article'
+import { Route as ApiAdminUpdateResourceRouteImport } from './routes/api/admin/update-resource'
+import { Route as ApiAdminUpdateSubjectRouteImport } from './routes/api/admin/update-subject'
+import { Route as ApiAdminUploadArticleRouteImport } from './routes/api/admin/upload-article'
+import { Route as ApiAdminUploadResourceRouteImport } from './routes/api/admin/upload-resource'
+import { Route as ApiAdminUploadSubjectRouteImport } from './routes/api/admin/upload-subject'
+import { Route as ApiArticleSlugRouteImport } from './routes/api/article/$slug'
+import { Route as ApiResourceSlugRouteImport } from './routes/api/resource/$slug'
 import { Route as ApiResourceDownloadSlugRouteImport } from './routes/api/resource/download/$slug'
+import { Route as ApiResourcePdfSlugRouteImport } from './routes/api/resource/pdf/$slug'
 
-const ViewRoute = ViewRouteImport.update({
-  id: '/view',
-  path: '/view',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SitemapfyugpDotxmlRoute = SitemapfyugpDotxmlRouteImport.update({
-  id: '/sitemapfyugp.xml',
-  path: '/sitemapfyugp.xml',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const SelectRoute = SelectRouteImport.update({
-  id: '/select',
-  path: '/select',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ResourcesRoute = ResourcesRouteImport.update({
-  id: '/resources',
-  path: '/resources',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PurchaseRoute = PurchaseRouteImport.update({
-  id: '/purchase',
-  path: '/purchase',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const PrivacyRoute = PrivacyRouteImport.update({
-  id: '/privacy',
-  path: '/privacy',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ContactRoute = ContactRouteImport.update({
-  id: '/contact',
-  path: '/contact',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const AdminDashboardRoute = AdminDashboardRouteImport.update({
-  id: '/admin-dashboard',
-  path: '/admin-dashboard',
+const IndexRoute = IndexRouteImport.update({
+  id: '/',
+  path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AboutRoute = AboutRouteImport.update({
@@ -98,14 +63,44 @@ const AboutRoute = AboutRouteImport.update({
   path: '/about',
   getParentRoute: () => rootRouteImport,
 } as any)
-const IndexRoute = IndexRouteImport.update({
-  id: '/',
-  path: '/',
+const AdminDashboardRoute = AdminDashboardRouteImport.update({
+  id: '/admin-dashboard',
+  path: '/admin-dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
-  id: '/articles/',
-  path: '/articles/',
+const ContactRoute = ContactRouteImport.update({
+  id: '/contact',
+  path: '/contact',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PrivacyRoute = PrivacyRouteImport.update({
+  id: '/privacy',
+  path: '/privacy',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const PurchaseRoute = PurchaseRouteImport.update({
+  id: '/purchase',
+  path: '/purchase',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ResourcesRoute = ResourcesRouteImport.update({
+  id: '/resources',
+  path: '/resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SelectRoute = SelectRouteImport.update({
+  id: '/select',
+  path: '/select',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const SitemapfyugpDotxmlRoute = SitemapfyugpDotxmlRouteImport.update({
+  id: '/sitemapfyugp.xml',
+  path: '/sitemapfyugp.xml',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ViewRoute = ViewRouteImport.update({
+  id: '/view',
+  path: '/view',
   getParentRoute: () => rootRouteImport,
 } as any)
 const AdminIndexRoute = AdminIndexRouteImport.update({
@@ -113,39 +108,9 @@ const AdminIndexRoute = AdminIndexRouteImport.update({
   path: '/admin/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const PreviewSlugRoute = PreviewSlugRouteImport.update({
-  id: '/preview/$slug',
-  path: '/preview/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
-  id: '/articles/$slug',
-  path: '/articles/$slug',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiVerifyPaymentRoute = ApiVerifyPaymentRouteImport.update({
-  id: '/api/verify-payment',
-  path: '/api/verify-payment',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiSubjectsRoute = ApiSubjectsRouteImport.update({
-  id: '/api/subjects',
-  path: '/api/subjects',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiResourcesRoute = ApiResourcesRouteImport.update({
-  id: '/api/resources',
-  path: '/api/resources',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiCreateOrderRoute = ApiCreateOrderRouteImport.update({
-  id: '/api/create-order',
-  path: '/api/create-order',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiContactRoute = ApiContactRouteImport.update({
-  id: '/api/contact',
-  path: '/api/contact',
+const AdminArticlesRoute = AdminArticlesRouteImport.update({
+  id: '/admin/articles',
+  path: '/admin/articles',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiArticlesRoute = ApiArticlesRouteImport.update({
@@ -153,94 +118,54 @@ const ApiArticlesRoute = ApiArticlesRouteImport.update({
   path: '/api/articles',
   getParentRoute: () => rootRouteImport,
 } as any)
-const AdminArticlesRoute = AdminArticlesRouteImport.update({
-  id: '/admin/articles',
-  path: '/admin/articles',
+const ApiContactRoute = ApiContactRouteImport.update({
+  id: '/api/contact',
+  path: '/api/contact',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiResourceSlugRoute = ApiResourceSlugRouteImport.update({
-  id: '/api/resource/$slug',
-  path: '/api/resource/$slug',
+const ApiCreateOrderRoute = ApiCreateOrderRouteImport.update({
+  id: '/api/create-order',
+  path: '/api/create-order',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiArticleSlugRoute = ApiArticleSlugRouteImport.update({
-  id: '/api/article/$slug',
-  path: '/api/article/$slug',
+const ApiResourcesRoute = ApiResourcesRouteImport.update({
+  id: '/api/resources',
+  path: '/api/resources',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAdminUploadSubjectRoute = ApiAdminUploadSubjectRouteImport.update({
-  id: '/api/admin/upload-subject',
-  path: '/api/admin/upload-subject',
+const ApiSubjectsRoute = ApiSubjectsRouteImport.update({
+  id: '/api/subjects',
+  path: '/api/subjects',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAdminUploadResourceRoute = ApiAdminUploadResourceRouteImport.update({
-  id: '/api/admin/upload-resource',
-  path: '/api/admin/upload-resource',
+const ApiVerifyPaymentRoute = ApiVerifyPaymentRouteImport.update({
+  id: '/api/verify-payment',
+  path: '/api/verify-payment',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAdminUploadArticleRoute = ApiAdminUploadArticleRouteImport.update({
-  id: '/api/admin/upload-article',
-  path: '/api/admin/upload-article',
+const ArticlesIndexRoute = ArticlesIndexRouteImport.update({
+  id: '/articles/',
+  path: '/articles/',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAdminUpdateSubjectRoute = ApiAdminUpdateSubjectRouteImport.update({
-  id: '/api/admin/update-subject',
-  path: '/api/admin/update-subject',
+const ArticlesSlugRoute = ArticlesSlugRouteImport.update({
+  id: '/articles/$slug',
+  path: '/articles/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAdminUpdateResourceRoute = ApiAdminUpdateResourceRouteImport.update({
-  id: '/api/admin/update-resource',
-  path: '/api/admin/update-resource',
+const PreviewSlugRoute = PreviewSlugRouteImport.update({
+  id: '/preview/$slug',
+  path: '/preview/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAdminUpdateArticleRoute = ApiAdminUpdateArticleRouteImport.update({
-  id: '/api/admin/update-article',
-  path: '/api/admin/update-article',
+const ApiAdminArticlesRoute = ApiAdminArticlesRouteImport.update({
+  id: '/api/admin/articles',
+  path: '/api/admin/articles',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAdminSubjectsRoute = ApiAdminSubjectsRouteImport.update({
-  id: '/api/admin/subjects',
-  path: '/api/admin/subjects',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminResourcesRoute = ApiAdminResourcesRouteImport.update({
-  id: '/api/admin/resources',
-  path: '/api/admin/resources',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminMeRoute = ApiAdminMeRouteImport.update({
-  id: '/api/admin/me',
-  path: '/api/admin/me',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminLogoutRoute = ApiAdminLogoutRouteImport.update({
-  id: '/api/admin/logout',
-  path: '/api/admin/logout',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminLoginRoute = ApiAdminLoginRouteImport.update({
-  id: '/api/admin/login',
-  path: '/api/admin/login',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminDeleteSubjectRoute = ApiAdminDeleteSubjectRouteImport.update({
-  id: '/api/admin/delete-subject',
-  path: '/api/admin/delete-subject',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminDeleteResourceRoute = ApiAdminDeleteResourceRouteImport.update({
-  id: '/api/admin/delete-resource',
-  path: '/api/admin/delete-resource',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminDeleteArticleRoute = ApiAdminDeleteArticleRouteImport.update({
-  id: '/api/admin/delete-article',
-  path: '/api/admin/delete-article',
-  getParentRoute: () => rootRouteImport,
-} as any)
-const ApiAdminDashboardRoute = ApiAdminDashboardRouteImport.update({
-  id: '/api/admin/dashboard',
-  path: '/api/admin/dashboard',
+const ApiAdminBulkPriceUpdateRoute = ApiAdminBulkPriceUpdateRouteImport.update({
+  id: '/api/admin/bulk-price-update',
+  path: '/api/admin/bulk-price-update',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiAdminBulkResourceUpdateRoute =
@@ -249,24 +174,99 @@ const ApiAdminBulkResourceUpdateRoute =
     path: '/api/admin/bulk-resource-update',
     getParentRoute: () => rootRouteImport,
   } as any)
-const ApiAdminBulkPriceUpdateRoute = ApiAdminBulkPriceUpdateRouteImport.update({
-  id: '/api/admin/bulk-price-update',
-  path: '/api/admin/bulk-price-update',
+const ApiAdminDashboardRoute = ApiAdminDashboardRouteImport.update({
+  id: '/api/admin/dashboard',
+  path: '/api/admin/dashboard',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiAdminArticlesRoute = ApiAdminArticlesRouteImport.update({
-  id: '/api/admin/articles',
-  path: '/api/admin/articles',
+const ApiAdminDeleteArticleRoute = ApiAdminDeleteArticleRouteImport.update({
+  id: '/api/admin/delete-article',
+  path: '/api/admin/delete-article',
   getParentRoute: () => rootRouteImport,
 } as any)
-const ApiResourcePdfSlugRoute = ApiResourcePdfSlugRouteImport.update({
-  id: '/api/resource/pdf/$slug',
-  path: '/api/resource/pdf/$slug',
+const ApiAdminDeleteResourceRoute = ApiAdminDeleteResourceRouteImport.update({
+  id: '/api/admin/delete-resource',
+  path: '/api/admin/delete-resource',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminDeleteSubjectRoute = ApiAdminDeleteSubjectRouteImport.update({
+  id: '/api/admin/delete-subject',
+  path: '/api/admin/delete-subject',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminLoginRoute = ApiAdminLoginRouteImport.update({
+  id: '/api/admin/login',
+  path: '/api/admin/login',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminLogoutRoute = ApiAdminLogoutRouteImport.update({
+  id: '/api/admin/logout',
+  path: '/api/admin/logout',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminMeRoute = ApiAdminMeRouteImport.update({
+  id: '/api/admin/me',
+  path: '/api/admin/me',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminResourcesRoute = ApiAdminResourcesRouteImport.update({
+  id: '/api/admin/resources',
+  path: '/api/admin/resources',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminSubjectsRoute = ApiAdminSubjectsRouteImport.update({
+  id: '/api/admin/subjects',
+  path: '/api/admin/subjects',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminUpdateArticleRoute = ApiAdminUpdateArticleRouteImport.update({
+  id: '/api/admin/update-article',
+  path: '/api/admin/update-article',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminUpdateResourceRoute = ApiAdminUpdateResourceRouteImport.update({
+  id: '/api/admin/update-resource',
+  path: '/api/admin/update-resource',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminUpdateSubjectRoute = ApiAdminUpdateSubjectRouteImport.update({
+  id: '/api/admin/update-subject',
+  path: '/api/admin/update-subject',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminUploadArticleRoute = ApiAdminUploadArticleRouteImport.update({
+  id: '/api/admin/upload-article',
+  path: '/api/admin/upload-article',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminUploadResourceRoute = ApiAdminUploadResourceRouteImport.update({
+  id: '/api/admin/upload-resource',
+  path: '/api/admin/upload-resource',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiAdminUploadSubjectRoute = ApiAdminUploadSubjectRouteImport.update({
+  id: '/api/admin/upload-subject',
+  path: '/api/admin/upload-subject',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiArticleSlugRoute = ApiArticleSlugRouteImport.update({
+  id: '/api/article/$slug',
+  path: '/api/article/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiResourceSlugRoute = ApiResourceSlugRouteImport.update({
+  id: '/api/resource/$slug',
+  path: '/api/resource/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ApiResourceDownloadSlugRoute = ApiResourceDownloadSlugRouteImport.update({
   id: '/api/resource/download/$slug',
   path: '/api/resource/download/$slug',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const ApiResourcePdfSlugRoute = ApiResourcePdfSlugRouteImport.update({
+  id: '/api/resource/pdf/$slug',
+  path: '/api/resource/pdf/$slug',
   getParentRoute: () => rootRouteImport,
 } as any)
 
@@ -592,60 +592,11 @@ export interface RootRouteChildren {
 
 declare module '@tanstack/react-router' {
   interface FileRoutesByPath {
-    '/view': {
-      id: '/view'
-      path: '/view'
-      fullPath: '/view'
-      preLoaderRoute: typeof ViewRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/sitemapfyugp.xml': {
-      id: '/sitemapfyugp.xml'
-      path: '/sitemapfyugp.xml'
-      fullPath: '/sitemapfyugp.xml'
-      preLoaderRoute: typeof SitemapfyugpDotxmlRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/select': {
-      id: '/select'
-      path: '/select'
-      fullPath: '/select'
-      preLoaderRoute: typeof SelectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/resources': {
-      id: '/resources'
-      path: '/resources'
-      fullPath: '/resources'
-      preLoaderRoute: typeof ResourcesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/purchase': {
-      id: '/purchase'
-      path: '/purchase'
-      fullPath: '/purchase'
-      preLoaderRoute: typeof PurchaseRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/privacy': {
-      id: '/privacy'
-      path: '/privacy'
-      fullPath: '/privacy'
-      preLoaderRoute: typeof PrivacyRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/contact': {
-      id: '/contact'
-      path: '/contact'
-      fullPath: '/contact'
-      preLoaderRoute: typeof ContactRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/admin-dashboard': {
-      id: '/admin-dashboard'
-      path: '/admin-dashboard'
-      fullPath: '/admin-dashboard'
-      preLoaderRoute: typeof AdminDashboardRouteImport
+    '/': {
+      id: '/'
+      path: '/'
+      fullPath: '/'
+      preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/about': {
@@ -655,18 +606,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/': {
-      id: '/'
-      path: '/'
-      fullPath: '/'
-      preLoaderRoute: typeof IndexRouteImport
+    '/admin-dashboard': {
+      id: '/admin-dashboard'
+      path: '/admin-dashboard'
+      fullPath: '/admin-dashboard'
+      preLoaderRoute: typeof AdminDashboardRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/articles/': {
-      id: '/articles/'
-      path: '/articles'
-      fullPath: '/articles/'
-      preLoaderRoute: typeof ArticlesIndexRouteImport
+    '/contact': {
+      id: '/contact'
+      path: '/contact'
+      fullPath: '/contact'
+      preLoaderRoute: typeof ContactRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/privacy': {
+      id: '/privacy'
+      path: '/privacy'
+      fullPath: '/privacy'
+      preLoaderRoute: typeof PrivacyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/purchase': {
+      id: '/purchase'
+      path: '/purchase'
+      fullPath: '/purchase'
+      preLoaderRoute: typeof PurchaseRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/resources': {
+      id: '/resources'
+      path: '/resources'
+      fullPath: '/resources'
+      preLoaderRoute: typeof ResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/select': {
+      id: '/select'
+      path: '/select'
+      fullPath: '/select'
+      preLoaderRoute: typeof SelectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/sitemapfyugp.xml': {
+      id: '/sitemapfyugp.xml'
+      path: '/sitemapfyugp.xml'
+      fullPath: '/sitemapfyugp.xml'
+      preLoaderRoute: typeof SitemapfyugpDotxmlRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/view': {
+      id: '/view'
+      path: '/view'
+      fullPath: '/view'
+      preLoaderRoute: typeof ViewRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/admin/': {
@@ -676,53 +669,11 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AdminIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/preview/$slug': {
-      id: '/preview/$slug'
-      path: '/preview/$slug'
-      fullPath: '/preview/$slug'
-      preLoaderRoute: typeof PreviewSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/articles/$slug': {
-      id: '/articles/$slug'
-      path: '/articles/$slug'
-      fullPath: '/articles/$slug'
-      preLoaderRoute: typeof ArticlesSlugRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/verify-payment': {
-      id: '/api/verify-payment'
-      path: '/api/verify-payment'
-      fullPath: '/api/verify-payment'
-      preLoaderRoute: typeof ApiVerifyPaymentRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/subjects': {
-      id: '/api/subjects'
-      path: '/api/subjects'
-      fullPath: '/api/subjects'
-      preLoaderRoute: typeof ApiSubjectsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/resources': {
-      id: '/api/resources'
-      path: '/api/resources'
-      fullPath: '/api/resources'
-      preLoaderRoute: typeof ApiResourcesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/create-order': {
-      id: '/api/create-order'
-      path: '/api/create-order'
-      fullPath: '/api/create-order'
-      preLoaderRoute: typeof ApiCreateOrderRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/contact': {
-      id: '/api/contact'
-      path: '/api/contact'
-      fullPath: '/api/contact'
-      preLoaderRoute: typeof ApiContactRouteImport
+    '/admin/articles': {
+      id: '/admin/articles'
+      path: '/admin/articles'
+      fullPath: '/admin/articles'
+      preLoaderRoute: typeof AdminArticlesRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/articles': {
@@ -732,144 +683,60 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiArticlesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/admin/articles': {
-      id: '/admin/articles'
-      path: '/admin/articles'
-      fullPath: '/admin/articles'
-      preLoaderRoute: typeof AdminArticlesRouteImport
+    '/api/contact': {
+      id: '/api/contact'
+      path: '/api/contact'
+      fullPath: '/api/contact'
+      preLoaderRoute: typeof ApiContactRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/resource/$slug': {
-      id: '/api/resource/$slug'
-      path: '/api/resource/$slug'
-      fullPath: '/api/resource/$slug'
-      preLoaderRoute: typeof ApiResourceSlugRouteImport
+    '/api/create-order': {
+      id: '/api/create-order'
+      path: '/api/create-order'
+      fullPath: '/api/create-order'
+      preLoaderRoute: typeof ApiCreateOrderRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/article/$slug': {
-      id: '/api/article/$slug'
-      path: '/api/article/$slug'
-      fullPath: '/api/article/$slug'
-      preLoaderRoute: typeof ApiArticleSlugRouteImport
+    '/api/resources': {
+      id: '/api/resources'
+      path: '/api/resources'
+      fullPath: '/api/resources'
+      preLoaderRoute: typeof ApiResourcesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/admin/upload-subject': {
-      id: '/api/admin/upload-subject'
-      path: '/api/admin/upload-subject'
-      fullPath: '/api/admin/upload-subject'
-      preLoaderRoute: typeof ApiAdminUploadSubjectRouteImport
+    '/api/subjects': {
+      id: '/api/subjects'
+      path: '/api/subjects'
+      fullPath: '/api/subjects'
+      preLoaderRoute: typeof ApiSubjectsRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/admin/upload-resource': {
-      id: '/api/admin/upload-resource'
-      path: '/api/admin/upload-resource'
-      fullPath: '/api/admin/upload-resource'
-      preLoaderRoute: typeof ApiAdminUploadResourceRouteImport
+    '/api/verify-payment': {
+      id: '/api/verify-payment'
+      path: '/api/verify-payment'
+      fullPath: '/api/verify-payment'
+      preLoaderRoute: typeof ApiVerifyPaymentRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/admin/upload-article': {
-      id: '/api/admin/upload-article'
-      path: '/api/admin/upload-article'
-      fullPath: '/api/admin/upload-article'
-      preLoaderRoute: typeof ApiAdminUploadArticleRouteImport
+    '/articles/': {
+      id: '/articles/'
+      path: '/articles'
+      fullPath: '/articles/'
+      preLoaderRoute: typeof ArticlesIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/admin/update-subject': {
-      id: '/api/admin/update-subject'
-      path: '/api/admin/update-subject'
-      fullPath: '/api/admin/update-subject'
-      preLoaderRoute: typeof ApiAdminUpdateSubjectRouteImport
+    '/articles/$slug': {
+      id: '/articles/$slug'
+      path: '/articles/$slug'
+      fullPath: '/articles/$slug'
+      preLoaderRoute: typeof ArticlesSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/admin/update-resource': {
-      id: '/api/admin/update-resource'
-      path: '/api/admin/update-resource'
-      fullPath: '/api/admin/update-resource'
-      preLoaderRoute: typeof ApiAdminUpdateResourceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/update-article': {
-      id: '/api/admin/update-article'
-      path: '/api/admin/update-article'
-      fullPath: '/api/admin/update-article'
-      preLoaderRoute: typeof ApiAdminUpdateArticleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/subjects': {
-      id: '/api/admin/subjects'
-      path: '/api/admin/subjects'
-      fullPath: '/api/admin/subjects'
-      preLoaderRoute: typeof ApiAdminSubjectsRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/resources': {
-      id: '/api/admin/resources'
-      path: '/api/admin/resources'
-      fullPath: '/api/admin/resources'
-      preLoaderRoute: typeof ApiAdminResourcesRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/me': {
-      id: '/api/admin/me'
-      path: '/api/admin/me'
-      fullPath: '/api/admin/me'
-      preLoaderRoute: typeof ApiAdminMeRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/logout': {
-      id: '/api/admin/logout'
-      path: '/api/admin/logout'
-      fullPath: '/api/admin/logout'
-      preLoaderRoute: typeof ApiAdminLogoutRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/login': {
-      id: '/api/admin/login'
-      path: '/api/admin/login'
-      fullPath: '/api/admin/login'
-      preLoaderRoute: typeof ApiAdminLoginRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/delete-subject': {
-      id: '/api/admin/delete-subject'
-      path: '/api/admin/delete-subject'
-      fullPath: '/api/admin/delete-subject'
-      preLoaderRoute: typeof ApiAdminDeleteSubjectRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/delete-resource': {
-      id: '/api/admin/delete-resource'
-      path: '/api/admin/delete-resource'
-      fullPath: '/api/admin/delete-resource'
-      preLoaderRoute: typeof ApiAdminDeleteResourceRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/delete-article': {
-      id: '/api/admin/delete-article'
-      path: '/api/admin/delete-article'
-      fullPath: '/api/admin/delete-article'
-      preLoaderRoute: typeof ApiAdminDeleteArticleRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/dashboard': {
-      id: '/api/admin/dashboard'
-      path: '/api/admin/dashboard'
-      fullPath: '/api/admin/dashboard'
-      preLoaderRoute: typeof ApiAdminDashboardRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/bulk-resource-update': {
-      id: '/api/admin/bulk-resource-update'
-      path: '/api/admin/bulk-resource-update'
-      fullPath: '/api/admin/bulk-resource-update'
-      preLoaderRoute: typeof ApiAdminBulkResourceUpdateRouteImport
-      parentRoute: typeof rootRouteImport
-    }
-    '/api/admin/bulk-price-update': {
-      id: '/api/admin/bulk-price-update'
-      path: '/api/admin/bulk-price-update'
-      fullPath: '/api/admin/bulk-price-update'
-      preLoaderRoute: typeof ApiAdminBulkPriceUpdateRouteImport
+    '/preview/$slug': {
+      id: '/preview/$slug'
+      path: '/preview/$slug'
+      fullPath: '/preview/$slug'
+      preLoaderRoute: typeof PreviewSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/admin/articles': {
@@ -879,11 +746,137 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ApiAdminArticlesRouteImport
       parentRoute: typeof rootRouteImport
     }
-    '/api/resource/pdf/$slug': {
-      id: '/api/resource/pdf/$slug'
-      path: '/api/resource/pdf/$slug'
-      fullPath: '/api/resource/pdf/$slug'
-      preLoaderRoute: typeof ApiResourcePdfSlugRouteImport
+    '/api/admin/bulk-price-update': {
+      id: '/api/admin/bulk-price-update'
+      path: '/api/admin/bulk-price-update'
+      fullPath: '/api/admin/bulk-price-update'
+      preLoaderRoute: typeof ApiAdminBulkPriceUpdateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/bulk-resource-update': {
+      id: '/api/admin/bulk-resource-update'
+      path: '/api/admin/bulk-resource-update'
+      fullPath: '/api/admin/bulk-resource-update'
+      preLoaderRoute: typeof ApiAdminBulkResourceUpdateRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/dashboard': {
+      id: '/api/admin/dashboard'
+      path: '/api/admin/dashboard'
+      fullPath: '/api/admin/dashboard'
+      preLoaderRoute: typeof ApiAdminDashboardRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/delete-article': {
+      id: '/api/admin/delete-article'
+      path: '/api/admin/delete-article'
+      fullPath: '/api/admin/delete-article'
+      preLoaderRoute: typeof ApiAdminDeleteArticleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/delete-resource': {
+      id: '/api/admin/delete-resource'
+      path: '/api/admin/delete-resource'
+      fullPath: '/api/admin/delete-resource'
+      preLoaderRoute: typeof ApiAdminDeleteResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/delete-subject': {
+      id: '/api/admin/delete-subject'
+      path: '/api/admin/delete-subject'
+      fullPath: '/api/admin/delete-subject'
+      preLoaderRoute: typeof ApiAdminDeleteSubjectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/login': {
+      id: '/api/admin/login'
+      path: '/api/admin/login'
+      fullPath: '/api/admin/login'
+      preLoaderRoute: typeof ApiAdminLoginRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/logout': {
+      id: '/api/admin/logout'
+      path: '/api/admin/logout'
+      fullPath: '/api/admin/logout'
+      preLoaderRoute: typeof ApiAdminLogoutRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/me': {
+      id: '/api/admin/me'
+      path: '/api/admin/me'
+      fullPath: '/api/admin/me'
+      preLoaderRoute: typeof ApiAdminMeRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/resources': {
+      id: '/api/admin/resources'
+      path: '/api/admin/resources'
+      fullPath: '/api/admin/resources'
+      preLoaderRoute: typeof ApiAdminResourcesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/subjects': {
+      id: '/api/admin/subjects'
+      path: '/api/admin/subjects'
+      fullPath: '/api/admin/subjects'
+      preLoaderRoute: typeof ApiAdminSubjectsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/update-article': {
+      id: '/api/admin/update-article'
+      path: '/api/admin/update-article'
+      fullPath: '/api/admin/update-article'
+      preLoaderRoute: typeof ApiAdminUpdateArticleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/update-resource': {
+      id: '/api/admin/update-resource'
+      path: '/api/admin/update-resource'
+      fullPath: '/api/admin/update-resource'
+      preLoaderRoute: typeof ApiAdminUpdateResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/update-subject': {
+      id: '/api/admin/update-subject'
+      path: '/api/admin/update-subject'
+      fullPath: '/api/admin/update-subject'
+      preLoaderRoute: typeof ApiAdminUpdateSubjectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/upload-article': {
+      id: '/api/admin/upload-article'
+      path: '/api/admin/upload-article'
+      fullPath: '/api/admin/upload-article'
+      preLoaderRoute: typeof ApiAdminUploadArticleRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/upload-resource': {
+      id: '/api/admin/upload-resource'
+      path: '/api/admin/upload-resource'
+      fullPath: '/api/admin/upload-resource'
+      preLoaderRoute: typeof ApiAdminUploadResourceRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/admin/upload-subject': {
+      id: '/api/admin/upload-subject'
+      path: '/api/admin/upload-subject'
+      fullPath: '/api/admin/upload-subject'
+      preLoaderRoute: typeof ApiAdminUploadSubjectRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/article/$slug': {
+      id: '/api/article/$slug'
+      path: '/api/article/$slug'
+      fullPath: '/api/article/$slug'
+      preLoaderRoute: typeof ApiArticleSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/resource/$slug': {
+      id: '/api/resource/$slug'
+      path: '/api/resource/$slug'
+      fullPath: '/api/resource/$slug'
+      preLoaderRoute: typeof ApiResourceSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/api/resource/download/$slug': {
@@ -891,6 +884,13 @@ declare module '@tanstack/react-router' {
       path: '/api/resource/download/$slug'
       fullPath: '/api/resource/download/$slug'
       preLoaderRoute: typeof ApiResourceDownloadSlugRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/api/resource/pdf/$slug': {
+      id: '/api/resource/pdf/$slug'
+      path: '/api/resource/pdf/$slug'
+      fullPath: '/api/resource/pdf/$slug'
+      preLoaderRoute: typeof ApiResourcePdfSlugRouteImport
       parentRoute: typeof rootRouteImport
     }
   }

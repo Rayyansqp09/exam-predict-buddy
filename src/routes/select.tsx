@@ -53,18 +53,18 @@ function SelectPage() {
       <main className="mx-auto max-w-4xl px-4 py-10 md:px-6 md:py-24">
         <div className="text-center">
           <span className="inline-flex items-center gap-2 rounded-full border border-primary/20 bg-background/70 px-3 py-1 text-xs font-medium text-primary shadow-sm">
-            Step 1 of 1 · Choose your paper
+            Step 1 of 1 · Choose your course
           </span>
           <h1 className="mt-5 font-display text-2xl font-bold md:text-5xl">
             Select your <span className="text-gradient">Course &amp; Semester</span>
           </h1>
-          <p className="mt-3 text-sm md:text-base text-muted-foreground">
+          <p className="mt-3 text-[14px] md:text-base text-muted-foreground">
             Pick the right resource for your course and semester. You’ll be redirected
             to a secure checkout page to complete your purchase.
           </p>
         </div>
 
-        <div className="mt-12 md:mt-12 space-y-7 md:space-y-10">
+        <div className="mt-9 md:mt-12 space-y-7 md:space-y-10">
           {/* Course */}
           <section className="space-y-2 md:space-y-4">
             <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
@@ -149,16 +149,16 @@ function SelectPage() {
           <section className="rounded-3xl border border-primary/20 bg-gradient-hero p-5 shadow-card md:p-10">
             <div className="flex flex-col gap-4 md:gap-5 md:flex-row md:items-center md:justify-between">
               <div className="space-y-1">
-                <p className="text-xs font-medium uppercase tracking-wide text-muted-foreground md:text-sm md:normal-case md:tracking-normal">
+                <p className="text-[10px] font-medium uppercase tracking-wide text-muted-foreground md:text-sm md:normal-case md:tracking-normal">
                   Your selection
                 </p>
 
-                <p className="font-display text-[1.1rem] font-bold leading-tight md:mt-1 md:text-xl">
+                <p className="font-display text-[1rem] font-bold leading-tight md:mt-1 md:text-xl">
                   {course ?? "Select course"} ·{" "}
                   {semester ? `Semester ${semester}` : "Select semester"}
                 </p>
 
-                <p className="text-[0.8rem] leading-6 text-muted-foreground">
+                <p className="text-[0.75rem] leading-6 text-muted-foreground">
                   ₹30 · Instant PDF after Razorpay checkout
                 </p>
               </div>
@@ -198,10 +198,10 @@ function SelectPage() {
               Can’t find your course or semester?
             </h3>
 
-            <p className="mt-2 text-sm leading-6 text-muted-foreground">
+            <p className="mt-2 text-[13px] leading-5 text-muted-foreground">
               Tell us your course, semester, subject, and the type of resource you need,
               and we’ll try to add it as soon as possible and notify you once available.
-              <br />
+              <br /><br />
               Reach us at{" "}
               <a
                 href="mailto:support.fyugphub@gmail.com"

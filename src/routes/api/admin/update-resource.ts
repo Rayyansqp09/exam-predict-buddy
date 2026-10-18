@@ -12,14 +12,17 @@ function slugify(value: string) {
 
 function formatResourceType(resourceType: string) {
   const map: Record<string, string> = {
-    MODEL_PAPER: "Model Paper",
-    PYQ: "PYQ",
-    QUESTION_BANK: "Question Bank",
-    STUDY_MATERIAL: "Study Material",
-    TEXTBOOK_PDF: "Textbook PDF",
-    HANDWRITTEN_NOTE: "Handwritten Notes",
-    MICRO_NOTE: "Micro Notes",
-    IMPORTANT_QUESTION: "Important Questions",
+   MODEL_PAPER: "Model Paper",
+      PYQ: "PYQ",
+      QUESTION_BANK: "Question Bank",
+      STUDY_MATERIAL: "Study Material",
+      DETAILED_NOTES: "Detailed Notes",
+      SHORT_NOTES: "Short Notes",
+      TEXTBOOK_PDF: "Textbook PDF",
+      HANDWRITTEN_NOTE: "Handwritten Notes",
+      MICRO_NOTE: "Micro Notes",
+      IMPORTANT_QUESTION: "Important Questions",
+      UNKNOWN: "Unknown",
   };
   return map[resourceType] ?? resourceType;
 }

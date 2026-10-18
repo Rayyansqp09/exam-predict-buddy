@@ -145,6 +145,8 @@ function AdminDashboardPage() {
       PYQ: "PYQ",
       QUESTION_BANK: "Question Bank",
       STUDY_MATERIAL: "Study Material",
+      DETAILED_NOTES: "Detailed Notes",
+      SHORT_NOTES: "Short Notes",
       TEXTBOOK_PDF: "Textbook PDF",
       HANDWRITTEN_NOTE: "Handwritten Notes",
       MICRO_NOTE: "Micro Notes",
