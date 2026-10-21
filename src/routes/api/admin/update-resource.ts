@@ -12,18 +12,19 @@ function slugify(value: string) {
 
 function formatResourceType(resourceType: string) {
   const map: Record<string, string> = {
-   MODEL_PAPER: "Model Paper",
-      PYQ: "PYQ",
-      QUESTION_BANK: "Question Bank",
-      STUDY_MATERIAL: "Study Material",
-      DETAILED_NOTES: "Detailed Notes",
-      SHORT_NOTES: "Short Notes",
-      TEXTBOOK_PDF: "Textbook PDF",
-      HANDWRITTEN_NOTE: "Handwritten Notes",
-      MICRO_NOTE: "Micro Notes",
-      IMPORTANT_QUESTION: "Important Questions",
-      UNKNOWN: "Unknown",
+    MODEL_PAPER: "Model Paper",
+    PYQ: "PYQ",
+    QUESTION_BANK: "Question Bank",
+    STUDY_MATERIAL: "Study Material",
+    DETAILED_NOTES: "Detailed Notes",
+    SHORT_NOTES: "Short Notes",
+    TEXTBOOK_PDF: "Textbook PDF",
+    HANDWRITTEN_NOTE: "Handwritten Notes",
+    MICRO_NOTE: "Micro Notes",
+    IMPORTANT_QUESTION: "Important Questions",
+    UNKNOWN: "Unknown",
   };
+
   return map[resourceType] ?? resourceType;
 }
 
@@ -119,9 +120,21 @@ export const Route = createFileRoute("/api/admin/update-resource")({
             );
           }
 
-          let pdfUrl = existing.pdf_url;
-          let storagePath = existing.storage_path;
+          const title = extraInfo
+            ? `${subject} - ${formatResourceType(resourceType)} (${extraInfo})`
+            : `${subject} - ${formatResourceType(resourceType)}`;
 
+          const newSlug = slugify(
+            `${resourceType}-${course}-sem-${semester}-${subject}-${extraInfo || formatResourceType(resourceType)}`,
+          );
+
+          const bucket = "resources";
+          let pdfUrl: string | null = existing.pdf_url;
+          let storagePath: string | null = existing.storage_path;
+          let newlyUploadedStoragePath: string | null = null;
+
+          // Upload to a unique path for every replacement. Reusing the old path can
+          // leave browsers/CDNs showing the previous PDF even after an upsert.
           if (pdf instanceof File && pdf.size > 0) {
             if (pdf.type !== "application/pdf") {
               return Response.json(
@@ -130,48 +143,29 @@ export const Route = createFileRoute("/api/admin/update-resource")({
               );
             }
 
-            const bucket = "resources";
-            const newSlug = slugify(
-              `${resourceType}-${course}-sem-${semester}-${subject}-${extraInfo || formatResourceType(resourceType)}`,
-            );
-            const newStoragePath = `${course}/sem-${semester}/${newSlug}.pdf`;
+            const newStoragePath =
+              `${course}/sem-${semester}/${newSlug}-${crypto.randomUUID()}.pdf`;
+            const fileBody = Buffer.from(await pdf.arrayBuffer());
 
-            const arrayBuffer = await pdf.arrayBuffer();
-            const fileBody = Buffer.from(arrayBuffer);
-
-            const uploadResult = await supabaseAdmin.storage
+            const { error: uploadError } = await supabaseAdmin.storage
               .from(bucket)
               .upload(newStoragePath, fileBody, {
                 contentType: "application/pdf",
-                upsert: true,
+                cacheControl: "0",
+                upsert: false,
               });
 
-            if (uploadResult.error) {
+            if (uploadError) {
               return Response.json(
-                { success: false, message: uploadResult.error.message },
+                { success: false, message: uploadError.message },
                 { status: 500 },
               );
             }
 
-            const { data: publicData } = supabaseAdmin.storage
-              .from(bucket)
-              .getPublicUrl(newStoragePath);
-
-            pdfUrl = publicData.publicUrl;
+            newlyUploadedStoragePath = newStoragePath;
             storagePath = newStoragePath;
-
-            if (existing.storage_path && existing.storage_path !== newStoragePath) {
-              await supabaseAdmin.storage.from(bucket).remove([existing.storage_path]);
-            }
+            pdfUrl = supabaseAdmin.storage.from(bucket).getPublicUrl(newStoragePath).data.publicUrl;
           }
-
-          const title = extraInfo
-            ? `${subject} - ${formatResourceType(resourceType)} (${extraInfo})`
-            : `${subject} - ${formatResourceType(resourceType)}`;
-
-          const newSlug = slugify(
-            `${resourceType}-${course}-sem-${semester}-${subject}-${extraInfo || formatResourceType(resourceType)}`,
-          );
 
           const { error: updateError } = await supabaseAdmin
             .from("resources")
@@ -196,10 +190,38 @@ export const Route = createFileRoute("/api/admin/update-resource")({
             .eq("resource_slug", originalSlug);
 
           if (updateError) {
+            // If the database update failed, keep the old file and clean up the
+            // newly uploaded replacement so the resource remains consistent.
+            if (newlyUploadedStoragePath) {
+              const { error: cleanupError } = await supabaseAdmin.storage
+                .from(bucket)
+                .remove([newlyUploadedStoragePath]);
+              if (cleanupError) {
+                console.error("Failed to clean up replacement PDF:", cleanupError);
+              }
+            }
+
             return Response.json(
               { success: false, message: updateError.message },
               { status: 500 },
             );
+          }
+
+          // Delete the old PDF only after the database points to the new file.
+          if (
+            newlyUploadedStoragePath &&
+            existing.storage_path &&
+            existing.storage_path !== newlyUploadedStoragePath
+          ) {
+            const { error: removeError } = await supabaseAdmin.storage
+              .from(bucket)
+              .remove([existing.storage_path]);
+
+            if (removeError) {
+              // The replacement is already active, so don't report the update as
+              // failed. Log the orphaned old object for later cleanup instead.
+              console.error("Failed to remove old resource PDF:", removeError);
+            }
           }
 
           return Response.json({

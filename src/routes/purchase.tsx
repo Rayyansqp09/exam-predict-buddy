@@ -547,7 +547,7 @@ function PurchasePage() {
 
                                 <div className="mt-3 md:mt-3 text-center">
                                     <a
-                                        href="/select#find"
+                                        href="#find"
                                         className="text-xs text-muted-foreground underline underline-offset-4 hover:text-foreground"
                                     >
                                         Can't find the materials you're looking for?

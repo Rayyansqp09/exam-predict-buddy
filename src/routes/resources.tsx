@@ -289,7 +289,7 @@ function ResourcesPage() {
       ),
     ).sort();
   }, [resources, course, semester]);
-  
+
   const trendingSubjects = useMemo(() => {
     const scores = new Map<string, number>();
 
@@ -544,13 +544,13 @@ function ResourcesPage() {
             <div>
               <h2 className="text-2xl font-bold">
                 {filteredResources.length}{" "}
-                {filteredResources.length === 1 ? "resource" : "resources"}
+                {filteredResources.length === 1 ? "Resource" : "Resources"}
               </h2>
               <p className="text-sm text-muted-foreground">
                 {access === "free"
                   ? "Free study material"
                   : access === "premium"
-                    ? "Premium curated resources"
+                    ? "Premium study materials"
                     : "Free & premium resources"}
               </p>
             </div>
@@ -1095,10 +1095,13 @@ function formatResourceType(type: string) {
     PYQ: "PYQ",
     QUESTION_BANK: "Question Bank",
     STUDY_MATERIAL: "Study Material",
+    DETAILED_NOTES: "Detailed Notes",
+    SHORT_NOTES: "Short Notes",
     TEXTBOOK_PDF: "Textbook PDF",
     HANDWRITTEN_NOTE: "Handwritten Notes",
     MICRO_NOTE: "Micro Notes",
     IMPORTANT_QUESTION: "Important Questions",
+    UNKNOWN: "Unknown",
   };
 
   return map[type] ?? type;

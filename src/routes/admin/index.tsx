@@ -76,6 +76,7 @@ function AdminPage() {
 
     const [filterResourceType, setFilterResourceType] = useState("all");
     const [filterCourse, setFilterCourse] = useState("all");
+    const [filterSemester, setFilterSemester] = useState("all");
     const [filterSubject, setFilterSubject] = useState("all");
     const [filterAccessType, setFilterAccessType] = useState("all");
 
@@ -147,6 +148,10 @@ function AdminPage() {
             filterCourse === "all" ||
             resource.course === filterCourse;
 
+        const semesterMatch =
+            filterSemester === "all" ||
+            resource.semester === Number(filterSemester);
+
         const subjectMatch =
             filterSubject === "all" ||
             resource.subject === filterSubject;
@@ -158,6 +163,7 @@ function AdminPage() {
         return (
             typeMatch &&
             courseMatch &&
+            semesterMatch &&
             subjectMatch &&
             accessMatch
         );
@@ -968,6 +974,24 @@ function AdminPage() {
                     </div>
 
                     <div className="space-y-2">
+                        <Label>Filter by semester</Label>
+                        <select
+                            value={filterSemester}
+                            onChange={(e) => setFilterSemester(e.target.value)}
+                            className="h-10 w-full rounded-md border bg-background px-2 md:px-3 text-sm md:text-base"
+                        >
+                            <option value="all">All semesters</option>
+                            {Array.from(new Set(resources.map((r) => r.semester)))
+                                .sort((a, b) => a - b)
+                                .map((semester) => (
+                                    <option key={semester} value={String(semester)}>
+                                        Semester {semester}
+                                    </option>
+                                ))}
+                        </select>
+                    </div>
+
+                    <div className="space-y-2">
                         <Label>Filter by subject</Label>
                         <select
                             value={filterSubject}
@@ -1014,6 +1038,8 @@ function AdminPage() {
                             <p className="text-sm text-destructive">{resourcesError}</p>
                         ) : resources.length === 0 ? (
                             <p className="text-sm text-muted-foreground">No resources found.</p>
+                        ) : filteredResources.length === 0 ? (
+                            <p className="text-sm text-muted-foreground">No resources match the selected filters.</p>
                         ) : (
                             <div className="space-y-3">
                                 {filteredResources.map((resource) => {
