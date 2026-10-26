@@ -139,6 +139,41 @@ function AdminPage() {
     const [resourcesLoading, setResourcesLoading] = useState(false);
     const [resourcesError, setResourcesError] = useState("");
 
+    const availableSubjects = Array.from(
+        new Set(
+            resources
+                .filter((resource) => {
+                    const courseMatch =
+                        filterCourse === "all" ||
+                        resource.course.split(",").some(
+                            (course) =>
+                                course.trim().toLowerCase() ===
+                                filterCourse.trim().toLowerCase()
+                        );
+
+                    const semesterMatch =
+                        filterSemester === "all" ||
+                        resource.semester === Number(filterSemester);
+
+                    const typeMatch =
+                        filterResourceType === "all" ||
+                        resource.resourceType === filterResourceType;
+
+                    const accessMatch =
+                        filterAccessType === "all" ||
+                        resource.accessType === filterAccessType;
+
+                    return (
+                        courseMatch &&
+                        semesterMatch &&
+                        typeMatch &&
+                        accessMatch
+                    );
+                })
+                .map((resource) => resource.subject)
+        )
+    ).sort((a, b) => a.localeCompare(b));
+
     const filteredResources = resources.filter((resource) => {
         const typeMatch =
             filterResourceType === "all" ||
@@ -146,7 +181,13 @@ function AdminPage() {
 
         const courseMatch =
             filterCourse === "all" ||
-            resource.course === filterCourse;
+            resource.course
+                .split(",")
+                .some(
+                    (course) =>
+                        course.trim().toLowerCase() ===
+                        filterCourse.trim().toLowerCase()
+                );
 
         const semesterMatch =
             filterSemester === "all" ||
@@ -961,15 +1002,29 @@ function AdminPage() {
                         <Label>Filter by course</Label>
                         <select
                             value={filterCourse}
-                            onChange={(e) => setFilterCourse(e.target.value)}
+                            onChange={(e) => {
+                                setFilterCourse(e.target.value);
+                                setFilterSubject("all");
+                            }}
                             className="h-10 w-full rounded-md border bg-background px-2 md:px-3 text-sm md:text-base"
                         >
                             <option value="all">All courses</option>
-                            {Array.from(new Set(resources.map((r) => r.course))).map((course) => (
-                                <option key={course} value={course}>
-                                    {course}
-                                </option>
-                            ))}
+                            {Array.from(
+                                new Map(
+                                    resources
+                                        .flatMap((resource) => resource.course.split(","))
+                                        .map((course) => course.trim())
+                                        .filter(Boolean)
+                                        .map((course) => [course.toLowerCase(), course])
+                                ).values()
+                            )
+                                .sort((a, b) => a.localeCompare(b))
+                                .map((course) => (
+                                    <option key={course.toLowerCase()} value={course}>
+                                        {course}
+                                    </option>
+                                ))}
+
                         </select>
                     </div>
 
@@ -999,7 +1054,7 @@ function AdminPage() {
                             className="h-10 w-full rounded-md border bg-background px-2 md:px-3 text-sm md:text-base"
                         >
                             <option value="all">All subjects</option>
-                            {Array.from(new Set(resources.map((r) => r.subject))).map((subject) => (
+                            {availableSubjects.map((subject) => (
                                 <option key={subject} value={subject}>
                                     {subject}
                                 </option>
@@ -1027,11 +1082,11 @@ function AdminPage() {
                 <Card className="border-0 shadow-none bg-transparent">
                     <CardHeader className="px-4 py-4 md:px-6 md:py-6">
                         <CardTitle className="text-base md:text-xl">
-                            Uploaded Resources
+                            Uploaded Resources : {filteredResources.length}
                         </CardTitle>
                     </CardHeader>
 
-                    <CardContent className="space-y-4 px-4 pb-4 md:px-6 md:pb-6">
+                    <CardContent className="space-y-4 px-0 pb-4 md:px-6 md:pb-6">
                         {resourcesLoading ? (
                             <p className="text-sm text-muted-foreground">Loading resources...</p>
                         ) : resourcesError ? (
@@ -1041,7 +1096,8 @@ function AdminPage() {
                         ) : filteredResources.length === 0 ? (
                             <p className="text-sm text-muted-foreground">No resources match the selected filters.</p>
                         ) : (
-                            <div className="space-y-3">
+
+                            <div className="max-h-[600px] space-y-3 overflow-y-auto overflow-x-hidden pr-2">
                                 {filteredResources.map((resource) => {
                                     const salePrice = resource.discountPrice ?? resource.originalPrice;
 

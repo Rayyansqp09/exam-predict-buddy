@@ -11,6 +11,7 @@ export const COURSES = [
   "BSc Botany",
   "BSc Mathematics",
   "BSc Computer Science",
+  "BSc Psychology",
   "BSc Microbiology",
   "BA History",
   "BSc Physics",
@@ -35,14 +36,12 @@ export const COURSES = [
 
   // Additional BSc courses
   "BSc Statistics",
-  "BSc Psychology",
   "BSc Biotechnology",
   "BSc Biochemistry",
   "BSc Electronics",
   "BSc Geology",
   "BSc Food Technology",
   "BSc Geography",
-  "BSc Computer Science",
   "BSc Artificial Intelligence",
   "BSc Information Technology",
   "BSc Hotel Management and Catering Science",

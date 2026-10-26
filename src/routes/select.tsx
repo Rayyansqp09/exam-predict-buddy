@@ -1,9 +1,17 @@
+
+
 import { createFileRoute, Link, useNavigate } from "@tanstack/react-router";
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { Header } from "@/components/site/Header";
 import { Footer } from "@/components/site/Footer";
-import { ArrowRight, GraduationCap, CheckCircle2 } from "lucide-react";
+import {
+  ArrowRight,
+  GraduationCap,
+  CheckCircle2,
+  Check,
+  ChevronsUpDown,
+} from "lucide-react";
 import { COURSES, SEMESTERS } from "@/lib/config";
 import {
   Select,
@@ -12,6 +20,23 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+
+import {
+  Popover,
+  PopoverContent,
+  PopoverTrigger,
+} from "@/components/ui/popover";
+
+import {
+  Command,
+  CommandEmpty,
+  CommandGroup,
+  CommandInput,
+  CommandItem,
+  CommandList,
+} from "@/components/ui/command";
+
+import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/select")({
   head: () => ({
@@ -32,6 +57,7 @@ function SelectPage() {
 
   const [course, setCourse] = useState<string | null>(null);
   const [semester, setSemester] = useState<number | null>(null);
+  const [courseOpen, setCourseOpen] = useState(false);
 
   const ready = Boolean(course && semester);
 
@@ -60,7 +86,7 @@ function SelectPage() {
           </h1>
           <p className="mt-3 text-[14px] md:text-base text-muted-foreground">
             Pick the right resource for your course and semester. You’ll be redirected
-            to a secure checkout page to complete your purchase.
+            to a secure checkout page.
           </p>
         </div>
 
@@ -79,24 +105,55 @@ function SelectPage() {
               )}
             </div>
 
-            <Select
-              value={course ?? ""}
-              onValueChange={(value) => {
-                setCourse(value);
-                setSemester(null);
-              }}
-            >
-              <SelectTrigger className="h-11 rounded-2xl sm:h-12">
-                <SelectValue placeholder="Select your course" />
-              </SelectTrigger>
-              <SelectContent>
-                {COURSES.map((c) => (
-                  <SelectItem key={c} value={c}>
-                    {c}
-                  </SelectItem>
-                ))}
-              </SelectContent>
-            </Select>
+            <Popover open={courseOpen} onOpenChange={setCourseOpen}>
+              <PopoverTrigger asChild>
+                <Button
+                  variant="outline"
+                  role="combobox"
+                  aria-expanded={courseOpen}
+                  className="h-11 w-full justify-between rounded-2xl font-normal sm:h-12"
+                >
+                  <span className="truncate">
+                    {course || "Search or select your course"}
+                  </span>
+                  <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
+                </Button>
+              </PopoverTrigger>
+
+              <PopoverContent
+                className="w-[var(--radix-popover-trigger-width)] p-0"
+                align="start"
+              >
+                <Command>
+                  <CommandInput placeholder="Type course name..." />
+                  <CommandList>
+                    <CommandEmpty>No course found.</CommandEmpty>
+
+                    <CommandGroup>
+                      {COURSES.map((c) => (
+                        <CommandItem
+                          key={c}
+                          value={c}
+                          onSelect={() => {
+                            setCourse(c);
+                            setSemester(null);
+                            setCourseOpen(false);
+                          }}
+                        >
+                          <Check
+                            className={cn(
+                              "mr-2 h-4 w-4",
+                              course === c ? "opacity-100" : "opacity-0"
+                            )}
+                          />
+                          {c}
+                        </CommandItem>
+                      ))}
+                    </CommandGroup>
+                  </CommandList>
+                </Command>
+              </PopoverContent>
+            </Popover>
 
             <div className="mt-0 md:mt-3 text-center">
               <a
@@ -159,7 +216,7 @@ function SelectPage() {
                 </p>
 
                 <p className="text-[0.75rem] leading-6 text-muted-foreground">
-                  ₹30 · Instant PDF after Razorpay checkout
+                  Instant PDF after Razorpay checkout
                 </p>
               </div>
 
