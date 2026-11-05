@@ -75,16 +75,35 @@ const RESOURCE_TYPES = [
 
 export const Route = createFileRoute("/resources")({
   head: () => ({
+
     meta: [
       {
-        title: "Resource Hub — FYUGP Notes, PYQs, Predicted Papers & Study Materials",
+        title: "Free FYUGP Notes PDF, PYQs & Study Materials | FYUGP Hub",
       },
       {
         name: "description",
         content:
-          "Centralized FYUGP resource hub for Calicut University students. Handwritten notes, PYQs, predicted model papers, micro notes, module-wise notes, question banks and more — organized by course, semester and subject.",
+          "Download FYUGP notes PDF, handwritten notes, previous year question papers (PYQs), micro notes, module-wise notes, question banks and predicted model papers for Calicut University students. Find resources by course, semester and subject.",
+      },
+      {
+        name: "robots",
+        content: "index, follow",
+      },
+      {
+        property: "og:title",
+        content: "Free FYUGP Notes PDF & Study Materials – FYUGP Hub",
+      },
+      {
+        property: "og:description",
+        content:
+          "Explore and download FYUGP notes, PYQs, micro notes, question banks and exam preparation materials organized by course, semester and subject.",
+      },
+      {
+        property: "og:type",
+        content: "website",
       },
     ],
+
   }),
   component: ResourcesPage,
 });
@@ -540,28 +559,29 @@ function ResourcesPage() {
             </div>
           </div>
 
-          <div className="mb-5 flex items-end justify-between mt-6 md:mt-9">
+          <div className="mb-5 mt-6 flex items-end justify-between md:mt-9">
             <div>
               <h2 className="text-2xl font-bold">
-                {filteredResources.length}{" "}
-                {filteredResources.length === 1 ? "Resource" : "Resources"}
+                {loading
+                  ? "Loading resources..."
+                  : `${filteredResources.length} ${filteredResources.length === 1 ? "Resource" : "Resources"
+                  }`}
               </h2>
+
               <p className="text-sm text-muted-foreground">
-                {access === "free"
-                  ? "Free study material"
-                  : access === "premium"
-                    ? "Premium study materials"
-                    : "Free & premium resources"}
+                {loading
+                  ? "Please wait while we fetch your study materials."
+                  : access === "free"
+                    ? "Free study material"
+                    : access === "premium"
+                      ? "Premium study materials"
+                      : "Free & premium resources"}
               </p>
             </div>
           </div>
 
           {loading ? (
-            <Card className="shadow-card">
-              <CardHeader>
-                <CardTitle>Loading resources...</CardTitle>
-              </CardHeader>
-            </Card>
+            <ResourceLoadingSkeleton />
           ) : error ? (
             <Card className="shadow-card">
               <CardHeader>
@@ -690,6 +710,62 @@ function ResourcesPage() {
     </div>
   );
 }
+
+
+function ResourceLoadingSkeleton() {
+  return (
+    <div
+      role="status"
+      aria-label="Loading resources"
+      className="grid grid-cols-2 gap-3 md:grid-cols-3"
+    >
+      {Array.from({ length: 6 }).map((_, index) => (
+        <div
+          key={index}
+          className="overflow-hidden rounded-2xl border border-border bg-card shadow-soft"
+        >
+          {/* Resource header */}
+          <div className="animate-pulse bg-muted/40 px-3 pb-5 pt-3 md:px-4 md:pt-4">
+            <div className="flex items-center justify-between">
+              <div className="h-7 w-7 rounded-lg bg-muted md:h-9 md:w-9" />
+              <div className="h-4 w-12 rounded-full bg-muted md:w-16" />
+            </div>
+
+            <div className="mt-4 h-4 w-20 rounded bg-muted" />
+
+            <div className="mt-3 space-y-2">
+              <div className="h-4 w-full rounded bg-muted" />
+              <div className="h-4 w-3/4 rounded bg-muted" />
+            </div>
+
+            <div className="mt-3 h-3 w-2/3 rounded bg-muted" />
+          </div>
+
+          {/* Resource details */}
+          <div className="animate-pulse space-y-3 px-3 pb-3 pt-4 md:px-4 md:pb-4">
+            <div className="flex items-center justify-between">
+              <div className="h-3 w-16 rounded bg-muted" />
+              <div className="h-3 w-14 rounded bg-muted" />
+            </div>
+
+            <div className="space-y-2">
+              <div className="h-3 w-full rounded bg-muted" />
+              <div className="h-3 w-4/5 rounded bg-muted" />
+            </div>
+
+            <div className="flex gap-2 pt-1">
+              <div className="h-8 flex-1 rounded-lg bg-muted" />
+              <div className="h-8 flex-1 rounded-lg bg-muted" />
+            </div>
+          </div>
+        </div>
+      ))}
+
+      <span className="sr-only">Loading resources, please wait...</span>
+    </div>
+  );
+}
+
 
 function FilterSelect({
   label,

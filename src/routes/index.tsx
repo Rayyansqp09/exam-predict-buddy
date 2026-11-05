@@ -43,7 +43,7 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Study resources for Calicut University FYUGP students including handwritten notes, PYQs, study materials, text books, predicted model papers, micro notes, question banks, important questions, and many more study resources.",
+          "Download study resources for Calicut University FYUGP students including handwritten notes, PYQs, study materials, text books, predicted model papers, micro notes, question banks, important questions, and many more study resources.",
       },
 
       {
@@ -55,7 +55,7 @@ export const Route = createFileRoute("/")({
       {
         property: "og:description",
         content:
-          "Handwritten notes, PYQs, study materials, text books, predicted model papers, micro notes, question banks, and many more study resources for FYUGP students.",
+          "Download handwritten notes, PYQs, study materials, text books, predicted model papers, micro notes, question banks, and many more study resources for FYUGP students.",
       },
     ],
   }),

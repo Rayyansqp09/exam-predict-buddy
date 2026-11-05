@@ -69,6 +69,8 @@ function ErrorComponent({ error, reset }: { error: Error; reset: () => void }) {
 
 export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()({
   head: () => ({
+
+
     meta: [
       { charSet: "utf-8" },
 
@@ -79,13 +81,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 
       {
         title:
-          "FYUGP Hub — Notes, PYQs, Study Materials, Text Books & Many More Resources",
+          "FYUGP Hub – Free FYUGP Notes PDF, Study Materials & PYQs",
       },
 
       {
         name: "description",
         content:
-          "FYUGP study resources for Calicut University students including handwritten notes, PYQs, study materials, text books, micro notes, predicted question papers, question banks, important questions, and many more resources.",
+          "Download free FYUGP notes PDF, study materials, previous year question papers (PYQs), micro notes, question banks and predicted model papers for Calicut University B.Com, BBA, BSc, BA and BCA students.",
       },
 
       {
@@ -94,15 +96,20 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
 
       {
+        name: "robots",
+        content: "index, follow",
+      },
+
+      {
         property: "og:title",
         content:
-          "FYUGP Hub — Notes, PYQs, Study Materials, Text Books & Many More Resources",
+          "FYUGP Hub – Download Free FYUGP Notes, PYQs & Study Materials",
       },
 
       {
         property: "og:description",
         content:
-          "Handwritten notes, PYQs, study materials, text books, micro notes, question banks, and many more resources for Calicut University students.",
+          "Find and download FYUGP notes, free study resources, previous year question papers, micro notes and exam preparation materials for Calicut University students.",
       },
 
       {
@@ -116,6 +123,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       },
 
       {
+        property: "og:url",
+        content: "https://fyugphub.vercel.app/",
+      },
+
+      {
         name: "twitter:card",
         content: "summary_large_image",
       },
@@ -123,15 +135,16 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         name: "twitter:title",
         content:
-          "FYUGP Hub — Notes, PYQs, Study Materials, Text Books & Many More Resources",
+          "FYUGP Hub – Free Notes PDF, PYQs & Study Materials",
       },
 
       {
         name: "twitter:description",
         content:
-          "FYUGP notes, PYQs, study materials, text books, micro notes, question banks, and many more resources for Calicut University students.",
+          "Download FYUGP notes, PYQs, micro notes, question banks and exam preparation resources for Calicut University students.",
       },
     ],
+
     links: [
       { rel: "stylesheet", href: appCss },
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
@@ -139,6 +152,11 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
       {
         rel: "stylesheet",
         href: "https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap",
+      },
+      {
+        rel: "icon",
+        type: "image/svg+xml",
+        href: "/favicon.svg",
       },
     ],
     scripts: [

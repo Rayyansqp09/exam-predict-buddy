@@ -8,7 +8,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Badge } from "@/components/ui/badge";
-import { Pencil, Trash2, Tag } from "lucide-react";
+import { Pencil, Trash2, Tag, BookOpen } from "lucide-react";
 import {
     Dialog,
     DialogContent,
@@ -1186,6 +1186,26 @@ function AdminPage() {
                                                     </div>
 
                                                     <div className="grid grid-cols-2 gap-2 rounded-xl border bg-muted/40 p-2 md:flex md:items-center md:justify-end md:gap-2 md:p-1">
+
+                                                        {/* Open PDF */}
+                                                        <Button
+                                                            asChild
+                                                            variant="outline"
+                                                            size="sm"
+                                                            disabled={!resource.pdfUrl}
+                                                            className="h-8 w-full gap-1 rounded-lg px-2 text-xs font-medium md:h-9 md:w-auto md:gap-2 md:px-3 md:text-sm"
+                                                        >
+                                                            <a
+                                                                href={`/api/resource/pdf/${encodeURIComponent(resource.slug)}`}
+                                                                target="_blank"
+                                                                rel="noopener noreferrer"
+                                                            >
+                                                                <BookOpen className="h-3.5 w-3.5 md:h-4 md:w-4" />
+                                                                Open
+                                                            </a>
+                                                        </Button>
+
+                                                        {/* Edit */}
                                                         <Button
                                                             variant="ghost"
                                                             size="sm"
@@ -1196,6 +1216,7 @@ function AdminPage() {
                                                             Edit
                                                         </Button>
 
+                                                        {/* Delete */}
                                                         <Button
                                                             variant="destructive"
                                                             size="sm"
@@ -1205,6 +1226,7 @@ function AdminPage() {
                                                             <Trash2 className="h-3.5 w-3.5 md:h-4 md:w-4" />
                                                             Delete
                                                         </Button>
+
                                                     </div>
                                                 </div>
                                             </div>

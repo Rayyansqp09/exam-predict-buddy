@@ -1,6 +1,7 @@
 // src/routes/sitemap[.]xml.ts
 import { createFileRoute } from "@tanstack/react-router";
 import { supabaseAdmin } from "@/lib/supabase.server";
+import { COURSES, SEMESTERS } from "@/lib/config";
 
 type SitemapEntry = {
   loc: string;
@@ -82,6 +83,24 @@ async function getDynamicEntries(
         priority: "0.8",
       })),
     );
+  }
+
+  // Course and semester pages
+
+  // Course and semester pages
+  for (const course of COURSES) {
+    for (const semester of SEMESTERS) {
+      const params = new URLSearchParams({
+        course,
+        semester: `"${semester}"`,
+      });
+
+      entries.push({
+        loc: `${origin}/purchase?${params.toString()}`,
+        changefreq: "weekly",
+        priority: "0.7",
+      });
+    }
   }
 
   return entries;

@@ -1,5 +1,6 @@
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { useEffect, useMemo, useState } from "react";
+import { COURSES, SEMESTERS } from "@/lib/config";
 import {
     AlertCircle,
     ArrowLeft,
@@ -50,18 +51,113 @@ type ResourcesApiResponse =
     | { success: true; resources: Resource[] }
     | { success: false; message: string };
 
+
 export const Route = createFileRoute("/purchase")({
     validateSearch: (search: Record<string, unknown>) => {
         return {
             course: typeof search.course === "string" ? search.course : "",
             semester:
-                typeof search.semester === "string" && search.semester.trim()
-                    ? search.semester
+                typeof search.semester === "string"
+                    ? search.semester.replace(/^["']|["']$/g, "").trim()
                     : "",
         };
     },
+
+    // Dynamic SEO metadata for each course and semester
+    head: ({ match }) => {
+        const { course, semester } = match.search;
+
+        const semesterNumber = Number(semester);
+
+        const isValidSelection =
+            COURSES.includes(course as (typeof COURSES)[number]) &&
+            SEMESTERS.includes(semesterNumber as (typeof SEMESTERS)[number]);
+
+        // Prevent invalid or incomplete selections from being indexed
+        if (!isValidSelection) {
+            return {
+                meta: [
+                    {
+                        title: "Select Course & Semester | FYUGP Hub",
+                    },
+                    {
+                        name: "robots",
+                        content: "noindex, follow",
+                    },
+                ],
+            };
+        }
+
+        const title =
+            `${course} FYUGP Semester ${semesterNumber} Notes PDF & Study Materials | FYUGP Hub`;
+
+        const description =
+            `Download ${course} FYUGP Semester ${semesterNumber} notes PDF, ` +
+            `free study materials, previous year question papers (PYQs), ` +
+            `micro notes, question banks and exam preparation resources.`;
+
+        const params = new URLSearchParams({
+            course,
+            semester: `"${semesterNumber}"`,
+        });
+
+        const canonicalUrl =
+            `https://fyugphub.vercel.app/purchase?${params.toString()}`;
+
+        return {
+            meta: [
+                {
+                    title,
+                },
+                {
+                    name: "description",
+                    content: description,
+                },
+                {
+                    name: "robots",
+                    content: "index, follow",
+                },
+                {
+                    property: "og:title",
+                    content: title,
+                },
+                {
+                    property: "og:description",
+                    content: description,
+                },
+                {
+                    property: "og:type",
+                    content: "website",
+                },
+                {
+                    property: "og:url",
+                    content: canonicalUrl,
+                },
+                {
+                    name: "twitter:card",
+                    content: "summary",
+                },
+                {
+                    name: "twitter:title",
+                    content: title,
+                },
+                {
+                    name: "twitter:description",
+                    content: description,
+                },
+            ],
+            links: [
+                {
+                    rel: "canonical",
+                    href: canonicalUrl,
+                },
+            ],
+        };
+    },
+
     component: PurchasePage,
 });
+
 
 function formatTimeAgo(dateString: string) {
     const seconds = Math.floor(

@@ -40,14 +40,35 @@ import { cn } from "@/lib/utils";
 
 export const Route = createFileRoute("/select")({
   head: () => ({
+
     meta: [
-      { title: "Select Course & Semester — FYUGP HUB" },
+      {
+        title: "Select FYUGP Course & Semester – Free Notes PDF | FYUGP Hub",
+      },
       {
         name: "description",
         content:
-          "Choose your Calicut University course and semester to get the matching predicted model question paper.",
+          "Select your Calicut University FYUGP course and semester to find and download notes PDF, study materials, previous year question papers (PYQs), micro notes and exam preparation resources.",
+      },
+      {
+        name: "robots",
+        content: "index, follow",
+      },
+      {
+        property: "og:title",
+        content: "Select Course & Semester – FYUGP Hub",
+      },
+      {
+        property: "og:description",
+        content:
+          "Find FYUGP notes, free study materials, PYQs and exam preparation resources organized by course and semester.",
+      },
+      {
+        property: "og:type",
+        content: "website",
       },
     ],
+
   }),
   component: SelectPage,
 });
